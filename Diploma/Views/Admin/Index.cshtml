@@ -1,0 +1,20 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Админ-панель</h2>
+
+@Html.ActionLink("Добавить новость", "CreateNew")
+
+<br />
+
+@foreach(var n in ViewBag.News)
+{
+    <p>@n.Title</p> 
+    
+}
+
+

@@ -1,16 +1,18 @@
 ﻿@model Diploma.Models.New
 
 @{
-    ViewBag.Title = "Опубликовать новость";
+    ViewBag.Title = "Редактирование новости" + Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Опубликовать новость</h2>
+<h2>Редактировать новость @Model.Title</h2>
 
 
-@using (Html.BeginForm("CreateNew", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+
     <label>Заголовок</label>
     <br />
     @Html.EditorFor(model => model.Title)
@@ -31,12 +33,11 @@
     <br />
     <br />
 
-    <label>Картинка для новости</label>
-    <br />
-    <input type="file" name="imageFile" multiple accept="image/*,image/jpeg">
-    <br />
-    <br />
-    <input type="submit" value="Опубликовать" />
+
+    @Html.HiddenFor(model => model.ImagePath)
+    @Html.HiddenFor(model => model.Date)
+
+    <input type="submit" value="Редактировать" />
 
 }
 

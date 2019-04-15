@@ -7,5 +7,13 @@
 
 <h2>Удалить новость</h2>
 
+<form method="post" action="admin/deletenew">
+    <p>Точно удалить хочешь новость @Model.Title  ?</p>
+    <input type="submit" value="Удалить"/>
+</form>
 
+
+<br />
+<br />
+@Html.ActionLink("Вернуться", "Index")
 

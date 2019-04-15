@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace Diploma.Controllers
 {
@@ -14,13 +15,16 @@ namespace Diploma.Controllers
         UniversityContext db = new UniversityContext();
 
         //GET-запрос админ панель
+        [Route("admin")]
         public ActionResult Index()
         {
-            var news = db.News;
-            ViewBag.News = news;
-            return View();
+            var news = db.News.Include(n => n.Category);
+            return View(news);
         }
+        
+        
         //GET-запрос создание новости
+        [Route("createnew")]
         [HttpGet]
         public ActionResult CreateNew()
         {
@@ -29,6 +33,7 @@ namespace Diploma.Controllers
             return View();
         }
 
+        
         //POST-запрос создание новости
         [HttpPost]
         public ActionResult CreateNew(New aNew, HttpPostedFileBase imageFile)
@@ -55,12 +60,81 @@ namespace Diploma.Controllers
             return Redirect("/Admin/CreateNew");
         }
         
+        
         //GET-запрос на удаление новости
+        [Route("deletenew/{id}")]
         [HttpGet]
-        public ActionResult DeleteNew()
+        public ActionResult DeleteNew(int? id)
         {
+            //если есть id
+            if (id != null)
+            {
+                //Найти новость по ID новости
+                var deleteNew = db.News.FirstOrDefault(n => n.ID == id);
 
-            return View();
+                //если нашли новость
+                if (deleteNew != null)
+                {
+                    db.News.Remove(deleteNew);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                //если не нашли новость
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            //если нет id
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+
+        //GET-запрос на редактирование новости
+        [Route("editnew/{id}")]
+        [HttpGet]
+        public ActionResult EditNew(int? id)
+        {
+            //Если id передан
+            if (id != null)
+            {
+                //Найти новость по ID
+                var editNew = db.News.FirstOrDefault(n => n.ID == id);
+                
+                //Если новость найдена
+                if (editNew != null)
+                {
+                    //Возвращаем новость во View
+                    SelectList categories = new SelectList(db.Categories, "ID", "Title");
+                    ViewBag.Categories = categories;
+                    return View(editNew);
+                }
+                //Если новость не найдена
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+
+        //POST-запрос на удаление новости
+        [HttpPost]
+        public ActionResult EditNew(New editNew)
+        {
+            //Редактирование новости
+            db.Entry(editNew).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

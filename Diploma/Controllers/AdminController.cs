@@ -6,25 +6,30 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 
 namespace Diploma.Controllers
 {
+    [Authorize]
+    [RoutePrefix("admin")]
     public class AdminController : Controller
     {
         //Объявляем контекст данных
         UniversityContext db = new UniversityContext();
 
         //GET-запрос админ панель
-        [Route("admin")]
-        public ActionResult Index()
+        [Route("~/admin")]
+        public ActionResult Index(int? UserId)
         {
             var news = db.News.Include(n => n.Category);
+
+            ViewBag.Name = User.Identity.GetUserName();
             return View(news);
         }
         
         
         //GET-запрос создание новости
-        [Route("createnew")]
+        [Route("/createnew")]
         [HttpGet]
         public ActionResult CreateNew()
         {
@@ -57,12 +62,12 @@ namespace Diploma.Controllers
                 db.News.Add(aNew);
                 db.SaveChanges();
             }
-            return Redirect("/Admin/CreateNew");
+            return Redirect("/admin");
         }
         
         
         //GET-запрос на удаление новости
-        [Route("deletenew/{id}")]
+        [Route("/deletenew/{id}")]
         [HttpGet]
         public ActionResult DeleteNew(int? id)
         {
@@ -78,7 +83,7 @@ namespace Diploma.Controllers
                     db.News.Remove(deleteNew);
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("/admin");
                 }
                 //если не нашли новость
                 else
@@ -95,7 +100,7 @@ namespace Diploma.Controllers
 
 
         //GET-запрос на редактирование новости
-        [Route("editnew/{id}")]
+        [Route("/editnew/{id}")]
         [HttpGet]
         public ActionResult EditNew(int? id)
         {
@@ -134,7 +139,7 @@ namespace Diploma.Controllers
             db.Entry(editNew).State = EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("/admin");
         }
     }
 }

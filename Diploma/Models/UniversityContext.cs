@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Linq;
 using System.Web;
 
@@ -12,10 +13,22 @@ namespace Diploma.Models
         {
             Database.SetInitializer(new ContextInitializer());
         }
+
         public DbSet<New> News { get; set; }
         public DbSet<Category> Categories { get; set; }
     }
 
+    public class ApplicationContext : IdentityDbContext<ApplicationUser>
+    {
+        public ApplicationContext() : base("UniversityContext", throwIfV1Schema: false)
+        {
+        }
+
+        public static ApplicationContext Create()
+        {
+            return new ApplicationContext();
+        }
+    }
     //Инициализация базы данных при изменении модели
     public class ContextInitializer : DropCreateDatabaseIfModelChanges<UniversityContext>
     {

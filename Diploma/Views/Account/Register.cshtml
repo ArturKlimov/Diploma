@@ -1,0 +1,30 @@
+﻿@model Diploma.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Регистрация</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false)
+    <label>Логин</label>
+    @Html.EditorFor(model => model.Login)
+    <br />
+    <br />
+    <label>Пароль</label>
+    @Html.EditorFor(model => model.Password)
+    <br />
+    <br />
+    <input type="submit" value="Зарегистрироваться" />
+
+}
+
+<a href="/admin">Вернуться</a>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

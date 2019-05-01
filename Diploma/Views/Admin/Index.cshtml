@@ -7,7 +7,13 @@
 
 <h2>Админ-панель</h2>
 
+<p>Привет, @ViewBag.Name</p>
+<a href="/account/logout">Выйти из аккаунта</a>
+
 @Html.ActionLink("Добавить новость", "createnew", "admin")
+<br />
+<br />
+<a href="/account/register">Зарегистрировать</a>
 <br />
 <br />
 <table>
@@ -18,13 +24,13 @@
     </tr>
     @foreach (var n in Model)
     {
-    <tr>
-        <td>@n.Title</td>
-        <td>@n.Date.ToShortDateString()</td>
-        <td>@n.Category.Title</td>
-        <td> <a href="/admin/editnew/@n.ID">Редактировать</a> </td>
-        <td> <a href="/admin/deletenew/@n.ID">Удалить</a> </td>
-    </tr>
+        <tr>
+            <td>@n.Title</td>
+            <td>@n.Date.ToShortDateString()</td>
+            <td>@n.Category.Title</td>
+            <td> <a href="/admin/editnew/@n.ID">Редактировать</a> </td>
+            <td> <a href="/admin/deletenew/@n.ID">Удалить</a> </td>
+        </tr>
     }
 </table>
 

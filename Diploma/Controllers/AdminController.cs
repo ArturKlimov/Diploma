@@ -1,4 +1,5 @@
 ﻿using Diploma.Models;
+using Diploma.Controllers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,6 @@ namespace Diploma.Controllers
     {
         //Объявляем контекст данных
         UniversityContext db = new UniversityContext();
-
         //GET-запрос админ панель
         [Route("~/admin")]
         public ActionResult Index(int? UserId)
@@ -24,6 +24,7 @@ namespace Diploma.Controllers
             var news = db.News.Include(n => n.Category);
 
             ViewBag.Name = User.Identity.GetUserName();
+
             return View(news);
         }
         
@@ -48,19 +49,32 @@ namespace Diploma.Controllers
                 //Заполняем поле даты  
                 aNew.Date = DateTime.Now;
 
-                //Работа с изображением
-                string extension = Path.GetExtension(imageFile.FileName);
-                string fileName = DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
-                string filePath = "/Content/Images/" + fileName;
-                fileName = Path.Combine(Server.MapPath(@"~/Content/Images/"), fileName);
-                imageFile.SaveAs(fileName);
+                if (imageFile != null)
+                {
+                    //Работа с изображением
+                    string extension = Path.GetExtension(imageFile.FileName);
+                    string fileName = DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                    string filePath = "/Content/Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath(@"~/Content/Images/"), fileName);
+                    imageFile.SaveAs(fileName);
 
-                //Заполняем поле путь к изображению
-                aNew.ImagePath = filePath;
-                
+                    //Заполняем поле путь к изображению
+                    aNew.ImagePath = filePath;
+                }
+                else
+                {
+                    aNew.ImagePath = "";
+                }
+
+                //Для получения данных в EmailController
+                TempData["subject"] = aNew.Title;
+                TempData["body"] = aNew.Description;
+
                 //Сохраняем новость в базе данных
                 db.News.Add(aNew);
                 db.SaveChanges();
+
+                return RedirectToAction("Index", "Email");
             }
             return Redirect("/admin");
         }
@@ -83,7 +97,7 @@ namespace Diploma.Controllers
                     db.News.Remove(deleteNew);
                     db.SaveChanges();
 
-                    return RedirectToAction("/admin");
+                    return Redirect("/admin");
                 }
                 //если не нашли новость
                 else
@@ -131,7 +145,7 @@ namespace Diploma.Controllers
         }
 
 
-        //POST-запрос на удаление новости
+        //POST-запрос на изменение новости
         [HttpPost]
         public ActionResult EditNew(New editNew)
         {
@@ -141,5 +155,15 @@ namespace Diploma.Controllers
 
             return RedirectToAction("/admin");
         }
+
+        //GET-запрос на добавление почты в базу
+        [Route("/addemail")]
+        [HttpGet]
+        public ActionResult AddEmail ()
+        {
+            return View();
+        }
+
+        
     }
 }

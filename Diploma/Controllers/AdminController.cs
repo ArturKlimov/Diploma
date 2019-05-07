@@ -16,7 +16,7 @@ namespace Diploma.Controllers
     public class AdminController : Controller
     {
         //Объявляем контекст данных
-        UniversityContext db = new UniversityContext();
+        ApplicationContext db = new ApplicationContext();
         //GET-запрос админ панель
         [Route("~/admin")]
         public ActionResult Index(int? UserId)
@@ -159,11 +159,26 @@ namespace Diploma.Controllers
         //GET-запрос на добавление почты в базу
         [Route("/addemail")]
         [HttpGet]
-        public ActionResult AddEmail ()
+        public ActionResult AddEmail()
         {
             return View();
         }
 
-        
+        [HttpPost]
+        public ActionResult AddEmail(Email email)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Emails.Add(email);
+                db.SaveChanges();
+            }
+            return Redirect("/admin/addemail");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

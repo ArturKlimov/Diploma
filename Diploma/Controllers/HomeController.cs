@@ -4,14 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Diploma.Models;
-using System.Linq;
 using System.Data.Entity;
 
 namespace Diploma.Controllers
 {
     public class HomeController : Controller
     {
-        UniversityContext db = new UniversityContext();
+        ApplicationContext db = new ApplicationContext();
 
         public ActionResult Index()
         {

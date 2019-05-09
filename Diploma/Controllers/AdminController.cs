@@ -35,14 +35,18 @@ namespace Diploma.Controllers
         public ActionResult CreateNew()
         {
             SelectList categories = new SelectList(db.Categories, "ID", "Title");
-            ViewBag.Categories = categories; 
+            ViewBag.Categories = categories;
+
+            var recipients = db.Recipients.ToList();
+            ViewBag.Recipients = recipients;
+
             return View();
         }
 
         
         //POST-запрос создание новости
         [HttpPost]
-        public ActionResult CreateNew(New aNew, HttpPostedFileBase imageFile)
+        public ActionResult CreateNew(New aNew, HttpPostedFileBase imageFile, int[] recipients)
         {
             if (ModelState.IsValid)
             {
@@ -66,15 +70,24 @@ namespace Diploma.Controllers
                     aNew.ImagePath = "";
                 }
 
-                //Для получения данных в EmailController
-                TempData["subject"] = aNew.Title;
-                TempData["body"] = aNew.Description;
-
                 //Сохраняем новость в базе данных
                 db.News.Add(aNew);
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "Email");
+                //Для получения данных в EmailController
+                if (recipients.Count() != 0)
+                {
+                    //Передаем заголовок и описание новости
+                    TempData["subject"] = aNew.Title;
+                    TempData["body"] = aNew.Description;
+                    
+                    //Передаем список получателей
+                    TempData["recipients"] = recipients.ToList();
+
+                    //Переходим на метод отправки
+                    return RedirectToAction("Index", "Email");
+                }
+                
             }
             return Redirect("/admin");
         }
@@ -161,6 +174,8 @@ namespace Diploma.Controllers
         [HttpGet]
         public ActionResult AddEmail()
         {
+            SelectList recipients= new SelectList(db.Recipients, "ID", "Title");
+            ViewBag.Recipients = recipients;
             return View();
         }
 

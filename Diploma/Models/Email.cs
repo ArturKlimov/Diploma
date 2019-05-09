@@ -17,6 +17,7 @@ namespace Diploma.Models
         public string Mail { get; set; }
 
         //Владелец почты для справочной информации
+        [Required(ErrorMessage = "Введите владельца почты")]
         [StringLength(50, ErrorMessage = "Максимум 50 символов")]
         public string Name { get; set; }
 

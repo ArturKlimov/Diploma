@@ -36,6 +36,17 @@
     <input type="file" name="imageFile" multiple accept="image/*,image/jpeg">
     <br />
     <br />
+
+
+    <label>Кому отправить почту?</label>
+    <br />
+    foreach (var r in ViewBag.Recipients)
+    {
+        <p><input type="checkbox" name="recipients" value="@r.ID"> @r.Title</p>
+    }
+    <br />
+    <br />
+
     <input type="submit" value="Опубликовать" />
 
 }

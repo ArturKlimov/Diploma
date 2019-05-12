@@ -19,34 +19,58 @@ namespace Diploma.Controllers
         ApplicationContext db = new ApplicationContext();
         //GET-запрос админ панель
         [Route("~/admin")]
+        [HttpGet]
         public ActionResult Index(int? UserId)
         {
-            var news = db.News.Include(n => n.Category);
 
             ViewBag.Name = User.Identity.GetUserName();
 
-            return View(news);
+            return View();
         }
         
-        
-        //GET-запрос создание новости
-        [Route("/createnew")]
+        //GET-запрос на вывод списка новостей
         [HttpGet]
-        public ActionResult CreateNew()
+        public ActionResult GetNewsList()
         {
+            var news = db.News.Include(n => n.Category).ToList();
+
+            List<New> lastNews = new List<New>();
+
+            int numberOfNews = news.Count;
+
+            for (int i = 1; i <= 5; i++)
+            {
+                if (numberOfNews - i >= 0)
+                {
+                    lastNews.Add(news[numberOfNews - i]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return PartialView(lastNews);
+        }
+        
+        [HttpGet]
+        //GET-запрос на добавление новости
+        public ActionResult AddNew()
+        {
+
             SelectList categories = new SelectList(db.Categories, "ID", "Title");
             ViewBag.Categories = categories;
 
             var recipients = db.Recipients.ToList();
             ViewBag.Recipients = recipients;
 
-            return View();
+            return PartialView();
         }
 
         
         //POST-запрос создание новости
         [HttpPost]
-        public ActionResult CreateNew(New aNew, HttpPostedFileBase imageFile, int[] recipients)
+        public ActionResult AddNew(New aNew, HttpPostedFileBase imageFile, int[] recipients)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +99,7 @@ namespace Diploma.Controllers
                 db.SaveChanges();
 
                 //Для получения данных в EmailController
-                if (recipients.Count() != 0)
+                if (recipients != null)
                 {
                     //Передаем заголовок и описание новости
                     TempData["subject"] = aNew.Title;
@@ -169,15 +193,39 @@ namespace Diploma.Controllers
             return RedirectToAction("/admin");
         }
 
+        //GET-запрос на получение списка новостей
+        [HttpGet]
+        public ActionResult GetEmailsList()
+        {
+            var emails = db.Emails.Include(e => e.Recipient).ToList();
+
+            List<Email> lastEmails = new List<Email>();
+
+            int numberOfEmails = emails.Count;
+
+            for (int i = 1; i <= 5; i++)
+            {
+                if (numberOfEmails - i >= 0)
+                {
+                    lastEmails.Add(emails[numberOfEmails - i]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return PartialView(lastEmails);
+        }
+
         //GET-запрос на добавление почты в базу
-        [Route("/addemail")]
         [HttpGet]
         public ActionResult AddEmail()
         {
             SelectList recipients= new SelectList(db.Recipients, "ID", "Title");
             ViewBag.Recipients = recipients;
-            return View();
+            return PartialView();
         }
+
 
         [HttpPost]
         public ActionResult AddEmail(Email email)
@@ -187,7 +235,7 @@ namespace Diploma.Controllers
                 db.Emails.Add(email);
                 db.SaveChanges();
             }
-            return Redirect("/admin/addemail");
+            return Redirect("/admin");
         }
 
         protected override void Dispose(bool disposing)

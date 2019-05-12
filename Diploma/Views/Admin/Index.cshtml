@@ -11,32 +11,21 @@
 <a href="/account/logout">Выйти из аккаунта</a>
 <br />
 <br />
-<a href="/admin/addemail">Подписать на рассылку</a>
+
+<!--               Блок новостей               -->
+
+@Html.Action("GetNewsList")
+
 <br />
 <br />
 
-@Html.ActionLink("Добавить новость", "createnew", "admin")
-<br />
-<br />
-<a href="/account/register">Зарегистрировать</a>
-<br />
-<br />
-<table>
-    <tr>
-        <th>Заголовок</th>
-        <th>Дата</th>
-        <th>Категория</th>
-    </tr>
-    @foreach (var n in Model)
-    {
-        <tr>
-            <td>@n.Title</td>
-            <td>@n.Date.ToShortDateString()</td>
-            <td>@n.Category.Title</td>
-            <td> <a href="/admin/editnew/@n.ID">Редактировать</a> </td>
-            <td> <a href="/admin/deletenew/@n.ID">Удалить</a> </td>
-        </tr>
-    }
-</table>
+@Html.Action("AddNew")
 
+<br />
+<br />
 
+<!--               Блок рассылки               -->
+
+@Html.Action("GetEmailsList")
+
+@Html.Action("AddEmail")

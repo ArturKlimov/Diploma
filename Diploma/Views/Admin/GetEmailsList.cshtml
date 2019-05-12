@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Diploma.Models.Email>
+
+<table>
+    <tr>
+        <th>ФИО Пользователя</th>
+        <th>Почта</th>
+        <th>Группа рассылки</th>
+    </tr>
+    @foreach (var n in Model)
+    {
+        <tr>
+            <td>@n.Name</td>
+            <td>@n.Mail</td>
+            <td>@n.Recipient.Title</td>
+        </tr>
+    }
+</table>

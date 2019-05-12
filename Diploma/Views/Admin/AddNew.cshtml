@@ -1,14 +1,8 @@
 ﻿@model Diploma.Models.New
 
-@{
-    ViewBag.Title = "Опубликовать новость";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<h2>Добавить новость</h2>
 
-<h2>Опубликовать новость</h2>
-
-
-@using (Html.BeginForm("CreateNew", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddNew", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <label>Заголовок</label>
@@ -51,8 +45,7 @@
 
 }
 
-<a href="/admin">Вернуться</a>
-
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@
+

@@ -1,14 +1,9 @@
 ﻿@model Diploma.Models.Email
 
-@{
-    ViewBag.Title = "Подписка на рассылку";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
 <h2>Подписать на рассылку</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("AddEmail", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <label>Email</label>
@@ -29,10 +24,4 @@
     <br />
     <br />
     <input type="submit" value="Подписать" class="btn btn-default" />
-}
-
-<a href="/admin">Вернуться</a>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

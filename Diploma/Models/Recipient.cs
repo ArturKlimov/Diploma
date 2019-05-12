@@ -14,12 +14,12 @@ namespace Diploma.Models
         public string Title { get; set; }
 
         //Коллекция групп получателей
-        public ICollection<Recipient> Recipients { get; set; }
+        public ICollection<Email> Emails { get; set; }
 
         //Конструктор для групп получателей
         public Recipient()
         {
-            Recipients = new List<Recipient>();
+            Emails = new List<Email>();
         }
     }
 }

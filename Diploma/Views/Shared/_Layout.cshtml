@@ -1,13 +1,93 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title – приложение ASP.NET</title>
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <div class="header_logo">ФТИ</div>
+        <nav>
+            <div class="header_menu" id="myHeader_menu">
+                <a href="#">Главная</a>
+                <a href="#">Медиа</a>
+                <a href="#">Абитуриентам</a>
+                <a href="#">Студентам</a>
+                <a href="#">Выпускникам</a>
+                <a href="#">Работникам</a>
+                <a href="#">Контакты</a>
+            </div>
+        </nav>
+        <button> <img src="img/search.png"></button>
+    </header>
     @RenderBody()
+    <footer>
+        <div class="top-footer">
+            <div class="footer1">
+                <div class="footer_logo">ФТИ</div>
+                <div class="textinfo">
+                    <p>Информационный ресурс</p>
+                    <p>Физико-Технического института</p>
+                    <p>Петрозаводского государственного</p>
+                    <p>университета. Сайт ведётся </p>
+                    <p>администрацией института.</p>
+                </div>
+                <div class="social">
+                    <a href="#"><img src="img/social_icons/vk.png"></a>
+                    <a href="#"><img src="img/social_icons/instagram.png"></a>
+                    <a href="#"><img src="img/social_icons/youtube.png"></a>
+                    <a href="#"><img src="img/social_icons/facebook.png"></a>
+                </div>
+            </div>
+
+            <div class="footer2">
+                <div class="poleznoe">Полезное</div>
+                <div class="sspoleznoe">
+                    <ul>
+                        <li><a href="#">Магистратура</a></li>
+                        <li><a href="#">Стипендии</a></li>
+                        <li><a href="#">Научная деятельность</a></li>
+                        <li><a href="#">Карта сайта</a></li>
+                        <li><a href="#">Приёмная комиссия</a></li>
+                        <li><a href="#">Расписание занятий</a></li>
+                        <li><a href="#">Конкурсы и гранты</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer3">
+                <div class="contacts">Контакты</div>
+                <div class="contactinfo">
+                    <p><span class="colortext">Адрес: </span>ул. Университетская, д. 29,</p>
+                    <p>Петрозаводск, 195251</p>
+                    <p><span class="colortext">Приемная комиссия:</span> fti@petrsu.ru</p>
+                    <p>(814-2) 71-10-30</p>
+                    <p><span class="colortext">Платное образование:</span> </p>
+                    <p>kirilova@petrsu.ru</p>
+                    <p> (814-2) 71-10-40</p>
+                </div>
+            </div>
+
+            <div class="footer4">
+                <div class="podpiska">RSS подписка</div>
+                <p><input type="email" name="email" placeholder="Введите Ваш Email*" required></p>
+                <p><input type="submit" value="ПОДПИСАТЬСЯ"></p>
+            </div>
+        </div>
+        <hr>
+        <div class="bottom-footer">
+            <div class="bottom-footer1">Политика конфиденциальности</div>
+            <div class="bottom-footer2">© 2010 - 2019 Физико-технического институт (ФТИ)</div>
+        </div>
+
+    </footer>
+
+    @*<script src='js/script.js'></script>
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>*@
 
     @Scripts.Render("~/bundles/jquery")
 

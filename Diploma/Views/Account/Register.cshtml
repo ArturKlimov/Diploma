@@ -1,13 +1,8 @@
 ﻿@model Diploma.Models.RegisterModel
 
-@{
-    ViewBag.Title = "Регистрация";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
 <h2>Регистрация</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false)

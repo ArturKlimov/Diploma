@@ -244,6 +244,7 @@
     <Content Include="Views\Admin\AddNew.cshtml" />
     <Content Include="Views\Admin\AddEmail.cshtml" />
     <Content Include="Views\Admin\GetEmailsList.cshtml" />
+    <Content Include="Views\Admin\GetUsersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\" />

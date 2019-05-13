@@ -39,7 +39,7 @@ namespace Diploma.Controllers
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("register", "Account");
+                    return Redirect("/admin");
                 }
                 else
                 {

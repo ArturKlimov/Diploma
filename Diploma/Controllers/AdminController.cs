@@ -27,7 +27,7 @@ namespace Diploma.Controllers
 
             return View();
         }
-        
+
         //GET-запрос на вывод списка новостей
         [HttpGet]
         public ActionResult GetNewsList()
@@ -52,7 +52,7 @@ namespace Diploma.Controllers
 
             return PartialView(lastNews);
         }
-        
+
         [HttpGet]
         //GET-запрос на добавление новости
         public ActionResult AddNew()
@@ -67,7 +67,7 @@ namespace Diploma.Controllers
             return PartialView();
         }
 
-        
+
         //POST-запрос создание новости
         [HttpPost]
         public ActionResult AddNew(New aNew, HttpPostedFileBase imageFile, int[] recipients)
@@ -104,19 +104,19 @@ namespace Diploma.Controllers
                     //Передаем заголовок и описание новости
                     TempData["subject"] = aNew.Title;
                     TempData["body"] = aNew.Description;
-                    
+
                     //Передаем список получателей
                     TempData["recipients"] = recipients.ToList();
 
                     //Переходим на метод отправки
                     return RedirectToAction("Index", "Email");
                 }
-                
+
             }
             return Redirect("/admin");
         }
-        
-        
+
+
         //GET-запрос на удаление новости
         [Route("/deletenew/{id}")]
         [HttpGet]
@@ -160,7 +160,7 @@ namespace Diploma.Controllers
             {
                 //Найти новость по ID
                 var editNew = db.News.FirstOrDefault(n => n.ID == id);
-                
+
                 //Если новость найдена
                 if (editNew != null)
                 {
@@ -221,12 +221,13 @@ namespace Diploma.Controllers
         [HttpGet]
         public ActionResult AddEmail()
         {
-            SelectList recipients= new SelectList(db.Recipients, "ID", "Title");
+            SelectList recipients = new SelectList(db.Recipients, "ID", "Title");
             ViewBag.Recipients = recipients;
             return PartialView();
         }
 
 
+        //POST-запрос на добавление почты в базу
         [HttpPost]
         public ActionResult AddEmail(Email email)
         {
@@ -238,6 +239,30 @@ namespace Diploma.Controllers
             return Redirect("/admin");
         }
 
+        //GET-запрос на получения списка пользователей
+        [HttpGet]
+        public ActionResult GetUsersList()
+        {
+            var users = db.Users.ToList();
+
+            List<ApplicationUser> lastUsers = new List<ApplicationUser>();
+
+            int numberOfUsers = users.Count;
+
+            for (int i = 1; i <= 5; i++)
+            {
+                if (numberOfUsers - i >= 0)
+                {
+                    lastUsers.Add(users[numberOfUsers - i]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return PartialView(lastUsers);
+        }
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

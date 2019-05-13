@@ -2,26 +2,80 @@
 
 @{
     ViewBag.Title = "Вход";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "";
 }
 
-<h2>Вход</h2>
+@*<h2>Вход</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary()
-    
+
     <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
 
     <br />
     <label>Логин</label>
     <br />
     @Html.EditorFor(x => x.Login)
-    <br /> 
+    <br />
     <label>Пароль</label>
     <br />
     @Html.EditorFor(x => x.Password)
     <br />
     <button type="submit">Войти</button>
-}
+}*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Authorized</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!-- Template Styles -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
+
+    <!-- Milligram CSS minified -->
+    <link rel="stylesheet" href="~/Content/css/milligram.min.css">
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="~/Content/css/admin_style.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="column ">
+            <div class="card">
+                <div class="card-title">
+                    <h4>Вход</h4>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary()
+
+                        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+
+                        <label>Логин</label>
+                        @Html.EditorFor(x => x.Login, new { htmlAttributes = new { placeholder = "Введите логин" } })
+                        <label>Пароль</label>
+                        @Html.EditorFor(x => x.Password,new { htmlAttributes = new {@class ="vanya", placeholder = "Введите логин" } })
+                        <button type="submit">Войти</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+</body>
+</html> 

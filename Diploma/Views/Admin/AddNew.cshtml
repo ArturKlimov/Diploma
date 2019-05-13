@@ -1,6 +1,6 @@
 ﻿@model Diploma.Models.New
 
-<h2>Добавить новость</h2>
+@*<h2>Добавить новость</h2>
 
 @using (Html.BeginForm("AddNew", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -43,9 +43,40 @@
 
     <input type="submit" value="Опубликовать" />
 
-}
-
-@*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }*@
+
+    <div class="row grid-responsive">
+        <div class="column ">
+            <div class="card">
+                <div class="card-title">
+                    <h3>Добавить новость</h3>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("AddNew", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <fieldset>
+                            <label for="nameField">Заголовок</label>
+                            @Html.EditorFor(model => model.Title)
+                            @Html.ValidationMessageFor(model => model.Title, "")
+                            <label for="ageRangeField">Категория новости</label>
+                            @Html.DropDownListFor(model => model.CategoryID, ViewBag.Categories as SelectList)
+                            <label for="commentField">Описание новости</label>
+                            @Html.TextAreaFor(model => model.Description)
+                            @Html.ValidationMessageFor(model => model.Description, "")
+                            <div class="float-right">
+                                <label for="nameField">Получатели:</label>
+
+                                @foreach (var r in ViewBag.Recipients)
+                                {
+                                    <p><input type="checkbox" name="recipients" value="@r.ID"> @r.Title</p>
+                                }
+                            </div>
+                            <input class="button-primary" type="submit" value="Опубликовать">
+                        </fieldset>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 

@@ -38,8 +38,8 @@
                 <div class="user-section">
                     <a href="#">
                         <div class="username">
-                            <h4>User</h4>
-                            <p>Выход</p>
+                            <h4>@ViewBag.Name</h4>
+                            <p><a href="/account/logout">Выход</a></p>
                         </div>
                     </a>
                 </div>
@@ -64,20 +64,19 @@
                 <div class="column page-heading">
                 </div>
             </div>
-        </section>
-    </div>
+       
 
     <!--               Блок новостей               -->
 
+    <h5 class="mt-2">Новости</h5><a class="anchor" name="news"></a>
+
     @Html.Action("GetNewsList")
 
-    <br />
-    <br />
+    
 
     @Html.Action("AddNew")
 
-    <br />
-    <br />
+    
 
     <!--               Блок рассылки               -->
 

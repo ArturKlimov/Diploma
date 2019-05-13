@@ -22,9 +22,12 @@
                 <a href="#">Контакты</a>
             </div>
         </nav>
-        <button> <img src="img/search.png"></button>
+        <button> <img src="~/Content/Images/search.png"></button>
     </header>
-    @RenderBody()
+    <main>
+        @RenderBody()
+    </main>
+   
     <footer>
         <div class="top-footer">
             <div class="footer1">
@@ -37,10 +40,10 @@
                     <p>администрацией института.</p>
                 </div>
                 <div class="social">
-                    <a href="#"><img src="img/social_icons/vk.png"></a>
-                    <a href="#"><img src="img/social_icons/instagram.png"></a>
-                    <a href="#"><img src="img/social_icons/youtube.png"></a>
-                    <a href="#"><img src="img/social_icons/facebook.png"></a>
+                    <a href="#"><img src="~/Content/Images/social_icons/vk.png"></a>
+                    <a href="#"><img src="~/Content/Images/social_icons/instagram.png"></a>
+                    <a href="#"><img src="~/Content/Images/social_icons/youtube.png"></a>
+                    <a href="#"><img src="~/Content/Images/social_icons/facebook.png"></a>
                 </div>
             </div>
 
@@ -86,8 +89,8 @@
 
     </footer>
 
-    @*<script src='js/script.js'></script>
-    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>*@
+    <script src='js/script.js'></script>
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
     @Scripts.Render("~/bundles/jquery")
 

@@ -1,46 +1,103 @@
 ﻿@model IEnumerable<Diploma.Models.New>
 
-@{
-    ViewBag.Title = "Админ-панель";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+@{ 
+    Layout = "";
+
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Admin Template</title>
 
-<h2>Админ-панель</h2>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-<p>Привет, @ViewBag.Name</p>
-<a href="/account/logout">Выйти из аккаунта</a>
-<br />
-<br />
+    <!-- Template Styles -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
 
-<!--               Блок новостей               -->
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
 
-@Html.Action("GetNewsList")
+    <!-- Milligram CSS minified -->
+    <link rel="stylesheet" href="~/Content/css/milligram.min.css">
 
-<br />
-<br />
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="~/Content/css/admin_style.css">
 
-@Html.Action("AddNew")
+</head>
 
-<br />
-<br />
+<body>
 
-<!--               Блок рассылки               -->
+    <div class="navbar">
+        <div class="row">
+            <div class="column column-30 col-site-title"><a href="#" class="site-title float-left">ФТИ</a></div>
+            <div class="column column-40 col-search">
+            </div>
+            <div class="column column-30">
+                <div class="user-section">
+                    <a href="#">
+                        <div class="username">
+                            <h4>User</h4>
+                            <p>Выход</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="sidebar" class="column">
+            <ul>
+                <li><a href="#"><em class="fa fa-home"></em> Главная</a></li>
+                <li><a href="#news"><em class="fa fa-newspaper-o"></em> Новости</a></li>
+                <li><a href="#warning"><em class="fa fa fa-warning"></em> Объявления</a></li>
+                <li><a href="#event"><em class="fa fa-star"></em> Мероприятия</a></li>
+                <li><a href="#photo"><em class="fa fa-photo"></em> Фото</a></li>
+                <li><a href="#video"><em class="fa fa-video-camera"></em> Видео</a></li>
+                <li><a href="#mailing"><em class="fa fa-upload"></em> Рассылки</a></li>
+                <li><a href="#users"><em class="fa fa-users"></em> Пользователи</a></li>
+            </ul>
+        </div>
+        <section id="main-content" class="column column-offset-20">
+            <div class="row grid-responsive">
+                <div class="column page-heading">
+                </div>
+            </div>
+        </section>
+    </div>
 
-@Html.Action("GetEmailsList")
+    <!--               Блок новостей               -->
 
-<br />
-<br />
+    @Html.Action("GetNewsList")
 
-@Html.Action("AddEmail")
+    <br />
+    <br />
 
-<br />
-<br />
+    @Html.Action("AddNew")
 
-<!--               Блок пользователей          -->
+    <br />
+    <br />
 
-@Html.Action("GetUsersList")
+    <!--               Блок рассылки               -->
 
-<br />
-<br />
+    @Html.Action("GetEmailsList")
 
-@Html.Action("Register", "Account")
+    <br />
+    <br />
+
+    @Html.Action("AddEmail")
+
+    <br />
+    <br />
+
+    <!--               Блок пользователей          -->
+
+    @Html.Action("GetUsersList")
+
+    <br />
+    <br />
+
+    @Html.Action("Register", "Account")
+</body>
+</html>

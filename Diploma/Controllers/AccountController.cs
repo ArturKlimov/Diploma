@@ -15,6 +15,7 @@ namespace Diploma.Controllers
     [RoutePrefix("account")]
     public class AccountController : Controller
     {
+        //Получение UserManager
         private ApplicationUserManager UserManager
         {
             get
@@ -23,6 +24,10 @@ namespace Diploma.Controllers
             }
         }
 
+        //Объявляем контекст данных
+        ApplicationContext db = new ApplicationContext();
+
+        //Вывод представления для регистрации
         [Authorize]
         [Route("/register")]
         public ActionResult Register()
@@ -30,17 +35,25 @@ namespace Diploma.Controllers
             return View();
         }
 
+        //POST-запрос на регистрацию пользователя
         [HttpPost]
         public async Task<ActionResult> Register(RegisterModel model)
         {
+            //Если все данные в форме для регистрации введены правильно
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new ApplicationUser { UserName = model.Login };
+                //Инициализируем нового пользователя, учитывая данные из формы
+                ApplicationUser user = new ApplicationUser { UserName = model.Login, Email = model.Email, Name = model.Name };
+                
+                //Создаем пользователя и записываем результат создания в переменную result
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                //Если создание пользователя прошло успешно
                 if (result.Succeeded)
                 {
                     return Redirect("/admin");
                 }
+
                 else
                 {
                     foreach (string error in result.Errors)
@@ -50,6 +63,26 @@ namespace Diploma.Controllers
                 }
             }
             return View(model);
+        }
+
+        //GET-запрос на удаление пользователя
+        [Route("/account/deleteuser/{id}")]
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult> DeleteUser(string id)
+        {
+            //Ищем пользователя по имени
+            ApplicationUser user = await UserManager.FindByIdAsync(id);
+
+            //Находим количество пользователей
+            var usersCount = db.Users.ToList().Count;
+
+            //Если пользователь найден и количествоп пользователй не равно 1
+            if (user != null && usersCount != 1)
+            {
+                IdentityResult result = await UserManager.DeleteAsync(user);
+            }
+            return Redirect("/admin");
         }
 
         private IAuthenticationManager AuthenticationManager
@@ -92,11 +125,18 @@ namespace Diploma.Controllers
             ViewBag.returnUrl = returnUrl;
             return View(model);
         }
+
         [Route("/logout")]
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();
             return RedirectToAction("/login");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

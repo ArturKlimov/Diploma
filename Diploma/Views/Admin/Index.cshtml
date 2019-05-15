@@ -64,39 +64,46 @@
                 <div class="column page-heading">
                 </div>
             </div>
-       
 
-    <!--               Блок новостей               -->
 
-    <h5 class="mt-2">Новости</h5><a class="anchor" name="news"></a>
+            <!--               Блок новостей               -->
 
-    @Html.Action("GetNewsList")
+            <h5 class="mt-2">Новости</h5><a class="anchor" name="news"></a>
 
-    
+            @Html.Action("GetNewsList")
 
-    @Html.Action("AddNew")
 
-    
 
-    <!--               Блок рассылки               -->
+            @Html.Action("AddNew")
 
-    @Html.Action("GetEmailsList")
 
-    <br />
-    <br />
 
-    @Html.Action("AddEmail")
+            <!--               Блок рассылки               -->
 
-    <br />
-    <br />
+            @Html.Action("GetEmailsList")
 
-    <!--               Блок пользователей          -->
+            <br />
+            <br />
 
-    @Html.Action("GetUsersList")
+            @Html.Action("AddEmail")
 
-    <br />
-    <br />
+            <br />
+            <br />
 
-    @Html.Action("Register", "Account")
+            <!--               Блок пользователей          -->
+
+            @Html.Action("GetUsersList")
+
+            <br />
+            <br />
+
+            @Html.Action("Register", "Account")
 </body>
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
 </html>

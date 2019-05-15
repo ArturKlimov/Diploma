@@ -30,6 +30,7 @@
                             <th>ФИО Пользователя</th>
                             <th>Почта</th>
                             <th>Группа рассылки</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +40,7 @@
                                 <td>@n.Name</td>
                                 <td>@n.Mail</td>
                                 <td>@n.Recipient.Title</td>
-                                <td> <a href="#">Удалить</a> </td>  @*Поставить ссылку на удаление*@
+                                <td> <a href="/admin/deleteemail/@n.ID">Удалить</a> </td> 
                             </tr>
                         }
 

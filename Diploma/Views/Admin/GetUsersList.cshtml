@@ -30,16 +30,17 @@
                             <th>ФИО Пользователя</th>
                             <th>Логин</th>
                             <th>E-mail</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var n in Model)
                         {
                         <tr>
-                            <td></td> @*Добавить имя пользователя*@
+                            <td>@n.Name</td>
                             <td>@n.UserName</td>
-                            <td></td>@*Добавить E-mail*@
-                            <td><input class="button button-clear" type="submit" value="Удалить"></td>
+                            <td>@n.Email</td>
+                            <td><a href="/account/deleteuser/@n.Id">Удалить</a></td>
                         </tr>
                         }
                         

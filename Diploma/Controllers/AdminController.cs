@@ -190,7 +190,7 @@ namespace Diploma.Controllers
             db.Entry(editNew).State = EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction("/admin");
+            return Redirect("/admin");
         }
 
         //GET-запрос на получение списка новостей
@@ -263,6 +263,36 @@ namespace Diploma.Controllers
 
             return PartialView(lastUsers);
         }
+
+        //GET-запрос на удаление почты пользователя
+        [HttpGet]
+        [Route("/deleteemail/{id}")]
+        public ActionResult DeleteEmail(int? id)
+        {
+            var deleteEmail = db.Emails.FirstOrDefault(e => e.ID == id);
+
+            if (id != null)
+            {
+                //если нашли почту
+                if (deleteEmail != null)
+                {
+                    db.Emails.Remove(deleteEmail);
+                    db.SaveChanges();
+                    return Redirect("/admin");
+                }
+                //если не нашли почту
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            //если нет id
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

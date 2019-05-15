@@ -5,42 +5,6 @@
     Layout = "";
 }
 
-@*<h2>Редактировать новость @Model.Title</h2>
-
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.ID)
-
-        <label>Заголовок</label>
-        <br />
-        @Html.EditorFor(model => model.Title)
-        @Html.ValidationMessageFor(model => model.Title, "")
-        <br />
-        <br />
-
-        <label>Категория новости</label>
-        <br />
-        @Html.DropDownListFor(model => model.CategoryID, ViewBag.Categories as SelectList)
-        <br />
-        <br />
-
-        <label>Описание новости</label>
-        <br />
-        @Html.TextAreaFor(model => model.Description)
-        @Html.ValidationMessageFor(model => model.Description, "")
-        <br />
-        <br />
-
-
-        @Html.HiddenFor(model => model.ImagePath)
-        @Html.HiddenFor(model => model.Date)
-
-        <input type="submit" value="Редактировать" />
-
-    }*@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +35,8 @@
                     <h3>Редактировать новость</h3>
                 </div>
                 <div class="card-block">
-                    <form>
+                    @using (Html.BeginForm("EditNew", "Admin", FormMethod.Post))
+                    {
                         <fieldset>
                             <label for="nameField">Заголовок</label>
                             @Html.EditorFor(model => model.Title)
@@ -88,7 +53,7 @@
                             <input class="button-primary" type="submit" value="Редактировать">
                             <a href="/admin">Вернуться</a>
                         </fieldset>
-                    </form>
+                    }
                 </div>
             </div>
         </div>

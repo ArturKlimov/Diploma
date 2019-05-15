@@ -7,10 +7,13 @@ using System.Web;
 namespace Diploma.Models
 {
     public class LoginModel
-    {
-        [Required]
+    {     
+        //Логин пользователя
+        [Required(ErrorMessage = "Введите Логин")]
         public string Login { get; set; }
-        [Required]
+
+        //Пароль пользователя
+        [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }

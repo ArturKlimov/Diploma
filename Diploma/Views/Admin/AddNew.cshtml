@@ -58,12 +58,12 @@
                         <fieldset>
                             <label for="nameField">Заголовок</label>
                             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { placeholder = "Введите заголовок" } })
-                            @Html.ValidationMessageFor(model => model.Title, "")
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                             <label for="ageRangeField">Категория новости</label>
                             @Html.DropDownListFor(model => model.CategoryID, ViewBag.Categories as SelectList)
                             <label for="commentField">Описание новости</label>
-                            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { placeholder = "Введите текст" } }) @*Не работает placeholder*@
-                            @Html.ValidationMessageFor(model => model.Description, "")
+                            @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @placeholder = "Введите текст" } ) 
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger"})
                             <div class="float-right">
                                 <label for="nameField">Получатели:</label>
 

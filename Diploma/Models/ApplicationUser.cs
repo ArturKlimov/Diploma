@@ -8,6 +8,9 @@ namespace Diploma.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        //ФИО пользователя
+        public string Name { get; set; }
+
         public ApplicationUser()
         {
         }

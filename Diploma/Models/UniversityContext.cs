@@ -66,7 +66,7 @@ namespace Diploma.Models
             //Создаем первого администратора
             ApplicationUserManager userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
 
-            ApplicationUser admin = new ApplicationUser { UserName = "admin1" };
+            ApplicationUser admin = new ApplicationUser { UserName = "admin1", Email = "admin@admin.ru", Name = "Администратор" };
 
             IdentityResult result = userManager.Create(admin, "adminfti123");
 

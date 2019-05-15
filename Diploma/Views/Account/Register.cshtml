@@ -4,23 +4,6 @@
     Layout = "";
 
 }
-@*<h2>Регистрация</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(false)
-    <label>Логин</label>
-    @Html.EditorFor(model => model.Login)
-    <br />
-    <br />
-    <label>Пароль</label>
-    @Html.EditorFor(model => model.Password)
-    <br />
-    <br />
-    <input type="submit" value="Зарегистрироваться" />
-
-}*@
 
 <div class="row grid-responsive">
     <div class="column ">
@@ -34,15 +17,19 @@
                     @Html.AntiForgeryToken()
                 <fieldset>
                     <label for="nameField">E-mail</label>
-                    <input required type="email" placeholder="Введите email" id="nameField"> @*Добавить Email*@
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Введите почту" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     <label for="nameField">ФИО пользователя</label>
-                    <input required type="text" placeholder="Введите ФИО" id="nameField">    @*Добавить ФИО*@
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { placeholder = "Введите ФИО" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     <label for="nameField">Логин пользователя</label>
                     @Html.EditorFor(model => model.Login, new { htmlAttributes = new { placeholder = "Введите логин" } })
+                    @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
                     <label for="nameField">Пароль</label>
                     @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Введите пароль" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     <br />
-                    <input class="button-primary" type="submit" value="Зарегистрировать">   @*Сделать кнопку*@
+                    <input class="button-primary" type="submit" value="Зарегистрировать">
                 </fieldset>
                 }
             </div>

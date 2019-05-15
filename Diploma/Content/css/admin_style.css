@@ -23,7 +23,8 @@ h3 {
   font-size: 1.6em; }
 
 h4 {
-  font-size: 1.4em; }
+  font-size: 1.4em; 
+  color:#f9f9f9;}
 
 h5, h6 {
   color: #555;
@@ -50,10 +51,12 @@ h6 {
   text-align: right; }
 
 a {
-  color: #35cebe; }
+    color: #5C6CAA;
+}
 
-a:focus, a:hover {
-  color: #25beae; }
+    a:focus, a:hover {
+        color:#777;
+    }
 
 hr {
   border: 0;
@@ -267,7 +270,8 @@ select:focus {
       font-size: .9em; }
 
 .background-primary {
-  background: #35cebe; }
+    background: #5C6C8A;
+}
 
 .background-success {
   background: #aee460; }
@@ -450,4 +454,10 @@ select:focus {
 }
 h4{
 text-align: center;
+}
+
+.EditNew {
+    width: 1000px;
+    height: 500px;
+    margin: 100px auto 0 auto;
 }

@@ -2,47 +2,99 @@
 
 @{
     ViewBag.Title = "Редактирование новости" + Model.Title;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "";
 }
 
-<h2>Редактировать новость @Model.Title</h2>
+@*<h2>Редактировать новость @Model.Title</h2>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.ID)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ID)
 
-    <label>Заголовок</label>
-    <br />
-    @Html.EditorFor(model => model.Title)
-    @Html.ValidationMessageFor(model => model.Title, "")
-    <br />
-    <br />
+        <label>Заголовок</label>
+        <br />
+        @Html.EditorFor(model => model.Title)
+        @Html.ValidationMessageFor(model => model.Title, "")
+        <br />
+        <br />
 
-    <label>Категория новости</label>
-    <br />
-    @Html.DropDownListFor(model => model.CategoryID, ViewBag.Categories as SelectList)
-    <br />
-    <br />
+        <label>Категория новости</label>
+        <br />
+        @Html.DropDownListFor(model => model.CategoryID, ViewBag.Categories as SelectList)
+        <br />
+        <br />
 
-    <label>Описание новости</label>
-    <br />
-    @Html.TextAreaFor(model => model.Description)
-    @Html.ValidationMessageFor(model => model.Description, "")
-    <br />
-    <br />
+        <label>Описание новости</label>
+        <br />
+        @Html.TextAreaFor(model => model.Description)
+        @Html.ValidationMessageFor(model => model.Description, "")
+        <br />
+        <br />
 
 
-    @Html.HiddenFor(model => model.ImagePath)
-    @Html.HiddenFor(model => model.Date)
+        @Html.HiddenFor(model => model.ImagePath)
+        @Html.HiddenFor(model => model.Date)
 
-    <input type="submit" value="Редактировать" />
+        <input type="submit" value="Редактировать" />
 
-}
+    }*@
 
-<a href="/admin">Вернуться</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Authorized</title>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!-- Template Styles -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
+
+    <!-- Milligram CSS minified -->
+    <link rel="stylesheet" href="~/Content/css/milligram.min.css">
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="~/Content/css/admin_style.css">
+
+</head>
+<body>
+    <div class="EditNew">
+        <div class="column ">
+            <div class="card">
+                <div class="card-title">
+                    <h3>Редактировать новость</h3>
+                </div>
+                <div class="card-block">
+                    <form>
+                        <fieldset>
+                            <label for="nameField">Заголовок</label>
+                            @Html.EditorFor(model => model.Title)
+                            @Html.ValidationMessageFor(model => model.Title, "")
+                            <label for="ageRangeField">Категория новости</label>
+                            @Html.DropDownListFor(model => model.CategoryID, ViewBag.Categories as SelectList)
+                            <label for="commentField">Описание новости</label>
+                            @Html.TextAreaFor(model => model.Description)
+                            @Html.ValidationMessageFor(model => model.Description, "")
+
+
+                            @Html.HiddenFor(model => model.ImagePath)
+                            @Html.HiddenFor(model => model.Date)
+                            <input class="button-primary" type="submit" value="Редактировать">
+                            <a href="/admin">Вернуться</a>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</html> 

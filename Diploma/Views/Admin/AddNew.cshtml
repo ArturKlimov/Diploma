@@ -69,7 +69,7 @@
 
                                 @foreach (var r in ViewBag.Recipients)
                                 {
-                                    <p><input type="checkbox" name="recipients" value="@r.ID"> @r.Title</p>
+                                    <input type="checkbox" name="recipients" value="@r.ID"> @r.Title
                                 }
                             </div>
                             <input class="button-primary" type="submit" value="Опубликовать">

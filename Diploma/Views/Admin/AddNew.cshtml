@@ -57,12 +57,12 @@
                         @Html.AntiForgeryToken()
                         <fieldset>
                             <label for="nameField">Заголовок</label>
-                            @Html.EditorFor(model => model.Title)
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { placeholder = "Введите заголовок" } })
                             @Html.ValidationMessageFor(model => model.Title, "")
                             <label for="ageRangeField">Категория новости</label>
                             @Html.DropDownListFor(model => model.CategoryID, ViewBag.Categories as SelectList)
                             <label for="commentField">Описание новости</label>
-                            @Html.TextAreaFor(model => model.Description)
+                            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { placeholder = "Введите текст" } }) @*Не работает placeholder*@
                             @Html.ValidationMessageFor(model => model.Description, "")
                             <div class="float-right">
                                 <label for="nameField">Получатели:</label>

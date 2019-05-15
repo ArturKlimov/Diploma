@@ -1,17 +1,51 @@
 ﻿@model IEnumerable<Diploma.Models.Email>
 
-<table>
-    <tr>
-        <th>ФИО Пользователя</th>
-        <th>Почта</th>
-        <th>Группа рассылки</th>
-    </tr>
-    @foreach (var n in Model)
-    {
+@*<table>
         <tr>
-            <td>@n.Name</td>
-            <td>@n.Mail</td>
-            <td>@n.Recipient.Title</td>
+            <th>ФИО Пользователя</th>
+            <th>Почта</th>
+            <th>Группа рассылки</th>
         </tr>
-    }
-</table>
+        @foreach (var n in Model)
+        {
+            <tr>
+                <td>@n.Name</td>
+                <td>@n.Mail</td>
+                <td>@n.Recipient.Title</td>
+            </tr>
+        }
+    </table>*@
+
+<h5 class="mt-2">Рассылки</h5><a class="anchor" name="mailing"></a>
+<div class="row grid-responsive">
+    <div class="column ">
+        <div class="card">
+            <div class="card-title">
+                <h3>Список пользователей на рассылку</h3>
+            </div>
+            <div class="card-block">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ФИО Пользователя</th>
+                            <th>Почта</th>
+                            <th>Группа рассылки</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var n in Model)
+                        {
+                            <tr>
+                                <td>@n.Name</td>
+                                <td>@n.Mail</td>
+                                <td>@n.Recipient.Title</td>
+                                <td> <a href="#">Удалить</a> </td>  @*Поставить ссылку на удаление*@
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

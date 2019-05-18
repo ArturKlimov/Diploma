@@ -25,7 +25,7 @@ namespace Diploma.Controllers
         public ActionResult AllNews(int? page)
         {
             //Количество объектов на страницу
-            int pageSize = 3;
+            int pageSize = 1;
 
             //Количество страниц
             int pageNumber;
@@ -43,6 +43,12 @@ namespace Diploma.Controllers
             var news = db.News.Include(n => n.Category).ToList();
 
             return View(news.ToPagedList(pageNumber, pageSize));
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

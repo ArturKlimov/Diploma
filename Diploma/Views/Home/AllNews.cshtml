@@ -15,6 +15,7 @@
 }
 
 
-@Html.PagedListPager(Model, page => Url.Action("AllNews", new { page }),
-    new PagedListRenderOptions {  MaximumPageNumbersToDisplay = 3, LinkToNextPageFormat = ">",
-        LinkToPreviousPageFormat = "<", LinkToFirstPageFormat = "<<", LinkToLastPageFormat = ">>",   })
+@Html.PagedListPager(Model, page => Url.Action("/allnews", new { page }),
+    new PagedListRenderOptions { LinkToPreviousPageFormat = "<", LinkToNextPageFormat = ">",
+        MaximumPageNumbersToDisplay = 3, DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+        DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToFirstPage = PagedListDisplayMode.Never})

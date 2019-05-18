@@ -55,6 +55,7 @@
                     @using (Html.BeginForm("AddNew", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
+<<<<<<< Updated upstream
                         <fieldset>
                             <label for="nameField">Заголовок</label>
                             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { placeholder = "Введите заголовок" } })
@@ -66,14 +67,16 @@
                             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger"})
                             <div class="float-right">
                                 <label for="nameField">Получатели:</label>
+=======
+>>>>>>> Stashed changes
 
-                                @foreach (var r in ViewBag.Recipients)
-                                {
-                                    <input type="checkbox" name="recipients" value="@r.ID"> @r.Title
-                                }
-                            </div>
-                            <input class="button-primary" type="submit" value="Опубликовать">
-                        </fieldset>
+                            @foreach (var r in ViewBag.Recipients)
+                            {
+                                <input type="checkbox" name="recipients" value="@r.ID"> @r.Title
+                            }
+                        </div>
+                        <input class="button-primary" type="submit" value="Опубликовать">
+                    </fieldset>
                     }
                 </div>
             </div>

@@ -1,0 +1,20 @@
+﻿@model PagedList.IPagedList<Diploma.Models.New>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Новости";
+}
+
+@foreach(var n in Model)
+{
+    <div>
+        <p>@n.Date</p>
+        <p>@n.Title</p>
+        <p>@n.Category.Title</p>
+    </div>
+}
+
+
+@Html.PagedListPager(Model, page => Url.Action("AllNews", new { page }),
+    new PagedListRenderOptions {  MaximumPageNumbersToDisplay = 3, LinkToNextPageFormat = ">",
+        LinkToPreviousPageFormat = "<", LinkToFirstPageFormat = "<<", LinkToLastPageFormat = ">>",   })

@@ -449,16 +449,37 @@ select:focus {
       display: none; } }
 
 .container {
-  width: 500px;
-  height: 500px;
-  margin: 250px auto 0 auto;
-}
-h4{
-text-align: center;
+    width: 500px;
+    height: 500px;
+    margin: 200px auto 0 auto;
 }
 
+h4 {
+    text-align: center;
+}
+
+.delete {
+    width: 500px;
+    text-align: center;
+}
+
+    .delete .column .card {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 25px;
+    }
+
+        .delete .column .card .card-block .alert {
+            margin-top: 25px;
+        }
+
 .EditNew {
-    width: 1000px;
-    height: 500px;
-    margin: 100px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+}
+
+h4 {
+    text-align: center;
 }

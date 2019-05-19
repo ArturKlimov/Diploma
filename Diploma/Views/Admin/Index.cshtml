@@ -53,7 +53,6 @@
                 <li><a href="#news"><em class="fa fa-eye"></em> Новости</a></li>
                 <li><a href="#warning"><em class="fa fa fa-warning"></em> Объявления</a></li>
                 <li><a href="#event"><em class="fa fa-star"></em> Мероприятия</a></li>
-                <li><a href="#photo"><em class="fa fa-photo"></em> Фото</a></li>
                 <li><a href="#video"><em class="fa fa-video-camera"></em> Видео</a></li>
                 <li><a href="#mailing"><em class="fa fa-upload"></em> Рассылки</a></li>
                 <li><a href="#users"><em class="fa fa-users"></em> Пользователи</a></li>
@@ -98,6 +97,234 @@
             <br />
 
             @Html.Action("Register", "Account")
+
+            <!--Объявления-->
+            <h5 class="mt-2">Объявления</h5><a class="anchor" name="warning"></a>
+            <div class="row grid-responsive">
+                <div class="column ">
+                    <div class="card">
+                        <div class="card-title">
+                            <h3>Список объявлений</h3>
+                        </div>
+                        <div class="card-block">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Заголовок</th>
+                                        <th>Дата</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Объявление 1</td>
+                                        <td>09.05.19</td>
+                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
+                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Объявление 2</td>
+                                        <td>09.05.19</td>
+                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
+                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Объявление 3</td>
+                                        <td>09.05.19</td>
+                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
+                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Объявление 4</td>
+                                        <td>09.05.19</td>
+                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
+                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
+
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row grid-responsive">
+                <div class="column ">
+                    <div class="card">
+                        <div class="card-title">
+                            <h3>Добавить объявление</h3>
+                        </div>
+                        <div class="card-block">
+                            <form>
+                                <fieldset>
+                                    <label for="nameField">Заголовок</label>
+                                    <input type="text" placeholder="Объявление" id="nameField">
+                                    <label for="commentField">Описание объявления</label>
+                                    <textarea placeholder="Введите текст" id="commentField"></textarea>
+                                    <div class="float-right">
+                                        <label for="nameField">Получатели:</label>
+                                        <input type="checkbox" id="confirmField">
+                                        <label class="label-inline" for="confirmField">Старостат</label>
+
+                                        <input type="checkbox" id="confirmField">
+                                        <label class="label-inline" for="confirmField">Преподаватели</label>
+                                    </div>
+                                    <input class="button-primary" type="submit" value="Опубликовать">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row grid-responsive">
+                <div class="column ">
+                    <div class="card">
+                        <div class="card-title">
+                            <h3>Редактировать объявление</h3>
+                        </div>
+                        <div class="card-block">
+                            <form>
+                                <fieldset>
+                                    <label for="nameField">Заголовок</label>
+                                    <input type="text" placeholder="Объявление" id="nameField">
+                                    <label for="commentField">Описание объявления</label>
+                                    <textarea placeholder="Введите текст" id="commentField"></textarea>
+                                    <input class="button-primary" type="submit" value="Редактировать">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Мероприятия-->
+            <h5 class="mt-2">Мероприятия</h5><a class="anchor" name="event"></a>
+            <div class="row grid-responsive">
+                <div class="column ">
+                    <div class="card">
+                        <div class="card-title">
+                            <h3>Список мероприятий</h3>
+                        </div>
+                        <div class="card-block">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Заголовок</th>
+                                        <th>Дата</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Мероприятие 1</td>
+                                        <td>09.05.19</td>
+                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
+                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Мероприятие 2</td>
+                                        <td>09.05.19</td>
+                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
+                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Мероприятие 3</td>
+                                        <td>09.05.19</td>
+                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
+                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Мероприятие 4</td>
+                                        <td>09.05.19</td>
+                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
+                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row grid-responsive">
+                <div class="column ">
+                    <div class="card">
+                        <div class="card-title">
+                            <h3>Добавить мероприятие</h3>
+                        </div>
+                        <div class="card-block">
+                            <form>
+                                <fieldset>
+                                    <label for="nameField">Заголовок</label>
+                                    <input type="text" placeholder="Мероприятие" id="nameField">
+                                    <label for="commentField">Описание мероприятия</label>
+                                    <textarea placeholder="Введите текст" id="commentField"></textarea>
+                                    <label for="commentField">Дата начала мероприятия</label>
+                                    <input type="date" id="nameField">
+                                    <label for="commentField">Время начала мероприятия</label>
+                                    <input type="time" id="nameField">
+                                    <label for="commentField">Дата окончания мероприятия</label>
+                                    <input type="date" id="nameField">
+                                    <label for="commentField">Время окончания мероприятия</label>
+                                    <input type="time" id="nameField">
+                                    </br>
+                                    <input class="button-primary" type="submit" value="Опубликовать">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row grid-responsive">
+                <div class="column ">
+                    <div class="card">
+                        <div class="card-title">
+                            <h3>Редактировать мероприятие</h3>
+                        </div>
+                        <div class="card-block">
+                            <form>
+                                <fieldset>
+                                    <label for="nameField">Заголовок</label>
+                                    <input type="text" placeholder="Мероприятие" id="nameField">
+                                    <label for="commentField">Описание мероприятия</label>
+                                    <textarea placeholder="Введите текст" id="commentField"></textarea>
+                                    <label for="commentField">Дата начала мероприятия</label>
+                                    <input type="date" id="nameField">
+                                    <label for="commentField">Время начала мероприятия</label>
+                                    <input type="time" id="nameField">
+                                    <label for="commentField">Дата окончания мероприятия</label>
+                                    <input type="date" id="nameField">
+                                    <label for="commentField">Время окончания мероприятия</label>
+                                    <input type="time" id="nameField">
+                                    </br>
+                                    <input class="button-primary" type="submit" value="Редактировать">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Подтверждение удаления-->
+            <div class="delete">
+                <div class="column ">
+                    <div class="card">
+                        <div class="card-block">
+                            <form>
+                                <fieldset>
+                                    <div class="alert">
+                                        <em class="fa fa-warning"></em> Вы уверены,что хотите удалить?
+                                    </div>
+                                    <div class="float-center">
+                                        <input class="button-primary" type="submit" value="Да">
+                                        <input class="button-primary" type="submit" value="Нет">
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </body>
 
     @Scripts.Render("~/bundles/jquery")

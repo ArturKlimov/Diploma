@@ -20,12 +20,12 @@ namespace Diploma.Controllers
         {
             return View();
         }
-
-        [Route("/allnews/{page}")]
-        public ActionResult AllNews(int? page)
+        
+        [Route("/allnews/{category}/{page}")]
+        public ActionResult AllNews(int? category, int? page)
         {
             //Количество объектов на страницу
-            int pageSize = 1;
+            int pageSize = 8;
 
             //Количество страниц
             int pageNumber;
@@ -39,10 +39,25 @@ namespace Diploma.Controllers
                 pageNumber = (int)page;
             }
 
-            //Все новости
-            var news = db.News.Include(n => n.Category).ToList();
+            List<New> news;
 
-            return View(news.ToPagedList(pageNumber, pageSize));
+
+            if (category == null)
+            {
+                news = db.News.Include(n => n.Category).ToList();
+            }
+            else
+            {
+                news = db.News.Include(n => n.Category).Where(n => n.Category.ID == category).ToList();
+
+                var selectedCategory = db.Categories.FirstOrDefault(c => c.ID == category).ID;
+                ViewBag.SelectedCategory = selectedCategory;
+            }
+
+            var categories = db.Categories.ToList();
+
+            ViewBag.Categories = categories;
+            return PartialView("AllNews", news.ToPagedList(pageNumber, pageSize));
         }
 
         protected override void Dispose(bool disposing)

@@ -61,9 +61,6 @@ namespace Diploma.Controllers
             SelectList categories = new SelectList(db.Categories, "ID", "Title");
             ViewBag.Categories = categories;
 
-            var recipients = db.Recipients.ToList();
-            ViewBag.Recipients = recipients;
-
             return PartialView();
         }
 
@@ -97,20 +94,6 @@ namespace Diploma.Controllers
                 //Сохраняем новость в базе данных
                 db.News.Add(aNew);
                 db.SaveChanges();
-
-                //Для получения данных в EmailController
-                if (recipients != null)
-                {
-                    //Передаем заголовок и описание новости
-                    TempData["subject"] = aNew.Title;
-                    TempData["body"] = aNew.Description;
-
-                    //Передаем список получателей
-                    TempData["recipients"] = recipients.ToList();
-
-                    //Переходим на метод отправки
-                    return RedirectToAction("Index", "Email");
-                }
 
             }
             return Redirect("/admin");
@@ -186,9 +169,12 @@ namespace Diploma.Controllers
         [HttpPost]
         public ActionResult EditNew(New editNew)
         {
-            //Редактирование новости
-            db.Entry(editNew).State = EntityState.Modified;
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                //Редактирование новости
+                db.Entry(editNew).State = EntityState.Modified;
+                db.SaveChanges();
+            }
 
             return Redirect("/admin");
         }
@@ -293,6 +279,166 @@ namespace Diploma.Controllers
             }
         }
 
+        //GET-запрос на добавление объявления
+        [HttpGet]
+        public ActionResult AddNotification()
+        {
+            var recipients = db.Recipients.ToList();
+            ViewBag.Recipients = recipients;
+
+            return PartialView();
+        }
+
+        //POST-запрос на добавление объявления
+        [HttpPost]
+        public ActionResult AddNotification(Notification notification, int[] recipients)
+        {
+            if (ModelState.IsValid)
+            {
+                //Заполняем поле даты  
+                notification.Date = DateTime.Now;
+
+                //Сохраняем объявление в базе данных
+                db.Notifications.Add(notification);
+                db.SaveChanges();
+
+                //Для получения данных в EmailController
+                if (recipients != null)
+                {
+                    //Передаем заголовок и описание новости
+                    TempData["subject"] = notification.Title;
+                    TempData["body"] = notification.Description;
+
+                    //Передаем список получателей
+                    TempData["recipients"] = recipients.ToList();
+
+                    //Переходим на метод отправки
+                    return RedirectToAction("Index", "Email");
+                }
+
+            }
+            return Redirect("/admin");
+        }
+
+        //GET-запрос на вывод 5 последних объявлений
+        [HttpGet]
+        public ActionResult GetNotificationsList()
+        {
+            var notifications = db.Notifications.ToList();
+
+            List<Notification> lastNotifications = new List<Notification>();
+
+            int numberOfNotifications = notifications.Count;
+
+            for (int i = 1; i <= 5; i++)
+            {
+                if (numberOfNotifications - i >= 0)
+                {
+                    lastNotifications.Add(notifications[numberOfNotifications - i]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return PartialView(lastNotifications);
+        }
+
+        //GET-запрос на редактирование объявления
+        [HttpGet]
+        public ActionResult EditNotification(int? id)
+        {
+            //Если id передан
+            if (id != null)
+            {
+                //Найти объявление по ID и записать в переменную
+                var editNotification = db.Notifications.FirstOrDefault(n => n.ID == id);
+
+                //Если новость найдена
+                if (editNotification != null)
+                {
+                    return View(editNotification);
+                }
+                //Если новость не найдена
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        //POST-запрос на редактирование объявления
+        [HttpPost]
+        public ActionResult EditNotification(Notification editNotification)
+        {
+            if (ModelState.IsValid)
+            {
+                //Редактирование новости
+                db.Entry(editNotification).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Redirect("/admin");
+        }
+
+        //GET-запрос на удаление объявления
+        [HttpGet]
+        public ActionResult DeleteNotification(int? id)
+        {
+            //если есть id
+            if (id != null)
+            {
+                //Найти новость по ID новости
+                var deleteNotification = db.Notifications.FirstOrDefault(n => n.ID == id);
+
+                //если нашли новость
+                if (deleteNotification != null)
+                {
+                    db.Notifications.Remove(deleteNotification);
+                    db.SaveChanges();
+
+                    return Redirect("/admin");
+                }
+                //если не нашли новость
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            //если нет id
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        //GET-запрос на получение всех новостей
+        [HttpGet]
+        public ActionResult GetAllNotifications(string search)
+        {
+            List<Notification> notifications;
+            if (search == null)
+            {
+                notifications = db.Notifications.ToList();
+                
+            }
+            else
+            {
+                notifications = db.Notifications.Where(n => n.Title.Contains(search)).ToList();
+            }
+            return PartialView("GetAllNotifications", notifications);
+        }
+
+        //Запрос на получение предсатвления страницы всех пользователей
+        [HttpGet]
+        public ActionResult GetAllNotificationsList()
+        {
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

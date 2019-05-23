@@ -29,6 +29,8 @@ namespace Diploma.Models
 
         public DbSet<Recipient> Recipients { get; set; }
 
+        public DbSet<Notification> Notifications { get; set; }
+
     }
 
     //Инициализация базы данных при изменении модели

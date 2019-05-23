@@ -1,3 +1,441 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@{
+    Layout = "";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>main</title>
+    <!-- Flickity style -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="~/Content/css/style_main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+
+<body>
+    <!--ШАПКА-->
+    <header>
+        <div class="top_header">
+            <div class="header_logo">ФТИ</div>
+            <nav>
+                <div class="header_menu" id="myHeader_menu">
+                    <a href="#">Главная</a>
+                    <a href="#">Новости</a>
+                    <a href="#">Мероприятия</a>
+                    <a href="#">Объявления</a>
+                    <a href="#">Видео</a>
+                </div>
+            </nav>
+            <button> <img src="~/Content/Images/search.png"></button>
+        </div>
+
+        <div class="bottom_header">
+            <!--Блок ОБЪЯВЛЕНИЯ-->
+            <div class="ads">
+                <div class="adstopic">Объявления:</div>
+                <div class="adscontent">
+                    <ul>
+                        <li><a href="#">Заседание кафедры  —  12 сентября, 13:20</a></li>
+                    </ul>
+                    <p>Очередное заседание кафедры состоится в четверг, 14 марта. Аудитория будет сообщена позже.</p>
+                    </br>
+                    <ul>
+                        <li><a href="#">Пересдача экзаменов  —  5 сентября, 15:00</a></li>
+                    </ul>
+                    <p>Назначена новая пересдача по курсу “Детали приборов”. Тест состоится 16 сентября.</p>
+                    </br>
+                    <ul>
+                        <li><a href="#">Программа госэкзамена  —  2 сентября, 08:44</a></li>
+                    </ul>
+                    <p>Опубликована программа госэкзамена магистратуры по направлениям "Информатика и вычислительная техника".</p>
+                    </br>
+                </div>
+            </div>
+            <!--Карточки НОВОСТЕЙ-->
+            <div class="news">
+                <div class="carousel">
+                    <div class="carousel__list" data-flickity='{ "imagesLoaded": true,"groupCells": true,  "pageDots": false }'>
+                        <!--1КАРТОЧКА-->
+                        <div class="carousel__item" style="background-image: url(../../Content/Images/1.jpg);">
+                            <div class="carousel__overlay1"></div>
+                            <div class="carousel__content">
+                                <div class="newscat">ДОСТИЖЕНИЯ</div>
+                                <div class="newstopic">«Черные Медведи – ПетрГУ» выиграли регулярный чемпионат женской Суперлиги 2</div>
+                                <div class="newsdate">29 апреля, 2019</div>
+                            </div>
+                        </div>
+                        <!--2КАРТОЧКА-->
+                        <div class="carousel__item" style="background-image: url(../../Content/Images/2.jpg);">
+                            <div class="carousel__overlay2"></div>
+                            <div class="carousel__content">
+                                <div class="newscat">КУЛЬТУРА</div>
+                                <div class="newstopic">Топ-5 разработок и открытий ученых Физико-технического института за последний год</div>
+                                <div class="newsdate">28 апреля, 2019</div>
+                            </div>
+                        </div>
+                        <!--3КАРТОЧКА-->
+                        <div class="carousel__item" style="background-image: url(../../Content/Images/3.jpg);">
+                            <div class="carousel__overlay3"></div>
+                            <div class="carousel__content">
+                                <div class="newscat">НАУКА</div>
+                                <div class="newstopic">«Поющие инженеры дали концерт в честь первого директора ПетрГУ</div>
+                                <div class="newsdate">27 апреля, 2019</div>
+                            </div>
+                        </div>
+                        <!--4КАРТОЧКА-->
+                        <div class="carousel__item" style="background-image: url(../../Content/Images/4.jpg);">
+                            <div class="carousel__overlay4"></div>
+                            <div class="carousel__content">
+                                <div class="newscat">ОБРАЗОВАНИЕ</div>
+                                <div class="newstopic">«Черные Медведи – ПетрГУ» выиграли регулярный чемпионат женской Суперлиги 2</div>
+                                <div class="newsdate">26 апреля, 2019</div>
+                            </div>
+                        </div>
+                        <!--5КАРТОЧКА-->
+                        <div class="carousel__item" style="background-image: url(../../Content/Images/5.jpg);">
+                            <div class="carousel__overlay5"></div>
+                            <div class="carousel__content">
+                                <div class="newscat">ПАРТНЁРСТВО</div>
+                                <div class="newstopic">Топ-5 разработок и открытий ученых Физико-технического института за последний год</div>
+                                <div class="newsdate">25 апреля, 2019</div>
+                            </div>
+                        </div>
+                        <!--6КАРТОЧКА-->
+                        <div class="carousel__item" style="background-image: url(../../Content/Images/6.jpg);">
+                            <div class="carousel__overlay6"></div>
+                            <div class="carousel__content">
+                                <div class="newscat">СПОРТ</div>
+                                <div class="newstopic">«Поющие инженеры дали концерт в честь первого директора ПетрГУ</div>
+                                <div class="newsdate">24 апреля, 2019</div>
+                            </div>
+                        </div>
+                        <!--7КАРТОЧКА-->
+                        <div class="carousel__item" style="background-image: url(../../Content/Images/7.jpg);">
+                            <div class="carousel__overlay7"></div>
+                            <div class="carousel__content">
+                                <div class="newscat">ИНСТИТУТ</div>
+                                <div class="newstopic">«Черные Медведи – ПетрГУ» выиграли регулярный чемпионат женской Суперлиги 2</div>
+                                <div class="newsdate">23 апреля, 2019</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </header>
+    <main>
+
+        <!--ВИДЕО-->
+        <div class="video">
+            <div class="top_video">
+                <p>Видео</p>
+                <ul>
+                    <li><a href="#">все видео</a></li>
+                </ul>
+            </div>
+            <div class="bottom_video">
+                <div class="main-carousel" data-flickity='{ "groupCells": 4,  "pageDots": false }'>
+                    <div class="carousel-cell">
+                        <img сlass="imagevideo" src="~/Content/Images/video1.png">
+                        <div class="card-inner"><a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a></div>
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="~/Content/Images/video1.png">
+                        <div class="card-inner"><a href="#" class="btn">Открытие Гуманитарного иннопарка и другие события в дайджесте ПетрГУ</a></div>
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="~/Content/Images/video2.png">
+                        <div class="card-inner"><a href="#" class="btn">Первенство Карелии по функциональному многоборью в ПетрГУ</a></div>
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="~/Content/Images/video3.png">
+                        <div class="card-inner"><a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a></div>
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="~/Content/Images/video4.png">
+                        <div class="card-inner"><a href="#" class="btn">"Пушкинские чтения" и другие события в дайджесте ПетрГУ 16–31 января</a></div>
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="~/Content/Images/video1.png">
+                        <div class="card-inner"><a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a></div>
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="~/Content/Images/video2.png">
+                        <div class="card-inner"><a href="#" class="btn">Открытие Гуманитарного иннопарка и другие события в дайджесте ПетрГУ</a></div>
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="~/Content/Images/video3.png">
+                        <div class="card-inner"><a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a></div>
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="~/Content/Images/video4.png">
+                        <div class="card-inner"><a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a></div>
+                    </div>
+                    <div class="carousel-cell">
+                        <img src="~/Content/Images/video1.png">
+                        <div class="card-inner"><a href="#" class="btn">"Пушкинские чтения" и другие события в дайджесте ПетрГУ 16–31 января</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!--МЕРОПРИЯТИЯ-->
+        <div class="event">
+            <div class="top_event">
+                <p>Мероприятия</p>
+                <ul>
+                    <li><a href="#">все мероприятия</a></li>
+                </ul>
+            </div>
+            <div class="bottom_event">
+                <div class="carousel_event">
+                    <div class="carousel_listevent" data-flickity='{"groupCells": true, "prevNextButtons":false}'>
+                        <!--КАРТОЧКА-->
+                        <div class="fire">
+                            <div class="carousel_itemevent">
+                                <div class="eventdate">
+                                    <h2 class="number">20</h2>
+                                    <div class="dayear">
+                                        <h2 class="day">Воскресенье</h2>
+                                        <h2 class="year">апреля, 2019</h2>
+                                    </div>
+                                </div>
+                                <div class="eventtopic">Выставка ПетрГУ «Петербургское древо» </div>
+                            </div>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="fire">
+                            <div class="carousel_itemevent">
+                                <div class="eventdate">
+                                    <h2 class="number">19</h2>
+                                    <div class="dayear">
+                                        <h2 class="day">Суббота</h2>
+                                        <h2 class="year">апреля, 2019</h2>
+                                    </div>
+                                </div>
+                                <div class="eventtopic">VI Международный форум и выставка «Технопром»</div>
+                            </div>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="fire">
+                            <div class="carousel_itemevent">
+                                <div class="eventdate">
+                                    <h2 class="number">18</h2>
+                                    <div class="dayear">
+                                        <h2 class="day">Пятница</h2>
+                                        <h2 class="year">апреля, 2019</h2>
+                                    </div>
+                                </div>
+                                <div class="eventtopic">Уже сегодня стартует чемпионат Национальной студенческой </div>
+                            </div>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="fire">
+                            <div class="carousel_itemevent">
+                                <div class="eventdate">
+                                    <h2 class="number">17</h2>
+                                    <div class="dayear">
+                                        <h2 class="day">Четверг</h2>
+                                        <h2 class="year">апреля, 2019</h2>
+                                    </div>
+                                </div>
+                                <div class="eventtopic">Международный год Периодической таблицы химических</div>
+                            </div>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="fire">
+                            <div class="carousel_itemevent">
+                                <div class="eventdate">
+                                    <h2 class="number">16</h2>
+                                    <div class="dayear">
+                                        <h2 class="day">Среда</h2>
+                                        <h2 class="year">апреля, 2019</h2>
+                                    </div>
+                                </div>
+                                <div class="eventtopic">Выставка ПетрГУ «Петербургское древо» </div>
+                            </div>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="fire">
+                            <div class="carousel_itemevent">
+                                <div class="eventdate">
+                                    <h2 class="number">15</h2>
+                                    <div class="dayear">
+                                        <h2 class="day">Вторник</h2>
+                                        <h2 class="year">апреля, 2019</h2>
+                                    </div>
+                                </div>
+                                <div class="eventtopic">VI Международный форум и выставка «Технопром»</div>
+                            </div>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="fire">
+                            <div class="carousel_itemevent">
+                                <div class="eventdate">
+                                    <h2 class="number">14</h2>
+                                    <div class="dayear">
+                                        <h2 class="day">Понедельник</h2>
+                                        <h2 class="year">апреля, 2019</h2>
+                                    </div>
+                                </div>
+                                <div class="eventtopic">Уже сегодня стартует чемпионат Национальной студенческой </div>
+                            </div>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="fire">
+                            <div class="carousel_itemevent">
+                                <div class="eventdate">
+                                    <h2 class="number">13</h2>
+                                    <div class="dayear">
+                                        <h2 class="day">Воскресенье</h2>
+                                        <h2 class="year">апреля, 2019</h2>
+                                    </div>
+                                </div>
+                                <div class="eventtopic">Международный год Периодической таблицы химических</div>
+                            </div>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="fire">
+                            <div class="carousel_itemevent">
+                                <div class="eventdate">
+                                    <h2 class="number">12</h2>
+                                    <div class="dayear">
+                                        <h2 class="day">Суббота</h2>
+                                        <h2 class="year">апреля, 2019</h2>
+                                    </div>
+                                </div>
+                                <div class="eventtopic">Выставка ПетрГУ «Петербургское древо» </div>
+                            </div>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="fire">
+                            <div class="carousel_itemevent">
+                                <div class="eventdate">
+                                    <h2 class="number">11</h2>
+                                    <div class="dayear">
+                                        <h2 class="day">Пятница</h2>
+                                        <h2 class="year">апреля, 2019</h2>
+                                    </div>
+                                </div>
+                                <div class="eventtopic">VI Международный форум и выставка «Технопром»</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--ПОЛЕЗНОЕ-->
+        <div class="info">
+            <div class="top_info">
+                <p>Полезное</p>
+            </div>
+            <div class="bottom_info">
+                <div class="carousel">
+                    <div class="carousel__list" data-flickity='{ "groupCells": true,  "pageDots": false }'>
+
+                        <div class="arrival">
+                            <div class="light">
+                                <div class="carousel_arrival">
+                                    <img class="imgarrival" src="~/Content/Images/иконка (1).png">
+                                    <div class="infotopic">Поступление 2019</div>
+                                    <img class="separator" src="~/Content/Images/разделитель.png">
+                                    <div class="infocontent">В настоящее время, пока поправки об ограничении числа вузов для подачи документов</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table">
+                            <div class="light">
+                                <div class="carousel_table">
+                                    <img class="imgtable" src="~/Content/Images/иконка (2).png ">
+                                    <div class="infotopic">Расписания и графики</div>
+                                    <img class="separator" src="~/Content/Images/разделитель.png">
+                                    <div class="infocontent">График движения поездов является организующей и технологической основой работы</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profcom">
+                            <div class="light">
+                                <div class="carousel_profcom">
+                                    <img class="imgprofcom" src="~/Content/Images/иконка (3).png">
+                                    <div class="infotopic">Профком</div>
+                                    <img class="separator" src="~/Content/Images/разделитель.png">
+                                    <div class="infocontent">Организованная по определённым правилам деятельность людей</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sci">
+                            <div class="light">
+                                <div class="carousel_sci">
+                                    <img class="imgsci" src="~/Content/Images/иконка (4).png">
+                                    <div class="infotopic">Научная деятельность</div>
+                                    <img class="separator" src="~/Content/Images/разделитель.png">
+                                    <div class="infocontent">Интеллектуальная деятельность, направленная на получение </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+    <!--ПОДВАЛ-->
+    <footer>
+        <div class="top-footer">
+            <div class="footer1">
+                <div class="footer_logo">ФТИ</div>
+                <div class="textinfo">
+                    <p>Информационно-медийный ресурс Физико-Технического института</p>
+                    <p>Петрозаводского государственного университета. Сайт поддерживается и</p>
+                    <p>пополняется сотрудниками администрации института.</p>
+                    </br>
+                    <p>© 2010 - 2019 Физико-технического институт (ФТИ)</p>
+                </div>
+                <div class="social">
+                    <a href="#"><img src="~/Content/Images/social_icons/vk.png"></a>
+                    <a href="#"><img src="~/Content/Images/social_icons/instagram.png"></a>
+                    <a href="#"><img src="~/Content/Images/social_icons/youtube.png"></a>
+                    <a href="#"><img src="~/Content/Images/social_icons/facebook.png"></a>
+                </div>
+            </div>
+            <div class="footer3">
+                <div class="contacts">Контакты</div>
+                <div class="contactinfo">
+                    <p><span class="colortext">Адрес: </span>ул. Университетская, д. 29,</p>
+                    <p>Петрозаводск, 195251</p>
+                    <p><span class="colortext">Приемная комиссия:</span> fti@petrsu.ru</p>
+                    <p>(814-2) 71-10-30</p>
+                    <p><span class="colortext">Платное образование:</span> </p>
+                    <p>kirilova@petrsu.ru</p>
+                    <p> (814-2) 71-10-40</p>
+                </div>
+            </div>
+            <div class="footer2">
+                <div class="poleznoe">Другое</div>
+                <div class="sspoleznoe">
+                    <ul>
+                        <li><a href="#">Обратная связь</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Политика конфидециальности</a></li>
+                        <li><a href="#">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+    </footer>
+
+    <script src='js/script.js'></script>
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+    <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+    <!-- Flickity script -->
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+</body>
+</html>

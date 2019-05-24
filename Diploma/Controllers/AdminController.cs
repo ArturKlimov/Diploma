@@ -8,6 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
+using System.Web.Helpers;
+using System.Net.Mail;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Diploma.Controllers
 {
@@ -67,7 +71,7 @@ namespace Diploma.Controllers
 
         //POST-запрос создание новости
         [HttpPost]
-        public ActionResult AddNew(New aNew, HttpPostedFileBase imageFile, int[] recipients)
+        public ActionResult AddNew(New aNew, HttpPostedFileBase imageFile)
         {
             if (ModelState.IsValid)
             {
@@ -291,7 +295,7 @@ namespace Diploma.Controllers
 
         //POST-запрос на добавление объявления
         [HttpPost]
-        public ActionResult AddNotification(Notification notification, int[] recipients)
+        public async Task<ActionResult> AddNotification(Notification notification, int[] recipients, HttpPostedFileBase document1, HttpPostedFileBase document2)
         {
             if (ModelState.IsValid)
             {
@@ -302,18 +306,88 @@ namespace Diploma.Controllers
                 db.Notifications.Add(notification);
                 db.SaveChanges();
 
-                //Для получения данных в EmailController
+                //Если пользователь выбрал какую-либо группу получателей
                 if (recipients != null)
                 {
-                    //Передаем заголовок и описание новости
-                    TempData["subject"] = notification.Title;
-                    TempData["body"] = notification.Description;
+                    //настройка имэйла отправителя и получателя
+                    MailAddress fromAddress = new MailAddress("noreplyfti123@gmail.com");
+                    string fromPassword = "ftidrop1234";
 
-                    //Передаем список получателей
-                    TempData["recipients"] = recipients.ToList();
+                    //Все почты
+                    var emails = db.Emails.ToList();
+                    
+                    //Переменная для проверки
+                    bool check = false;
 
-                    //Переходим на метод отправки
-                    return RedirectToAction("Index", "Email");
+                    //Если в базе есть почты
+                    if (emails.Count() != 0)
+                    {
+                        //Пробегаем по всем почтам
+                        for (int i = 0; i < emails.Count(); i++)
+                        {
+                            //Пробегаем по всем ВЫБРАННЫМ группам получателей
+                            for (int j = 0; j < recipients.Count(); j++)
+                            {
+                                //Если ID группы получателя в почте равен выбранному ID из формы
+                                if (emails[i].RecipientID == recipients[j])
+                                {
+                                    check = true;
+                                }
+                            }
+
+                            //Если ID группы получателей не совпал ни с чем из выбранных, тогда удаляем из списка эту почту
+                            if (check == false)
+                            {
+                                emails.Remove(emails[i]);
+                            }
+                            //Если совпал, реверсируем переменную для проверки
+                            else
+                            {
+                                check = false;
+                            }
+                        }
+                    }
+
+                    //Если в списке остались почты
+                    if (emails.Count != 0)
+                    {
+
+                        //настройка smtp клиента
+                        SmtpClient smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            EnableSsl = true,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                        };
+
+                        MailAddress toAddress = new MailAddress(emails.First().Mail);
+
+                        MailMessage message = new MailMessage(fromAddress, toAddress)
+                        {
+                            Subject = notification.Title,
+                            Body = notification.Description
+                        };
+
+                        for (int i = 1; i < emails.Count(); i++)
+                        {
+                            message.Bcc.Add(emails[i].Mail);
+                        }
+
+                        if (document1 != null)
+                        {
+                            message.Attachments.Add(new Attachment(document1.InputStream, Path.GetFileName(document1.FileName)));
+                        }
+
+                        if (document2 != null)
+                        {
+                            message.Attachments.Add(new Attachment(document2.InputStream, Path.GetFileName(document2.FileName)));
+                        }
+
+                        await smtp.SendMailAsync(message);
+                    }
                 }
 
             }
@@ -439,6 +513,7 @@ namespace Diploma.Controllers
         {
             return View();
         }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

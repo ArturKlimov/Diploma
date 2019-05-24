@@ -9,23 +9,31 @@
             <div class="card-block">
                 @using (Html.BeginForm("AddNotification", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
-                <fieldset>
-                    <label for="nameField">Заголовок</label>
-                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { placeholder = "Введите заголовок" } })
-                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                    <label for="commentField">Описание объявления</label>
-                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @placeholder = "Введите текст" })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                    <div class="float-right">
-                        <label for="nameField">Получатели:</label>
-                        @foreach (var r in ViewBag.Recipients)
-                        {
-                            <input type="checkbox" name="recipients" value="@r.ID" id="confirmField">
-                            <label class="label-inline" for="confirmField">@r.Title</label>
-                        }
-                    </div>
-                    <input class="button-primary" type="submit" value="Опубликовать">
-                </fieldset>
+                    @Html.ValidationSummary(false)
+                    <fieldset>
+                        <label for="nameField">Заголовок</label>
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { placeholder = "Введите заголовок" } })
+
+                        <label for="commentField">Описание объявления</label>
+                        @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @placeholder = "Введите текст" })
+
+                        <label>Добавить документы</label>
+                        <input type="file" name="document1" accept="image/*, .jpg, .jpeg, .png, .doc, .docx, .pdf">
+                        <br />
+                        <input type="file" name="document2" accept="image/*, .jpg, .jpeg, .png, .doc, .docx, .pdf">
+                        <br />
+
+                        <div class="float-right">
+                            <label for="nameField">Получатели:</label>
+                            @foreach (var r in ViewBag.Recipients)
+                            {
+                                <input type="checkbox" name="recipients" value="@r.ID" id="confirmField">
+                                <label class="label-inline" for="confirmField">@r.Title</label>
+                            }
+                        </div>
+                        
+                        <input class="button-primary" type="submit" value="Опубликовать">
+                    </fieldset>
                 }
             </div>
         </div>

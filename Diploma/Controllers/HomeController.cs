@@ -60,6 +60,13 @@ namespace Diploma.Controllers
             return PartialView("AllNews", news.ToPagedList(pageNumber, pageSize));
         }
 
+        [HttpGet]
+        public ActionResult TestVideo()
+        {
+            return View("TestVideo");
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

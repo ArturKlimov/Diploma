@@ -12,7 +12,7 @@ namespace Diploma.Models
         public int ID { get; set; }
         
         //Email
-        [Required(ErrorMessage = "Вы не ввели почту")]
+        [Required(ErrorMessage = "Введите Email")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Некорректный адрес")]
         public string Mail { get; set; }
 

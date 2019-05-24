@@ -189,7 +189,6 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,6 +257,7 @@
     <Content Include="Views\Admin\EditNotification.cshtml" />
     <Content Include="Views\Admin\GetAllNotifications.cshtml" />
     <Content Include="Views\Admin\GetAllNotificationsList.cshtml" />
+    <Content Include="Views\Home\TestVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\css\" />

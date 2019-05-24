@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Admin Template</title>
+    <title>Admin-панель</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -67,15 +67,19 @@
 
             <!--               Блок новостей               -->
 
-            <h5 class="mt-2">Новости</h5><a class="anchor" name="news"></a>
-
             @Html.Action("GetNewsList")
 
 
 
             @Html.Action("AddNew")
 
+            <!--               Блок объявлений             -->
+            @Html.Action("GetNotificationsList")
 
+            <br />
+            <br />
+
+            @Html.Action("AddNotification")
 
             <!--               Блок рассылки               -->
 
@@ -98,105 +102,6 @@
 
             @Html.Action("Register", "Account")
 
-            <!--Объявления-->
-            <h5 class="mt-2">Объявления</h5><a class="anchor" name="warning"></a>
-            <div class="row grid-responsive">
-                <div class="column ">
-                    <div class="card">
-                        <div class="card-title">
-                            <h3>Список объявлений</h3>
-                        </div>
-                        <div class="card-block">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Заголовок</th>
-                                        <th>Дата</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Объявление 1</td>
-                                        <td>09.05.19</td>
-                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
-                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Объявление 2</td>
-                                        <td>09.05.19</td>
-                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
-                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Объявление 3</td>
-                                        <td>09.05.19</td>
-                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
-                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Объявление 4</td>
-                                        <td>09.05.19</td>
-                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
-                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
-
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row grid-responsive">
-                <div class="column ">
-                    <div class="card">
-                        <div class="card-title">
-                            <h3>Добавить объявление</h3>
-                        </div>
-                        <div class="card-block">
-                            <form>
-                                <fieldset>
-                                    <label for="nameField">Заголовок</label>
-                                    <input type="text" placeholder="Объявление" id="nameField">
-                                    <label for="commentField">Описание объявления</label>
-                                    <textarea placeholder="Введите текст" id="commentField"></textarea>
-                                    <div class="float-right">
-                                        <label for="nameField">Получатели:</label>
-                                        <input type="checkbox" id="confirmField">
-                                        <label class="label-inline" for="confirmField">Старостат</label>
-
-                                        <input type="checkbox" id="confirmField">
-                                        <label class="label-inline" for="confirmField">Преподаватели</label>
-                                    </div>
-                                    <input class="button-primary" type="submit" value="Опубликовать">
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row grid-responsive">
-                <div class="column ">
-                    <div class="card">
-                        <div class="card-title">
-                            <h3>Редактировать объявление</h3>
-                        </div>
-                        <div class="card-block">
-                            <form>
-                                <fieldset>
-                                    <label for="nameField">Заголовок</label>
-                                    <input type="text" placeholder="Объявление" id="nameField">
-                                    <label for="commentField">Описание объявления</label>
-                                    <textarea placeholder="Введите текст" id="commentField"></textarea>
-                                    <input class="button-primary" type="submit" value="Редактировать">
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!--Мероприятия-->
             <h5 class="mt-2">Мероприятия</h5><a class="anchor" name="event"></a>
             <div class="row grid-responsive">
@@ -330,7 +235,6 @@
     @Scripts.Render("~/bundles/jquery")
 
     @Scripts.Render("~/bundles/jqueryval")
-
 
 
 </html>

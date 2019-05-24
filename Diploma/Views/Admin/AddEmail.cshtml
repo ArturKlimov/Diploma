@@ -10,18 +10,17 @@
                 @using (Html.BeginForm("AddEmail", "Admin", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                <fieldset>
-                    <label for="nameField">E-mail</label>
-                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите E-mail" } })
-                    @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
-                    <label for="nameField">Владелец почты</label>
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите ФИО" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                    <label for="nameField">Группа</label>
-                    @Html.DropDownListFor(model => model.RecipientID, ViewBag.Recipients as SelectList)
-                    <br />
-                    <input class="button-primary" type="submit" value="Подписать">
-                </fieldset>
+                    @Html.ValidationSummary(false)
+                    <fieldset>
+                        <label for="nameField">E-mail</label>
+                        @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите E-mail" } })
+                        <label for="nameField">Владелец почты</label>
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите ФИО" } })
+                        <label for="nameField">Группа</label>
+                        @Html.DropDownListFor(model => model.RecipientID, ViewBag.Recipients as SelectList)
+                        <br />
+                        <input class="button-primary" type="submit" value="Подписать">
+                    </fieldset>
                 }
 
 

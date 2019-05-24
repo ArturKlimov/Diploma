@@ -8,6 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
+using System.Web.Helpers;
+using System.Net.Mail;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Diploma.Controllers
 {
@@ -61,16 +65,13 @@ namespace Diploma.Controllers
             SelectList categories = new SelectList(db.Categories, "ID", "Title");
             ViewBag.Categories = categories;
 
-            var recipients = db.Recipients.ToList();
-            ViewBag.Recipients = recipients;
-
             return PartialView();
         }
 
 
         //POST-запрос создание новости
         [HttpPost]
-        public ActionResult AddNew(New aNew, HttpPostedFileBase imageFile, int[] recipients)
+        public ActionResult AddNew(New aNew, HttpPostedFileBase imageFile)
         {
             if (ModelState.IsValid)
             {
@@ -97,20 +98,6 @@ namespace Diploma.Controllers
                 //Сохраняем новость в базе данных
                 db.News.Add(aNew);
                 db.SaveChanges();
-
-                //Для получения данных в EmailController
-                if (recipients != null)
-                {
-                    //Передаем заголовок и описание новости
-                    TempData["subject"] = aNew.Title;
-                    TempData["body"] = aNew.Description;
-
-                    //Передаем список получателей
-                    TempData["recipients"] = recipients.ToList();
-
-                    //Переходим на метод отправки
-                    return RedirectToAction("Index", "Email");
-                }
 
             }
             return Redirect("/admin");
@@ -186,9 +173,12 @@ namespace Diploma.Controllers
         [HttpPost]
         public ActionResult EditNew(New editNew)
         {
-            //Редактирование новости
-            db.Entry(editNew).State = EntityState.Modified;
-            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                //Редактирование новости
+                db.Entry(editNew).State = EntityState.Modified;
+                db.SaveChanges();
+            }
 
             return Redirect("/admin");
         }
@@ -291,6 +281,237 @@ namespace Diploma.Controllers
             {
                 return HttpNotFound();
             }
+        }
+
+        //GET-запрос на добавление объявления
+        [HttpGet]
+        public ActionResult AddNotification()
+        {
+            var recipients = db.Recipients.ToList();
+            ViewBag.Recipients = recipients;
+
+            return PartialView();
+        }
+
+        //POST-запрос на добавление объявления
+        [HttpPost]
+        public async Task<ActionResult> AddNotification(Notification notification, int[] recipients, HttpPostedFileBase document1, HttpPostedFileBase document2)
+        {
+            if (ModelState.IsValid)
+            {
+                //Заполняем поле даты  
+                notification.Date = DateTime.Now;
+
+                //Сохраняем объявление в базе данных
+                db.Notifications.Add(notification);
+                db.SaveChanges();
+
+                //Если пользователь выбрал какую-либо группу получателей
+                if (recipients != null)
+                {
+                    //настройка имэйла отправителя и получателя
+                    MailAddress fromAddress = new MailAddress("noreplyfti123@gmail.com");
+                    string fromPassword = "ftidrop1234";
+
+                    //Все почты
+                    var emails = db.Emails.ToList();
+                    
+                    //Переменная для проверки
+                    bool check = false;
+
+                    //Если в базе есть почты
+                    if (emails.Count() != 0)
+                    {
+                        //Пробегаем по всем почтам
+                        for (int i = 0; i < emails.Count(); i++)
+                        {
+                            //Пробегаем по всем ВЫБРАННЫМ группам получателей
+                            for (int j = 0; j < recipients.Count(); j++)
+                            {
+                                //Если ID группы получателя в почте равен выбранному ID из формы
+                                if (emails[i].RecipientID == recipients[j])
+                                {
+                                    check = true;
+                                }
+                            }
+
+                            //Если ID группы получателей не совпал ни с чем из выбранных, тогда удаляем из списка эту почту
+                            if (check == false)
+                            {
+                                emails.Remove(emails[i]);
+                            }
+                            //Если совпал, реверсируем переменную для проверки
+                            else
+                            {
+                                check = false;
+                            }
+                        }
+                    }
+
+                    //Если в списке остались почты
+                    if (emails.Count != 0)
+                    {
+
+                        //настройка smtp клиента
+                        SmtpClient smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            EnableSsl = true,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                        };
+
+                        MailAddress toAddress = new MailAddress(emails.First().Mail);
+
+                        MailMessage message = new MailMessage(fromAddress, toAddress)
+                        {
+                            Subject = notification.Title,
+                            Body = notification.Description
+                        };
+
+                        for (int i = 1; i < emails.Count(); i++)
+                        {
+                            message.Bcc.Add(emails[i].Mail);
+                        }
+
+                        if (document1 != null)
+                        {
+                            message.Attachments.Add(new Attachment(document1.InputStream, Path.GetFileName(document1.FileName)));
+                        }
+
+                        if (document2 != null)
+                        {
+                            message.Attachments.Add(new Attachment(document2.InputStream, Path.GetFileName(document2.FileName)));
+                        }
+
+                        await smtp.SendMailAsync(message);
+                    }
+                }
+
+            }
+            return Redirect("/admin");
+        }
+
+        //GET-запрос на вывод 5 последних объявлений
+        [HttpGet]
+        public ActionResult GetNotificationsList()
+        {
+            var notifications = db.Notifications.ToList();
+
+            List<Notification> lastNotifications = new List<Notification>();
+
+            int numberOfNotifications = notifications.Count;
+
+            for (int i = 1; i <= 5; i++)
+            {
+                if (numberOfNotifications - i >= 0)
+                {
+                    lastNotifications.Add(notifications[numberOfNotifications - i]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return PartialView(lastNotifications);
+        }
+
+        //GET-запрос на редактирование объявления
+        [HttpGet]
+        public ActionResult EditNotification(int? id)
+        {
+            //Если id передан
+            if (id != null)
+            {
+                //Найти объявление по ID и записать в переменную
+                var editNotification = db.Notifications.FirstOrDefault(n => n.ID == id);
+
+                //Если новость найдена
+                if (editNotification != null)
+                {
+                    return View(editNotification);
+                }
+                //Если новость не найдена
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        //POST-запрос на редактирование объявления
+        [HttpPost]
+        public ActionResult EditNotification(Notification editNotification)
+        {
+            if (ModelState.IsValid)
+            {
+                //Редактирование новости
+                db.Entry(editNotification).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Redirect("/admin");
+        }
+
+        //GET-запрос на удаление объявления
+        [HttpGet]
+        public ActionResult DeleteNotification(int? id)
+        {
+            //если есть id
+            if (id != null)
+            {
+                //Найти новость по ID новости
+                var deleteNotification = db.Notifications.FirstOrDefault(n => n.ID == id);
+
+                //если нашли новость
+                if (deleteNotification != null)
+                {
+                    db.Notifications.Remove(deleteNotification);
+                    db.SaveChanges();
+
+                    return Redirect("/admin");
+                }
+                //если не нашли новость
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            //если нет id
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        //GET-запрос на получение всех новостей
+        [HttpGet]
+        public ActionResult GetAllNotifications(string search)
+        {
+            List<Notification> notifications;
+            if (search == null)
+            {
+                notifications = db.Notifications.ToList();
+                
+            }
+            else
+            {
+                notifications = db.Notifications.Where(n => n.Title.Contains(search)).ToList();
+            }
+            return PartialView("GetAllNotifications", notifications);
+        }
+
+        //Запрос на получение предсатвления страницы всех пользователей
+        [HttpGet]
+        public ActionResult GetAllNotificationsList()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,41 @@
+﻿@model Diploma.Models.Notification
+
+<div class="row grid-responsive">
+    <div class="column ">
+        <div class="card">
+            <div class="card-title">
+                <h3>Добавить объявление</h3>
+            </div>
+            <div class="card-block">
+                @using (Html.BeginForm("AddNotification", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.ValidationSummary(false)
+                    <fieldset>
+                        <label for="nameField">Заголовок</label>
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { placeholder = "Введите заголовок" } })
+
+                        <label for="commentField">Описание объявления</label>
+                        @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @placeholder = "Введите текст" })
+
+                        <label>Добавить документы</label>
+                        <input type="file" name="document1" accept="image/*, .jpg, .jpeg, .png, .doc, .docx, .pdf">
+                        <br />
+                        <input type="file" name="document2" accept="image/*, .jpg, .jpeg, .png, .doc, .docx, .pdf">
+                        <br />
+
+                        <div class="float-right">
+                            <label for="nameField">Получатели:</label>
+                            @foreach (var r in ViewBag.Recipients)
+                            {
+                                <input type="checkbox" name="recipients" value="@r.ID" id="confirmField">
+                                <label class="label-inline" for="confirmField">@r.Title</label>
+                            }
+                        </div>
+                        
+                        <input class="button-primary" type="submit" value="Опубликовать">
+                    </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+</div>

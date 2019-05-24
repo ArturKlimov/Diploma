@@ -1,10 +1,10 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-@{
-    Layout = "";
+﻿@model IEnumerable<Diploma.Models.Notification>
 
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "";
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,27 +33,21 @@
             </nav>
             <button> <img src="~/Content/Images/search.png"></button>
         </div>
-
         <div class="bottom_header">
             <!--Блок ОБЪЯВЛЕНИЯ-->
             <div class="ads">
                 <div class="adstopic">Объявления:</div>
                 <div class="adscontent">
-                    <ul>
-                        <li><a href="#">Заседание кафедры  —  12 сентября, 13:20</a></li>
-                    </ul>
-                    <p>Очередное заседание кафедры состоится в четверг, 14 марта. Аудитория будет сообщена позже.</p>
-                    </br>
-                    <ul>
-                        <li><a href="#">Пересдача экзаменов  —  5 сентября, 15:00</a></li>
-                    </ul>
-                    <p>Назначена новая пересдача по курсу “Детали приборов”. Тест состоится 16 сентября.</p>
-                    </br>
-                    <ul>
-                        <li><a href="#">Программа госэкзамена  —  2 сентября, 08:44</a></li>
-                    </ul>
-                    <p>Опубликована программа госэкзамена магистратуры по направлениям "Информатика и вычислительная техника".</p>
-                    </br>
+                    @foreach (var n in Model)
+                    {
+                        <ul>
+                            <li><a href="#">@n.Title  — @n.Date.ToString("M"), @n.Date.ToShortTimeString()</a></li>
+                        </ul>
+
+                        <p>@n.Description</p>
+
+                        <br>
+                    }
                 </div>
             </div>
             <!--Карточки НОВОСТЕЙ-->

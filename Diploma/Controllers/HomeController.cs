@@ -18,7 +18,24 @@ namespace Diploma.Controllers
         [Route("~/home")]
         public ActionResult Index()
         {
-            return View();
+            var notifications = db.Notifications.ToList();
+
+            List<Notification> lastNotifications = new List<Notification>();
+
+            int numberOfNotifications = notifications.Count;
+
+            for (int i = 1; i <= 3; i++)
+            {
+                if (numberOfNotifications - i >= 0)
+                {
+                    lastNotifications.Add(notifications[numberOfNotifications - i]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return View(lastNotifications);
         }
         
         [Route("/allnews/{category}/{page}")]
@@ -44,11 +61,11 @@ namespace Diploma.Controllers
 
             if (category == null)
             {
-                news = db.News.Include(n => n.Category).ToList();
+                news = db.News.Include(n => n.Category).OrderByDescending(i => i.ID).ToList();
             }
             else
             {
-                news = db.News.Include(n => n.Category).Where(n => n.Category.ID == category).ToList();
+                news = db.News.Include(n => n.Category).Where(n => n.Category.ID == category).OrderByDescending(i => i.ID).ToList();
 
                 var selectedCategory = db.Categories.FirstOrDefault(c => c.ID == category).ID;
                 ViewBag.SelectedCategory = selectedCategory;

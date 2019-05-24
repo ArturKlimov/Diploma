@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<a href="/home/allnews">Все категории</a>
+<br />
 @foreach (var c in ViewBag.Categories)
 {
     <a href="/home/allnews?category=@c.ID">@c.Title</a>
@@ -14,7 +16,7 @@
 @foreach (var n in Model)
 {
     <div>
-        <p>@n.Date</p>
+        <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
         <p>@n.Title</p>
         <p>@n.Category.Title</p>
     </div>

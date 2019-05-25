@@ -18,24 +18,9 @@ namespace Diploma.Controllers
         [Route("~/home")]
         public ActionResult Index()
         {
-            var notifications = db.Notifications.ToList();
+            var notifications = db.Notifications.OrderByDescending(i => i.ID).Take(3).ToList();
 
-            List<Notification> lastNotifications = new List<Notification>();
-
-            int numberOfNotifications = notifications.Count;
-
-            for (int i = 1; i <= 3; i++)
-            {
-                if (numberOfNotifications - i >= 0)
-                {
-                    lastNotifications.Add(notifications[numberOfNotifications - i]);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            return View(lastNotifications);
+            return View(notifications);
         }
         
         [Route("/allnews/{category}/{page}")]

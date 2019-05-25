@@ -36,25 +36,9 @@ namespace Diploma.Controllers
         [HttpGet]
         public ActionResult GetNewsList()
         {
-            var news = db.News.Include(n => n.Category).ToList();
+            var news = db.News.Include(n => n.Category).OrderByDescending(i => i.ID).Take(5).ToList();
 
-            List<New> lastNews = new List<New>();
-
-            int numberOfNews = news.Count;
-
-            for (int i = 1; i <= 5; i++)
-            {
-                if (numberOfNews - i >= 0)
-                {
-                    lastNews.Add(news[numberOfNews - i]);
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            return PartialView(lastNews);
+            return PartialView(news);
         }
 
         [HttpGet]
@@ -187,24 +171,9 @@ namespace Diploma.Controllers
         [HttpGet]
         public ActionResult GetEmailsList()
         {
-            var emails = db.Emails.Include(e => e.Recipient).ToList();
+            var emails = db.Emails.Include(e => e.Recipient).OrderByDescending(i => i.ID).Take(5).ToList();
 
-            List<Email> lastEmails = new List<Email>();
-
-            int numberOfEmails = emails.Count;
-
-            for (int i = 1; i <= 5; i++)
-            {
-                if (numberOfEmails - i >= 0)
-                {
-                    lastEmails.Add(emails[numberOfEmails - i]);
-                }
-                else
-                {
-                    break;
-                }
-            }
-            return PartialView(lastEmails);
+            return PartialView(emails);
         }
 
         //GET-запрос на добавление почты в базу
@@ -233,25 +202,9 @@ namespace Diploma.Controllers
         [HttpGet]
         public ActionResult GetUsersList()
         {
-            var users = db.Users.ToList();
+            var users = db.Users.OrderByDescending(u => u.Id).Take(5).ToList();
 
-            List<ApplicationUser> lastUsers = new List<ApplicationUser>();
-
-            int numberOfUsers = users.Count;
-
-            for (int i = 1; i <= 5; i++)
-            {
-                if (numberOfUsers - i >= 0)
-                {
-                    lastUsers.Add(users[numberOfUsers - i]);
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            return PartialView(lastUsers);
+            return PartialView(users);
         }
 
         //GET-запрос на удаление почты пользователя
@@ -313,80 +266,55 @@ namespace Diploma.Controllers
                     MailAddress fromAddress = new MailAddress("noreplyfti123@gmail.com");
                     string fromPassword = "ftidrop1234";
 
-                    //Все почты
+                    //Записываем все элементы почты в список emails
                     var emails = db.Emails.ToList();
                     
-                    //Переменная для проверки
-                    bool check = false;
-
                     //Если в базе есть почты
-                    if (emails.Count() != 0)
-                    {
-                        //Пробегаем по всем почтам
-                        for (int i = 0; i < emails.Count(); i++)
-                        {
-                            //Пробегаем по всем ВЫБРАННЫМ группам получателей
-                            for (int j = 0; j < recipients.Count(); j++)
-                            {
-                                //Если ID группы получателя в почте равен выбранному ID из формы
-                                if (emails[i].RecipientID == recipients[j])
-                                {
-                                    check = true;
-                                }
-                            }
-
-                            //Если ID группы получателей не совпал ни с чем из выбранных, тогда удаляем из списка эту почту
-                            if (check == false)
-                            {
-                                emails.Remove(emails[i]);
-                            }
-                            //Если совпал, реверсируем переменную для проверки
-                            else
-                            {
-                                check = false;
-                            }
-                        }
-                    }
-
-                    //Если в списке остались почты
                     if (emails.Count != 0)
-                    {
+                    {  
+                        //если RecipientID у элемента почты совпадает с каким либо элементом в списке recipients, то берем его 
+                        emails = emails.Where(e => recipients.Any(r => r == e.RecipientID)).ToList();
 
-                        //настройка smtp клиента
-                        SmtpClient smtp = new SmtpClient
+                        //Если в списке остались почты
+                        if (emails.Count != 0)
                         {
-                            Host = "smtp.gmail.com",
-                            Port = 587,
-                            EnableSsl = true,
-                            DeliveryMethod = SmtpDeliveryMethod.Network,
-                            UseDefaultCredentials = false,
-                            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-                        };
 
-                        MailAddress toAddress = new MailAddress(emails.First().Mail);
+                            //настройка smtp клиента
+                            SmtpClient smtp = new SmtpClient
+                            {
+                                Host = "smtp.gmail.com",
+                                Port = 587,
+                                EnableSsl = true,
+                                DeliveryMethod = SmtpDeliveryMethod.Network,
+                                UseDefaultCredentials = false,
+                                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                            };
 
-                        MailMessage message = new MailMessage(fromAddress, toAddress)
-                        {
-                            Subject = notification.Title,
-                            Body = notification.Description
-                        };
+                            MailAddress toAddress = new MailAddress(emails.First().Mail);
 
-                        for (int i = 1; i < emails.Count(); i++)
-                        {
-                            message.Bcc.Add(emails[i].Mail);
+                            MailMessage message = new MailMessage(fromAddress, toAddress)
+                            {
+                                Subject = notification.Title,
+                                Body = notification.Description
+                            };
+
+                            for (int i = 1; i < emails.Count(); i++)
+                            {
+                                message.Bcc.Add(emails[i].Mail);
+                            }
+
+                            if (document1 != null)
+                            {
+                                message.Attachments.Add(new Attachment(document1.InputStream, Path.GetFileName(document1.FileName)));
+                            }
+
+                            if (document2 != null)
+                            {
+                                message.Attachments.Add(new Attachment(document2.InputStream, Path.GetFileName(document2.FileName)));
+                            }
+
+                            await smtp.SendMailAsync(message);
                         }
-
-                        if (document1 != null)
-                        {
-                            message.Attachments.Add(new Attachment(document1.InputStream, Path.GetFileName(document1.FileName)));
-                        }
-
-                        if (document2 != null)
-                        {
-                            message.Attachments.Add(new Attachment(document2.InputStream, Path.GetFileName(document2.FileName)));
-                        }
-
-                        await smtp.SendMailAsync(message);
                     }
                 }
 
@@ -398,25 +326,9 @@ namespace Diploma.Controllers
         [HttpGet]
         public ActionResult GetNotificationsList()
         {
-            var notifications = db.Notifications.ToList();
+            var notifications = db.Notifications.OrderByDescending(i => i.ID).Take(5).ToList();
 
-            List<Notification> lastNotifications = new List<Notification>();
-
-            int numberOfNotifications = notifications.Count;
-
-            for (int i = 1; i <= 5; i++)
-            {
-                if (numberOfNotifications - i >= 0)
-                {
-                    lastNotifications.Add(notifications[numberOfNotifications - i]);
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            return PartialView(lastNotifications);
+            return PartialView(notifications);
         }
 
         //GET-запрос на редактирование объявления

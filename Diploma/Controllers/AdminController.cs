@@ -16,13 +16,12 @@ using System.Threading.Tasks;
 namespace Diploma.Controllers
 {
     [Authorize]
-    [RoutePrefix("admin")]
     public class AdminController : Controller
     {
         //Объявляем контекст данных
         ApplicationContext db = new ApplicationContext();
+        
         //GET-запрос админ панель
-        [Route("~/admin")]
         [HttpGet]
         public ActionResult Index(int? UserId)
         {
@@ -55,28 +54,32 @@ namespace Diploma.Controllers
 
         //POST-запрос создание новости
         [HttpPost]
-        public ActionResult AddNew(New aNew, HttpPostedFileBase imageFile)
+        public ActionResult AddNew(New aNew)
         {
             if (ModelState.IsValid)
             {
                 //Заполняем поле даты  
                 aNew.Date = DateTime.Now;
 
-                if (imageFile != null)
+                var image = WebImage.GetImageFromRequest();
+
+                if (image != null)
                 {
-                    //Работа с изображением
-                    string extension = Path.GetExtension(imageFile.FileName);
-                    string fileName = DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
-                    string filePath = "/Content/Images/" + fileName;
-                    fileName = Path.Combine(Server.MapPath(@"~/Content/Images/"), fileName);
-                    imageFile.SaveAs(fileName);
+                    string extension = image.ImageFormat;
+                    string fileName = DateTime.Now.ToString("ddMMyyyyhhmmss");
+                    string filePath = "/Content/Images/" + fileName + "." + extension;
+
+                    image.FileName = fileName;
+                    image.Resize(800, 600);
+
+                    image.Save(Server.MapPath(@"~" + filePath));
 
                     //Заполняем поле путь к изображению
                     aNew.ImagePath = filePath;
                 }
                 else
                 {
-                    aNew.ImagePath = "";
+                    aNew.ImagePath = "/Content/Images/default.jpg";
                 }
 
                 //Сохраняем новость в базе данных
@@ -89,7 +92,6 @@ namespace Diploma.Controllers
 
 
         //GET-запрос на удаление новости
-        [Route("/deletenew/{id}")]
         [HttpGet]
         public ActionResult DeleteNew(int? id)
         {
@@ -122,7 +124,6 @@ namespace Diploma.Controllers
 
 
         //GET-запрос на редактирование новости
-        [Route("/editnew/{id}")]
         [HttpGet]
         public ActionResult EditNew(int? id)
         {
@@ -209,7 +210,6 @@ namespace Diploma.Controllers
 
         //GET-запрос на удаление почты пользователя
         [HttpGet]
-        [Route("/deleteemail/{id}")]
         public ActionResult DeleteEmail(int? id)
         {
             var deleteEmail = db.Emails.FirstOrDefault(e => e.ID == id);

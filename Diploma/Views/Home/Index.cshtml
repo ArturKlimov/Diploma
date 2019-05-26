@@ -1,7 +1,6 @@
-﻿@model IEnumerable<Diploma.Models.Notification>
+﻿@model Diploma.ViewModels.HomeViewModel
 
 @{
-    ViewBag.Title = "Home Page";
     Layout = "";
 }
 
@@ -9,7 +8,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>main</title>
+    <title>Физико-Технический Институт ПетрГУ</title>
     <!-- Flickity style -->
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <!-- Your custom styles (optional) -->
@@ -30,8 +29,8 @@
             <div class="header_logo">ФТИ</div>
             <nav>
                 <div class="header_menu" id="myHeader_menu">
-                    <a href="#">Главная</a>
-                    <a href="#">Новости</a>
+                    <a href="/">Главная</a>
+                    <a href="/news">Новости</a>
                     <a href="#">Мероприятия</a>
                     <a href="#">Объявления</a>
                     <a href="#">Видео</a>
@@ -44,7 +43,7 @@
             <div class="ads">
                 <div class="adstopic">Объявления:</div>
                 <div class="adscontent">
-                    @foreach (var n in Model)
+                    @foreach (var n in Model.Notifications)
                     {
                         <ul>
                             <li><a href="#">@n.Title  — @n.Date.ToString("M"), @n.Date.ToShortTimeString()</a></li>
@@ -60,69 +59,17 @@
             <div class="news">
                 <div class="carousel">
                     <div class="carousel__list" data-flickity='{ "imagesLoaded": true,"groupCells": true,  "pageDots": false }'>
-                        <!--1КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/1.jpg);">
-                            <div class="carousel__overlay1"></div>
-                            <div class="carousel__content">
-                                <div class="newscat">ДОСТИЖЕНИЯ</div>
-                                <div class="newstopic">«Черные Медведи – ПетрГУ» выиграли регулярный чемпионат женской Суперлиги 2</div>
-                                <div class="newsdate">29 апреля, 2019</div>
+                        @foreach (var n in Model.News)
+                        {
+                            <div class="carousel__item" style="background-image: url(@n.ImagePath);">
+                                <div class="carousel__overlay1"></div>
+                                <div class="carousel__content">
+                                    <div class="newscat">@n.Category.Title</div>
+                                    <div class="newstopic">@n.Title</div>
+                                    <div class="newsdate">@n.Date.ToString("M"), @n.Date.ToString("yyyy")</div>
+                                </div>
                             </div>
-                        </div>
-                        <!--2КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/2.jpg);">
-                            <div class="carousel__overlay2"></div>
-                            <div class="carousel__content">
-                                <div class="newscat">КУЛЬТУРА</div>
-                                <div class="newstopic">Топ-5 разработок и открытий ученых Физико-технического института за последний год</div>
-                                <div class="newsdate">28 апреля, 2019</div>
-                            </div>
-                        </div>
-                        <!--3КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/3.jpg);">
-                            <div class="carousel__overlay3"></div>
-                            <div class="carousel__content">
-                                <div class="newscat">НАУКА</div>
-                                <div class="newstopic">«Поющие инженеры дали концерт в честь первого директора ПетрГУ</div>
-                                <div class="newsdate">27 апреля, 2019</div>
-                            </div>
-                        </div>
-                        <!--4КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/4.jpg);">
-                            <div class="carousel__overlay4"></div>
-                            <div class="carousel__content">
-                                <div class="newscat">ОБРАЗОВАНИЕ</div>
-                                <div class="newstopic">«Черные Медведи – ПетрГУ» выиграли регулярный чемпионат женской Суперлиги 2</div>
-                                <div class="newsdate">26 апреля, 2019</div>
-                            </div>
-                        </div>
-                        <!--5КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/5.jpg);">
-                            <div class="carousel__overlay5"></div>
-                            <div class="carousel__content">
-                                <div class="newscat">ПАРТНЁРСТВО</div>
-                                <div class="newstopic">Топ-5 разработок и открытий ученых Физико-технического института за последний год</div>
-                                <div class="newsdate">25 апреля, 2019</div>
-                            </div>
-                        </div>
-                        <!--6КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/6.jpg);">
-                            <div class="carousel__overlay6"></div>
-                            <div class="carousel__content">
-                                <div class="newscat">СПОРТ</div>
-                                <div class="newstopic">«Поющие инженеры дали концерт в честь первого директора ПетрГУ</div>
-                                <div class="newsdate">24 апреля, 2019</div>
-                            </div>
-                        </div>
-                        <!--7КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/7.jpg);">
-                            <div class="carousel__overlay7"></div>
-                            <div class="carousel__content">
-                                <div class="newscat">ИНСТИТУТ</div>
-                                <div class="newstopic">«Черные Медведи – ПетрГУ» выиграли регулярный чемпионат женской Суперлиги 2</div>
-                                <div class="newsdate">23 апреля, 2019</div>
-                            </div>
-                        </div>
+                        } 
                     </div>
                 </div>
             </div>

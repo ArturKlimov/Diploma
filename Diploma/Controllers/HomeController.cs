@@ -7,23 +7,30 @@ using Diploma.Models;
 using System.Data.Entity;
 using PagedList.Mvc;
 using PagedList;
+using Diploma.ViewModels;
 
 namespace Diploma.Controllers
 {
-    [RoutePrefix("home")]
+    
     public class HomeController : Controller
     {
         ApplicationContext db = new ApplicationContext();
 
-        [Route("~/home")]
         public ActionResult Index()
         {
             var notifications = db.Notifications.OrderByDescending(i => i.ID).Take(3).ToList();
 
-            return View(notifications);
+            var news = db.News.Include(n => n.Category).OrderByDescending(i => i.ID).Take(6).ToList();
+
+            HomeViewModel viewModel = new HomeViewModel
+            {
+                Notifications = notifications,
+                News = news
+            };
+
+            return View(viewModel);
         }
         
-        [Route("/allnews/{category}/{page}")]
         public ActionResult AllNews(int? category, int? page)
         {
             //Количество объектов на страницу

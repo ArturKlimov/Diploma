@@ -66,7 +66,6 @@ namespace Diploma.Controllers
         }
 
         //GET-запрос на удаление пользователя
-        [Route("/account/deleteuser/{id}")]
         [Authorize]
         [HttpGet]
         public async Task<ActionResult> DeleteUser(string id)

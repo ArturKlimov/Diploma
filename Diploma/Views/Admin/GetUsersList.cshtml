@@ -1,21 +1,5 @@
 ﻿@model IEnumerable<Diploma.Models.ApplicationUser>
 
-@*<table>
-        <tr>
-            <th>ФИО Пользователя</th>
-            <th>Логин</th>
-            <th></th>
-        </tr>
-        @foreach (var n in Model)
-        {
-            <tr>
-                <td> </td>
-                <td>@n.UserName</td>
-                <td> </td>
-            </tr>
-        }
-    </table>*@
-
 <h5 class="mt-2">Пользователи</h5><a class="anchor" name="users"></a>
 <div class="row grid-responsive">
     <div class="column ">
@@ -40,7 +24,7 @@
                             <td>@n.Name</td>
                             <td>@n.UserName</td>
                             <td>@n.Email</td>
-                            <td><a href="/account/deleteuser/@n.Id">Удалить</a></td>
+                            <td><a href="/Account/DeleteUser?id=@n.Id">Удалить</a></td>
                         </tr>
                         }
                         

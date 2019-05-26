@@ -2,6 +2,7 @@
 @using PagedList.Mvc;
 
 @{
+    ViewBag.Title = "Новости";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +10,7 @@
 <br />
 @foreach (var c in ViewBag.Categories)
 {
-    <a href="/home/allnews?category=@c.ID">@c.Title</a>
+    <a href="/news?category=@c.ID">@c.Title</a>
     <br />
 }
 

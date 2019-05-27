@@ -14,15 +14,30 @@
     <!-- Your custom styles (optional) -->
     <link rel="stylesheet" href="~/Content/css/style_main.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
-    <script src='js/script.js'></script>
-    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-    <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
     <!-- Flickity scripts-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </head>
 
 <body>
+    <script>
+        $(document).ready(function () {
+            $(".carousel__item").each(function (index, value) {
+                var text = $(this).find(".newscat").children("p").text();
+
+                var block = $(this).find(".carousel__overlay1");
+
+                if (text == "Достижения") {
+                    block.css("background", "rgba(214, 16, 16, 0.87)");
+                }
+
+                if (text == "Культура") {
+                    block.css("background", "rgba(0, 179, 82, 0.87)")
+                }
+
+            });
+        });
+    </script>
     <!--ШАПКА-->
     <header>
         <div class="top_header">
@@ -48,7 +63,7 @@
                         <ul>
                             <li><a href="#">@n.Title  — @n.Date.ToString("M"), @n.Date.ToShortTimeString()</a></li>
                         </ul>
-
+                        
                         <p>@n.Description</p>
 
                         <br>
@@ -64,7 +79,7 @@
                             <div class="carousel__item" style="background-image: url(@n.ImagePath);">
                                 <div class="carousel__overlay1"></div>
                                 <div class="carousel__content">
-                                    <div class="newscat">@n.Category.Title</div>
+                                    <div class="newscat"><p>@n.Category.Title</p></div>
                                     <div class="newstopic">@n.Title</div>
                                     <div class="newsdate">@n.Date.ToString("M"), @n.Date.ToString("yyyy")</div>
                                 </div>

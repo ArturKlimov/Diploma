@@ -31,7 +31,21 @@
                     <a href="#">Видео</a>
                 </div>
             </nav>
-            <button> <img src="~/Content/Images/search.png"></button>
+
+            <button class="buttonsearch"> <img src="~/Content/Images/search.png"></button>
+
+            <div class="modal-container">
+                <form class="form-wrapper">
+                    <input type="text" id="search" placeholder="Поиск..." required>
+                    <input type="submit" value="Найти" id="submit">
+                </form>
+                <center><button class="close-btn">X</button></center>
+
+            </div>
+
+
+
+
         </div>
 
         <div class="bottom_header">
@@ -61,7 +75,7 @@
                 <div class="carousel">
                     <div class="carousel__list" data-flickity='{ "imagesLoaded": true,"groupCells": true,  "pageDots": false }'>
                         <!--1КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/1.jpg);">
+                        <div class="carousel__item" style="background-image: url(/Content/Images/1.jpg);">
                             <div class="carousel__overlay1"></div>
                             <div class="carousel__content">
                                 <div class="newscat">ДОСТИЖЕНИЯ</div>
@@ -70,7 +84,7 @@
                             </div>
                         </div>
                         <!--2КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/2.jpg);">
+                        <div class="carousel__item" style="background-image: url(/Content/Images/2.jpg);">
                             <div class="carousel__overlay2"></div>
                             <div class="carousel__content">
                                 <div class="newscat">КУЛЬТУРА</div>
@@ -79,7 +93,7 @@
                             </div>
                         </div>
                         <!--3КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/3.jpg);">
+                        <div class="carousel__item" style="background-image: url(/Content/Images/3.jpg);">
                             <div class="carousel__overlay3"></div>
                             <div class="carousel__content">
                                 <div class="newscat">НАУКА</div>
@@ -88,7 +102,7 @@
                             </div>
                         </div>
                         <!--4КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/4.jpg);">
+                        <div class="carousel__item" style="background-image: url(/Content/Images/4.jpg);">
                             <div class="carousel__overlay4"></div>
                             <div class="carousel__content">
                                 <div class="newscat">ОБРАЗОВАНИЕ</div>
@@ -97,7 +111,7 @@
                             </div>
                         </div>
                         <!--5КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/5.jpg);">
+                        <div class="carousel__item" style="background-image: url(/Content/Images/5.jpg);">
                             <div class="carousel__overlay5"></div>
                             <div class="carousel__content">
                                 <div class="newscat">ПАРТНЁРСТВО</div>
@@ -106,7 +120,7 @@
                             </div>
                         </div>
                         <!--6КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/6.jpg);">
+                        <div class="carousel__item" style="background-image: url(/Content/Images/6.jpg);">
                             <div class="carousel__overlay6"></div>
                             <div class="carousel__content">
                                 <div class="newscat">СПОРТ</div>
@@ -115,7 +129,7 @@
                             </div>
                         </div>
                         <!--7КАРТОЧКА-->
-                        <div class="carousel__item" style="background-image: url(../../Content/Images/7.jpg);">
+                        <div class="carousel__item" style="background-image: url(/Content/Images/7.jpg);">
                             <div class="carousel__overlay7"></div>
                             <div class="carousel__content">
                                 <div class="newscat">ИНСТИТУТ</div>
@@ -139,50 +153,83 @@
                 </ul>
             </div>
             <div class="bottom_video">
-                <div class="main-carousel" data-flickity='{ "groupCells": 4,  "pageDots": false }'>
-                    <div class="carousel-cell">
-                        <img сlass="imagevideo" src="~/Content/Images/video1.png">
-                        <div class="card-inner"><a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a></div>
-                    </div>
-                    <div class="carousel-cell">
-                        <img src="~/Content/Images/video1.png">
-                        <div class="card-inner"><a href="#" class="btn">Открытие Гуманитарного иннопарка и другие события в дайджесте ПетрГУ</a></div>
-                    </div>
-                    <div class="carousel-cell">
-                        <img src="~/Content/Images/video2.png">
-                        <div class="card-inner"><a href="#" class="btn">Первенство Карелии по функциональному многоборью в ПетрГУ</a></div>
-                    </div>
-                    <div class="carousel-cell">
-                        <img src="~/Content/Images/video3.png">
-                        <div class="card-inner"><a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a></div>
-                    </div>
-                    <div class="carousel-cell">
-                        <img src="~/Content/Images/video4.png">
-                        <div class="card-inner"><a href="#" class="btn">"Пушкинские чтения" и другие события в дайджесте ПетрГУ 16–31 января</a></div>
-                    </div>
-                    <div class="carousel-cell">
-                        <img src="~/Content/Images/video1.png">
-                        <div class="card-inner"><a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a></div>
-                    </div>
-                    <div class="carousel-cell">
-                        <img src="~/Content/Images/video2.png">
-                        <div class="card-inner"><a href="#" class="btn">Открытие Гуманитарного иннопарка и другие события в дайджесте ПетрГУ</a></div>
-                    </div>
-                    <div class="carousel-cell">
-                        <img src="~/Content/Images/video3.png">
-                        <div class="card-inner"><a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a></div>
-                    </div>
-                    <div class="carousel-cell">
-                        <img src="~/Content/Images/video4.png">
-                        <div class="card-inner"><a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a></div>
-                    </div>
-                    <div class="carousel-cell">
-                        <img src="~/Content/Images/video1.png">
-                        <div class="card-inner"><a href="#" class="btn">"Пушкинские чтения" и другие события в дайджесте ПетрГУ 16–31 января</a></div>
+                <div class="carousel_video">
+                    <div class="carousel_video" data-flickity='{"groupCells": true,"pageDots": false}'>
+                        <!--КАРТОЧКА-->
+                        <div class="video_item">
+                            <div class="videocontent">
+                                <div class="videoimg" style="background-image: url(/Content/Images/7.jpg);">
+                                    <div class="video_overlay">
+                                        <img src="~/Content/Images/кнопка_плей.png" class="play">
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a>
+                            <p>19 апреля, 2019</p>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="video_item">
+                            <div class="videocontent">
+                                <div class="videoimg" style="background-image: url(/Content/Images/1.jpg);">
+                                    <div class="video_overlay">
+                                        <img src="~/Content/Images/кнопка_плей.png" class="play">
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn">"Пушкинские чтения" и другие события в дайджесте ПетрГУ 16–31 января</a>
+                            <p>18 апреля, 2019</p>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="video_item">
+                            <div class="videocontent">
+                                <div class="videoimg" style="background-image: url(/Content/Images/2.jpg);">
+                                    <div class="video_overlay">
+                                        <img src="~/Content/Images/кнопка_плей.png" class="play">
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn">Открытие Гуманитарного иннопарка и другие события в дайджесте ПетрГУ</a>
+                            <p>18 апреля, 2019</p>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="video_item">
+                            <div class="videocontent">
+                                <div class="videoimg" style="background-image: url(/Content/Images/5.jpg);">
+                                    <div class="video_overlay">
+                                        <img src="~/Content/Images/кнопка_плей.png" class="play">
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn">Первенство Карелии по функциональному многоборью в ПетрГУ</a>
+                            <p>17 апреля, 2019</p>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="video_item">
+                            <div class="videocontent">
+                                <div class="videoimg" style="background-image: url(/Content/Images/3.jpg);">
+                                    <div class="video_overlay">
+                                        <img src="~/Content/Images/кнопка_плей.png" class="play">
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn">Флешмоб студентов ПетрГУ, посвященный XXIX Всемирной зимней универсиаде</a>
+                            <p>16 апреля, 2019</p>
+                        </div>
+                        <!--КАРТОЧКА-->
+                        <div class="video_item">
+                            <div class="videocontent">
+                                <div class="videoimg" style="background-image: url(/Content/Images/4.jpg);">
+                                    <div class="video_overlay">
+                                        <img src="~/Content/Images/кнопка_плей.png" class="play">
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn">"Пушкинские чтения" и другие события в дайджесте ПетрГУ 16–31 января</a>
+                            <p>15 апреля, 2019</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
 
         <!--МЕРОПРИЯТИЯ-->
@@ -337,50 +384,42 @@
                 <p>Полезное</p>
             </div>
             <div class="bottom_info">
-                <div class="carousel">
-                    <div class="carousel__list" data-flickity='{ "groupCells": true,  "pageDots": false }'>
-
+                <div class="carousel_info">
+                    <div class="carousel_info" data-flickity='{"groupCells": true, "pageDots": false}'>
+                        <!--КАРТОЧКА-->
                         <div class="arrival">
                             <div class="light">
-                                <div class="carousel_arrival">
-                                    <img class="imgarrival" src="~/Content/Images/иконка (1).png">
-                                    <div class="infotopic">Поступление 2019</div>
-                                    <img class="separator" src="~/Content/Images/разделитель.png">
-                                    <div class="infocontent">В настоящее время, пока поправки об ограничении числа вузов для подачи документов</div>
-                                </div>
+                                <a href="#" class="imgarrival"></a>
+                                <div class="infotopic">Поступление 2019</div>
+                                <a href="#" class="separator1"></a>
+                                <div class="infocontent">В настоящее время, пока поправки об ограничении числа вузов для подачи документов</div>
                             </div>
                         </div>
-
+                        <!--КАРТОЧКА-->
                         <div class="table">
                             <div class="light">
-                                <div class="carousel_table">
-                                    <img class="imgtable" src="~/Content/Images/иконка (2).png ">
-                                    <div class="infotopic">Расписания и графики</div>
-                                    <img class="separator" src="~/Content/Images/разделитель.png">
-                                    <div class="infocontent">График движения поездов является организующей и технологической основой работы</div>
-                                </div>
+                                <a href="#" class="imgtable"></a>
+                                <div class="infotopic">Расписания и графики</div>
+                                <a href="#" class="separator2"></a>
+                                <div class="infocontent">График движения поездов является организующей и технологической основой работы</div>
                             </div>
                         </div>
-
+                        <!--КАРТОЧКА-->
                         <div class="profcom">
                             <div class="light">
-                                <div class="carousel_profcom">
-                                    <img class="imgprofcom" src="~/Content/Images/иконка (3).png">
-                                    <div class="infotopic">Профком</div>
-                                    <img class="separator" src="~/Content/Images/разделитель.png">
-                                    <div class="infocontent">Организованная по определённым правилам деятельность людей</div>
-                                </div>
+                                <a href="#" class="imgprofcom"></a>
+                                <div class="infotopic">Профком</div>
+                                <a href="#" class="separator3"></a>
+                                <div class="infocontent">Организованная по определённым правилам деятельность людей</div>
                             </div>
                         </div>
-
+                        <!--КАРТОЧКА-->
                         <div class="sci">
                             <div class="light">
-                                <div class="carousel_sci">
-                                    <img class="imgsci" src="~/Content/Images/иконка (4).png">
-                                    <div class="infotopic">Научная деятельность</div>
-                                    <img class="separator" src="~/Content/Images/разделитель.png">
-                                    <div class="infocontent">Интеллектуальная деятельность, направленная на получение </div>
-                                </div>
+                                <a href="#" class="imgsci"></a>
+                                <div class="infotopic">Научная деятельность</div>
+                                <a href="#" class="separator4"></a>
+                                <div class="infocontent">Интеллектуальная деятельность, направленная на получение </div>
                             </div>
                         </div>
                     </div>
@@ -401,22 +440,18 @@
                     <p>© 2010 - 2019 Физико-технического институт (ФТИ)</p>
                 </div>
                 <div class="social">
-                    <a href="#"><img src="~/Content/Images/social_icons/vk.png"></a>
-                    <a href="#"><img src="~/Content/Images/social_icons/instagram.png"></a>
-                    <a href="#"><img src="~/Content/Images/social_icons/youtube.png"></a>
-                    <a href="#"><img src="~/Content/Images/social_icons/facebook.png"></a>
+                    <a href="#" class="vk"></a>
+                    <a href="#" class="instagram"></a>
+                    <a href="#" class="moroshka"></a>
                 </div>
             </div>
             <div class="footer3">
                 <div class="contacts">Контакты</div>
                 <div class="contactinfo">
-                    <p><span class="colortext">Адрес: </span>ул. Университетская, д. 29,</p>
-                    <p>Петрозаводск, 195251</p>
-                    <p><span class="colortext">Приемная комиссия:</span> fti@petrsu.ru</p>
-                    <p>(814-2) 71-10-30</p>
-                    <p><span class="colortext">Платное образование:</span> </p>
-                    <p>kirilova@petrsu.ru</p>
-                    <p> (814-2) 71-10-40</p>
+                    <p><span class="colortext">Адрес: </span>ул. Университетская, д. 10a,</p>
+                    <p>Петрозаводск, 185002</p>
+                    <p><span class="colortext">Дирекция:</span> fti@petrsu.ru</p>
+                    <p>(814-2) 71-96-76</p>
                 </div>
             </div>
             <div class="footer2">
@@ -432,7 +467,7 @@
             </div>
     </footer>
 
-    <script src='js/script.js'></script>
+    <script src='~/Scripts/main.js'></script>
     <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
     <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
     <!-- Flickity script -->

@@ -20,12 +20,14 @@
                     <tbody>
                         @foreach (var n in Model)
                         {
-                            <tr>
-                                <td>@n.Name</td>
-                                <td>@n.Mail</td>
-                                <td>@n.Recipient.Title</td>
-                                <td> <a href="/Admin/DeleteEmail?id=@n.ID">Удалить</a> </td> 
-                            </tr>
+                        <tr>
+                            <td>@n.Name</td>
+                            <td>@n.Mail</td>
+                            <td>@n.Recipient.Title</td>
+                            <td>@Html.ActionLink("Удалить", "DeleteEmail", "Admin", new { id = n.ID },
+                                new { onclick = "return confirm('Вы уверены, что отписать эту почту от рассылки?');" })
+                            </td>
+                        </tr>
                         }
 
                     </tbody>

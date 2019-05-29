@@ -104,6 +104,16 @@ namespace Diploma.Controllers
                 //если нашли новость
                 if (deleteNew != null)
                 {
+                    if (deleteNew.ImagePath != null && deleteNew.ImagePath != "/Content/Images/default.jpg")
+                    {
+                        string fullPath = Request.MapPath("~" + deleteNew.ImagePath);
+
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            System.IO.File.Delete(fullPath);
+                        }
+                    }
+
                     db.News.Remove(deleteNew);
                     db.SaveChanges();
 

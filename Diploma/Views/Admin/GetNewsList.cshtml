@@ -21,13 +21,15 @@
                     <tbody>
                         @foreach (var n in Model)
                         {
-                            <tr>
-                                <td>@n.Title</td>
-                                <td>@n.Date.ToShortDateString()</td>
-                                <td>@n.Category.Title</td>
-                                <td> <a href="/Admin/EditNew?id=@n.ID">Редактировать</a> </td>
-                                <td> <a href="/Admin/DeleteNew?id=@n.ID">Удалить</a> </td>
-                            </tr>
+                        <tr>
+                            <td>@n.Title</td>
+                            <td>@n.Date.ToShortDateString()</td>
+                            <td>@n.Category.Title</td>
+                            <td> <a href="/Admin/EditNew?id=@n.ID">Редактировать</a> </td>
+                            <td>@Html.ActionLink("Удалить", "DeleteNew", "Admin", new { id = n.ID },
+                                new { onclick = "return confirm('Вы уверены, что хотите удалить эту новость?');" })
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

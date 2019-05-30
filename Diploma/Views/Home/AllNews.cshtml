@@ -3,29 +3,242 @@
 
 @{
     ViewBag.Title = "Новости";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/Layout2.cshtml";
 }
 
-<a href="/home/allnews">Все категории</a>
-<br />
-@foreach (var c in ViewBag.Categories)
-{
-    <a href="/news?category=@c.ID">@c.Title</a>
-    <br />
-}
+<div class="breadcr">
+    <ul class="breadcrumbs">
+        <li><a href="">Главная</a></li>
+        <li><a href="">Новости</a></li>
+    </ul>
+</div>
+<div class="newsmain">
+    <div class="newslist">
+        <!--------Карточка------------->
+        @foreach (var n in Model)
+        {
+            if (n.Category.Title == "Достижения")
+            {
+                <div class="news_item">
+                    <div class="newscontent">
+                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                            <div class="news_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="category1">
+                        <a href="#" class="nameachi">Достижения</a>
+                    </div>
+                    <a href="#" class="newsbtn">@n.Title</a>
+                    <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
+                </div>
+            }
+            if (n.Category.Title == "Культура")
+            {
+                <div class="news_item">
+                    <div class="newscontent">
+                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                            <div class="news_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="category2">
+                        <a href="#" class="namecult">Культура</a>
+                    </div>
+                    <a href="#" class="newsbtn">@n.Title</a>
+                    <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
+                </div>
+            }
 
-@foreach (var n in Model)
-{
-    <div>
-        <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
-        <p>@n.Title</p>
-        <p>@n.Category.Title</p>
+            if (n.Category.Title == "Международная деятельность")
+            {
+                <div class="news_item">
+                    <div class="newscontent">
+                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                            <div class="news_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="category3">
+                        <a href="#" class="nameinter">Международная деятельность</a>
+                    </div>
+                    <a href="#" class="newsbtn">@n.Title</a>
+                    <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
+                </div>
+            }
+
+            if (n.Category.Title == "Наука и инновации")
+            {
+                <div class="news_item">
+                    <div class="newscontent">
+                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                            <div class="news_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="category4">
+                        <a href="#" class="namesci">Наука и инновации</a>
+                    </div>
+                    <a href="#" class="newsbtn">@n.Title</a>
+                    <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
+                </div>
+            }
+            if (n.Category.Title == "Образование")
+            {
+                <div class="news_item">
+                    <div class="newscontent">
+                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                            <div class="news_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="category5">
+                        <a href="#" class="nameform">Образование</a>
+                    </div>
+                    <a href="#" class="newsbtn">@n.Title</a>
+                    <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
+                </div>
+            }
+            if (n.Category.Title == "Партнерство")
+            {
+                <div class="news_item">
+                    <div class="newscontent">
+                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                            <div class="news_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="category6">
+                        <a href="#" class="namepartner">Партнерство</a>
+                    </div>
+                    <a href="#" class="newsbtn">@n.Title</a>
+                    <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
+                </div>
+            }
+            if (n.Category.Title == "Спорт")
+            {
+                <div class="news_item">
+                    <div class="newscontent">
+                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                            <div class="news_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="category7">
+                        <a href="#" class="namesport">Спорт</a>
+                    </div>
+                    <a href="#" class="newsbtn">@n.Title</a>
+                    <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
+                </div>
+            }
+            if (n.Category.Title == "Университетская жизнь")
+            {
+                <div class="news_item">
+                    <div class="newscontent">
+                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                            <div class="news_overlay"></div>
+                        </div>
+                    </div>
+                    <div class="category8">
+                        <a href="#" class="nameuniver">Университетская жизнь</a>
+                    </div>
+                    <a href="#" class="newsbtn">@n.Title</a>
+                    <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
+                </div>
+            }
+        }
+        </div>
+        <div class="categorys">
+            <div class="catcontent">
+                <p>Категории</p>
+                <div class="allcat">
+                    <ul><li><a href="/home/allnews">Все категории</a></li></ul>
+                    <div class="circle1"></div>
+                </div>
+                <div class="line"></div>
+
+
+
+                @foreach (var c in ViewBag.Categories)
+                {
+                    if (c.Title == "Достижения")
+                    {
+                        <div class="achicat">
+                            <ul><li><a href="/news?category=@c.ID">@c.Title</a></li></ul>
+                            <div class="circle2"></div>
+                        </div>
+                        <div class="line"></div>
+                    }
+                    if (c.Title == "Культура")
+                    {
+                        <div class="cultcat">
+                            <ul><li><a href="/news?category=@c.ID">@c.Title</a></li></ul>
+                            <div class="circle3"></div>
+                        </div>
+                        <div class="line"></div>
+                    }
+
+                    if (c.Title == "Международная деятельность")
+                    {
+                        <div class="intercat">
+                            <ul><li> <a href="/news?category=@c.ID">@c.Title</a></li></ul>
+                            <div class="circle4"></div>
+                        </div>
+                        <div class="line"></div>
+                    }
+
+                    if (c.Title == "Наука и инновации")
+                    {
+                        <div class="scicat">
+                            <ul><li><a href="/news?category=@c.ID">@c.Title</a></li></ul>
+                            <div class="circle5"></div>
+                        </div>
+                        <div class="line"></div>
+                    }
+
+                    if (c.Title == "Образование")
+                    {
+                        <div class="formcat">
+                            <ul><li><a href="/news?category=@c.ID">@c.Title</a></li></ul>
+                            <div class="circle6"></div>
+                        </div>
+                        <div class="line"></div>
+                    }
+
+                    if (c.Title == "Партнерство")
+                    {
+                        <div class="partnercat">
+                            <ul><li><a href="/news?category=@c.ID">@c.Title</a></li></ul>
+                            <div class="circle7"></div>
+                        </div>
+                        <div class="line"></div>
+                    }
+
+                    if (c.Title == "Спорт")
+                    {
+                        <div class="sportcat">
+                            <ul><li><a href="/news?category=@c.ID">@c.Title</a></li></ul>
+                            <div class="circle8"></div>
+                        </div>
+                        <div class="line"></div>
+                    }
+
+                    if (c.Title == "Университетская жизнь")
+                    {
+                        <div class="univercat">
+                            <ul><li><a href="/news?category=@c.ID">@c.Title</a></li></ul>
+                            <div class="circle9"></div>
+                        </div>
+                        <div class="line"></div>
+                    }
+                }
+                <script type="text/javascript" src="https://vk.com/js/api/openapi.js?160"></script>
+
+                <!-- VK Widget -->
+                <div id="vk_groups"></div>
+                <script type="text/javascript">
+                    VK.Widgets.Group("vk_groups", { mode: 3, width: "318", color1: 'F3F6FD' }, 18079046);
+                </script>
+            </div>
+        </div>
     </div>
-}
-	
+</div>
 
-@Html.PagedListPager(Model, page => Url.Action("AllNews", new { category = ViewBag.SelectedCategory, page }),
-    new PagedListRenderOptions { LinkToPreviousPageFormat = "<", LinkToNextPageFormat = ">",
-        MaximumPageNumbersToDisplay = 3, DisplayEllipsesWhenNotShowingAllPageNumbers = false,
-        DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToFirstPage = PagedListDisplayMode.Never})
+        @Html.PagedListPager(Model, page => Url.Action("AllNews", new { category = ViewBag.SelectedCategory, page }),
+            new PagedListRenderOptions { LinkToPreviousPageFormat = "<", LinkToNextPageFormat = ">",
+                MaximumPageNumbersToDisplay = 3, DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToFirstPage = PagedListDisplayMode.Never})
 

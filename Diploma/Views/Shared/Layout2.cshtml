@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>layout</title>
+    <!-- Flickity style -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="~/Content/css/style_layout.css">
+    <link rel="stylesheet" href="~/Content/css/style_news.css">
+    <link rel="stylesheet" href="~/Content/PagedList.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+</head>
+<body>
+    <!--ШАПКА-->
+    <header>
+        <div class="header_logo">ФТИ</div>
+        <nav>
+            <div class="header_menu" id="myHeader_menu">
+                <a href="#">Главная</a>
+                <a href="#">Новости</a>
+                <a href="#">Мероприятия</a>
+                <a href="#">Объявления</a>
+                <a href="#">Видео</a>
+            </div>
+        </nav>
+
+        <button class="buttonsearch"> <img src="~/Content/Images/search_layout.png"></button>
+
+        <div class="modal-container">
+            <form class="form-wrapper">
+                <input type="text" id="search" placeholder="Поиск..." required>
+                <input type="submit" value="Найти" id="submit">
+            </form>
+            <center><button class="close-btn">X</button></center>
+        </div>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+
+    <!--ПОДВАЛ-->
+    <footer>
+        <div class="top-footer">
+            <div class="footer1">
+                <div class="footer_logo">ФТИ</div>
+                <div class="textinfo">
+                    <p>Информационно-медийный ресурс Физико-Технического института</p>
+                    <p>Петрозаводского государственного университета. Сайт поддерживается и</p>
+                    <p>пополняется сотрудниками администрации института.</p>
+                    </br>
+                    <p>© 2010 - 2019 Физико-технического институт (ФТИ)</p>
+                </div>
+                <div class="social">
+                    <a href="#" class="vk"></a>
+                    <a href="#" class="instagram"></a>
+                    <a href="#" class="moroshka"></a>
+                </div>
+            </div>
+            <div class="footer3">
+                <div class="contacts">Контакты</div>
+                <div class="contactinfo">
+                    <p><span class="colortext">Адрес: </span>ул. Университетская, д. 10a,</p>
+                    <p>Петрозаводск, 185002</p>
+                    <p><span class="colortext">Дирекция:</span> fti@petrsu.ru</p>
+                    <p>(814-2) 71-96-76</p>
+                </div>
+            </div>
+            <div class="footer2">
+                <div class="poleznoe">Другое</div>
+                <div class="sspoleznoe">
+                    <ul>
+                        <li><a href="#">Обратная связь</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Политика конфидециальности</a></li>
+                        <li><a href="#">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+    </footer>
+    <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+    <!-- Flickity script -->
+    <script src="~/Scripts/main.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -259,6 +259,7 @@
     <Content Include="Views\Admin\GetAllNotifications.cshtml" />
     <Content Include="Views\Admin\GetAllNotificationsList.cshtml" />
     <Content Include="Views\Home\TestVideo.cshtml" />
+    <Content Include="Views\Shared\Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\css\" />

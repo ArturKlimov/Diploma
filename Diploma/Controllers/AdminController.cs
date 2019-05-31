@@ -74,7 +74,7 @@ namespace Diploma.Controllers
                     string filePath = "/Content/Images/" + fileName + "." + extension;
 
                     image.FileName = fileName;
-                    image.Resize(800, 600);
+                    image.Resize(1280, 720);
 
                     image.Save(Server.MapPath(@"~" + filePath));
 

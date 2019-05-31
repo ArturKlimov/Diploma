@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Список всех видео</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!-- Template Styles -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
+
+    <!-- Milligram CSS minified -->
+    <link rel="stylesheet" href="~/Content/css/milligram.min.css">
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="~/Content/css/admin_style.css">
+
+</head>
+<body>
+    <div class="row grid-responsive">
+        <div class="column ">
+            <div class="card">
+                <div class="card-title" style="position: relative; height: 63px;">
+                    <h3 style="position: absolute;">Список всех видео</h3>
+                    <input type="text" placeholder="Поиск" name="search" id="search" style="position: absolute; right: 20px; width: 300px; margin: 0px;" />
+                </div>
+                <div class="card-block">
+                    @Html.Action("GetSearchVideos")
+                    <a href="/admin">Вернуться</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

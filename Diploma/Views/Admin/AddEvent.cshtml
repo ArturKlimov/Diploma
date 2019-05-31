@@ -1,0 +1,37 @@
+﻿@model Diploma.Models.Event
+
+<div class="row grid-responsive">
+    <div class="column ">
+        <div class="card">
+            <div class="card-title">
+                <h3>Добавить мероприятие</h3>
+            </div>
+            <div class="card-block">
+                @using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                <fieldset>
+                    @Html.ValidationSummary(false)
+                    <label>Заголовок</label>
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { placeholder = "Введите заголовок" } })
+
+                    <label>Описание мероприятия</label>
+                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @placeholder = "Введите текст" })
+
+                    <label>Дата начала мероприятия</label>
+                    @Html.TextBoxFor(model => model.StartDate, "{0:dd.MM.yyyy }", new { type = "date" })
+                    <label>Время начала мероприятия</label>
+                    <input type="time" name="startTime">
+
+                    <label>Дата окончания мероприятия</label>
+                    @Html.TextBoxFor(model => model.EndDate, "{0:dd.MM.yyyy }", new { type = "date" })
+                    <label>Время окончания мероприятия</label>
+                    <input type="time" name="endTime">
+
+                    <br>
+                    <input class="button-primary" type="submit" value="Опубликовать">
+                </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+</div>

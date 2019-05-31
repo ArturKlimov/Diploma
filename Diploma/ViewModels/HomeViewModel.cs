@@ -11,5 +11,9 @@ namespace Diploma.ViewModels
         public IEnumerable<Notification> Notifications { get; set; }
 
         public IEnumerable<New> News { get; set; }
+
+        public IEnumerable<Video> Videos { get; set; }
+
+        public IEnumerable<Event> Events { get; set; }
     }
 }

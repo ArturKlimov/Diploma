@@ -1,0 +1,28 @@
+﻿@model Diploma.ViewModels.AddVideoViewModel
+
+<div class="row grid-responsive">
+    <div class="column ">
+        <div class="card">
+            <div class="card-title">
+                <h3>Добавить видео</h3>
+            </div>
+            <div class="card-block">
+                @using (Html.BeginForm("AddVideo", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationMessageFor(model => model.VideoURL)
+                    <fieldset>
+                        <label for="nameField">Ссылка</label>
+                        @Html.EditorFor(model => model.VideoURL, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите ссылку на youtube видео" } })
+                        <br />
+                        <input class="button-primary" type="submit" value="Подписать">
+                    </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

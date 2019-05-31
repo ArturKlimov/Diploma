@@ -4,8 +4,9 @@
 <div class="row grid-responsive">
     <div class="column ">
         <div class="card">
-            <div class="card-title">
-                <h3>Список пользователей на рассылку</h3>
+            <div class="card-title" style="position: relative; height: 63px;">
+                <h3 style="position: absolute;">Список пользователей на рассылку</h3>
+                <a href="/Admin/SearchEmails" class="card-block" style="position: absolute; right: 20px;">Все почты</a>
             </div>
             <div class="card-block">
                 <table>
@@ -20,12 +21,14 @@
                     <tbody>
                         @foreach (var n in Model)
                         {
-                            <tr>
-                                <td>@n.Name</td>
-                                <td>@n.Mail</td>
-                                <td>@n.Recipient.Title</td>
-                                <td> <a href="/Admin/DeleteEmail?id=@n.ID">Удалить</a> </td> 
-                            </tr>
+                        <tr>
+                            <td>@n.Name</td>
+                            <td>@n.Mail</td>
+                            <td>@n.Recipient.Title</td>
+                            <td>@Html.ActionLink("Удалить", "DeleteEmail", "Admin", new { id = n.ID },
+                                new { onclick = "return confirm('Вы уверены, что отписать эту почту от рассылки?');" })
+                            </td>
+                        </tr>
                         }
 
                     </tbody>

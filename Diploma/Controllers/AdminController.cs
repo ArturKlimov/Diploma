@@ -12,6 +12,10 @@ using System.Web.Helpers;
 using System.Net.Mail;
 using System.Net;
 using System.Threading.Tasks;
+using Google.Apis.Services;
+using Google.Apis.YouTube.v3.Data;
+using Google.Apis.YouTube.v3;
+using Diploma.ViewModels;
 
 namespace Diploma.Controllers
 {
@@ -20,7 +24,7 @@ namespace Diploma.Controllers
     {
         //Объявляем контекст данных
         ApplicationContext db = new ApplicationContext();
-        
+
         //GET-запрос админ панель
         [HttpGet]
         public ActionResult Index(int? UserId)
@@ -213,7 +217,7 @@ namespace Diploma.Controllers
         [HttpGet]
         public ActionResult GetUsersList()
         {
-            var users = db.Users.OrderByDescending(u => u.Id).Take(5).ToList();
+            var users = db.Users.OrderByDescending(u => u.Id).ToList();
 
             return PartialView(users);
         }
@@ -278,10 +282,10 @@ namespace Diploma.Controllers
 
                     //Записываем все элементы почты в список emails
                     var emails = db.Emails.ToList();
-                    
+
                     //Если в базе есть почты
                     if (emails.Count != 0)
-                    {  
+                    {
                         //если RecipientID у элемента почты совпадает с каким либо элементом в списке recipients, то берем его 
                         emails = emails.Where(e => recipients.Any(r => r == e.RecipientID)).ToList();
 
@@ -412,7 +416,7 @@ namespace Diploma.Controllers
             }
         }
 
-        //GET-запрос на получение всех новостей
+        //GET-запрос на получение всех объявлений по результатам поиска
         [HttpGet]
         public ActionResult GetAllNotifications(string search)
         {
@@ -420,7 +424,7 @@ namespace Diploma.Controllers
             if (search == null)
             {
                 notifications = db.Notifications.ToList();
-                
+
             }
             else
             {
@@ -436,6 +440,374 @@ namespace Diploma.Controllers
             return View();
         }
 
+        //GET-запрос на получение представления со всеми новостями и поиском по новостям
+        [HttpGet]
+        public ActionResult SearchNews()
+        {
+            return View();
+        }
+
+        //GET-запрос на получение всех новостей
+        [HttpGet]
+        public ActionResult GetSearchNews(string search)
+        {
+            List<New> news;
+            if (search == null)
+            {
+                news = db.News.Include(n => n.Category).ToList();
+
+            }
+            else
+            {
+                news = db.News.Include(n => n.Category).Where(n => n.Title.Contains(search)).ToList();
+            }
+            return PartialView("GetSearchNews", news);
+        }
+
+        //GET-запрос на добавление видео
+        [HttpGet]
+        public ActionResult AddVideo()
+        {
+            return PartialView();
+        }
+
+        //POST-запрос на добавление видео
+        [HttpPost]
+        public ActionResult AddVideo(AddVideoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUri = Uri.IsWellFormedUriString(model.VideoURL, UriKind.Absolute);
+
+                if (isUri == true)
+                {
+                    var uri = new Uri(model.VideoURL);
+
+                    if (uri.Host == "www.youtube.com")
+                    {
+                        var query = HttpUtility.ParseQueryString(uri.Query);
+
+                        string videoId;
+
+                        if (query.AllKeys.Contains("v"))
+                        {
+                            videoId = query["v"];
+                        }
+                        else
+                        {
+                            videoId = uri.Segments.Last();
+                        }
+
+                        var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+                        {
+                            ApiKey = "AIzaSyCFClrn_jMQ7-6dDacoXtf4GdeWwwjG0_g",
+                            ApplicationName = GetType().ToString()
+                        });
+
+                        var request = youtubeService.Videos.List("snippet,contentDetails,statistics");
+
+                        request.Id = videoId;
+
+                        var response = request.Execute();
+
+                        var video = new Models.Video();
+
+                        foreach (var v in response.Items)
+                        {
+                            video.YoutubeID = v.Id;
+                            video.Title = v.Snippet.Title;
+                            video.Description = v.Snippet.Description;
+                            video.Date = DateTime.Now;
+                        }
+
+                        db.Videos.Add(video);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            return Redirect("/admin");
+        }
+
+        //GET-запрос на добавление мероприятия
+        [HttpGet]
+        public ActionResult AddEvent()
+        {
+            return PartialView();
+        }
+
+        //POST-запрос на добавление мероприятия
+        [HttpPost]
+        public ActionResult AddEvent(Event aEvent, string startTime, string endTime)
+        {
+            if (ModelState.IsValid)
+            {
+                if(aEvent.StartDate == null)
+                {
+                    aEvent.StartDate = DateTime.Now.Date;
+                }
+
+                if (aEvent.EndDate == null)
+                {
+                    aEvent.EndDate = DateTime.Now.Date;
+                }
+
+                //Если поле со времнем было заполнено
+                if (startTime != "")
+                {
+                    //То из строки времени вырезаем первые два символа, конвертируем их в число и записываем как часы к дате
+                    aEvent.StartDate = aEvent.StartDate.AddHours(Convert.ToDouble(startTime.Substring(0, 2)));
+                    aEvent.StartDate = aEvent.StartDate.AddMinutes(Convert.ToDouble(startTime.Substring(3, 2)));
+                }
+                else
+                {
+                    aEvent.StartDate = aEvent.StartDate.AddHours(12);
+                }
+                
+                //
+                if (endTime != "")
+                {
+                    aEvent.EndDate = aEvent.EndDate.AddHours(Convert.ToDouble(endTime.Substring(0, 2)));
+                    aEvent.EndDate = aEvent.EndDate.AddMinutes(Convert.ToDouble(endTime.Substring(3, 2)));
+                }
+                else
+                {
+                    aEvent.EndDate = aEvent.EndDate.AddHours(12);
+                }
+
+                db.Events.Add(aEvent);
+                db.SaveChanges();
+            }
+
+            return Redirect("/admin");
+        }
+
+        //GET-запрос на получение последних 5 мероприятий для админ-панели
+        [HttpGet]
+        public ActionResult Get5Events()
+        {
+            var events = db.Events.OrderByDescending(i => i.ID).Take(5).ToList();
+
+            return PartialView(events);
+        }
+
+        //GET-запрос на редактирование объявления
+        [HttpGet]
+        public ActionResult EditEvent(int? id)
+        {
+            //Если id передан
+            if (id != null)
+            {
+                //Найти объявление по ID и записать в переменную
+                var editEvent = db.Events.FirstOrDefault(n => n.ID == id);
+
+                //Если новость найдена
+                if (editEvent != null)
+                {
+                    ViewBag.StartTime = editEvent.StartDate.ToString("t");
+                    ViewBag.EndTime = editEvent.EndDate.ToString("t");
+
+                    return View(editEvent);
+                }
+                //Если новость не найдена
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        //POST-запрос на редактирование объявления
+        [HttpPost]
+        public ActionResult EditEvent(Event editEvent, string startTime, string endTime)
+        {
+            if (ModelState.IsValid)
+            {
+                if (editEvent.StartDate == null)
+                {
+                    editEvent.StartDate = DateTime.Now.Date;
+                }
+
+                if (editEvent.EndDate == null)
+                {
+                    editEvent.EndDate = DateTime.Now.Date;
+                }
+
+                //Если поле со времнем было заполнено
+                if (startTime != "")
+                {
+                    //То из строки времени вырезаем первые два символа, конвертируем их в число и записываем как часы к дате
+                    editEvent.StartDate = editEvent.StartDate.AddHours(Convert.ToDouble(startTime.Substring(0, 2)));
+                    editEvent.StartDate = editEvent.StartDate.AddMinutes(Convert.ToDouble(startTime.Substring(3, 2)));
+                }
+                else
+                {
+                    editEvent.StartDate = editEvent.StartDate.AddHours(12);
+                }
+
+                //
+                if (endTime != "")
+                {
+                    editEvent.EndDate = editEvent.EndDate.AddHours(Convert.ToDouble(endTime.Substring(0, 2)));
+                    editEvent.EndDate = editEvent.EndDate.AddMinutes(Convert.ToDouble(endTime.Substring(3, 2)));
+                }
+                else
+                {
+                    editEvent.EndDate = editEvent.EndDate.AddHours(12);
+                }
+
+                //Редактирование мероприятия
+                db.Entry(editEvent).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Redirect("/admin");
+        }
+
+        //GET-запрос на удаление объявления
+        [HttpGet]
+        public ActionResult DeleteEvent(int? id)
+        {
+            //если есть id
+            if (id != null)
+            {
+                //Найти новость по ID новости
+                var deleteEvent = db.Events.FirstOrDefault(n => n.ID == id);
+
+                //если нашли новость
+                if (deleteEvent != null)
+                {
+                    db.Events.Remove(deleteEvent);
+                    db.SaveChanges();
+
+                    return Redirect("/admin");
+                }
+                //если не нашли новость
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            //если нет id
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        //GET-запрос на получение представления со всеми мероприятиями и поиском по мероприятиям
+        [HttpGet]
+        public ActionResult SearchEvents()
+        {
+            return View();
+        }
+
+        //GET-запрос на получение всех мероприятий
+        [HttpGet]
+        public ActionResult GetSearchEvents(string search)
+        {
+            List<Event> events;
+            if (search == null)
+            {
+                events = db.Events.ToList();
+
+            }
+            else
+            {
+                events = db.Events.Where(n => n.Title.Contains(search)).ToList();
+            }
+            return PartialView("GetSearchEvents", events);
+        }
+
+        //GET-запрос на получение последних 5 видео
+        [HttpGet]
+        public ActionResult Get5Videos()
+        {
+            var videos = db.Videos.OrderByDescending(i => i.ID).Take(5).ToList();
+
+            return PartialView(videos);
+        }
+
+        //GET-запрос на удаление видео
+        [HttpGet]
+        public ActionResult DeleteVideo(int? id)
+        {
+            //если есть id
+            if (id != null)
+            {
+                //Найти новость по ID новости
+                var deleteVideo = db.Videos.FirstOrDefault(n => n.ID == id);
+
+                //если нашли новость
+                if (deleteVideo != null)
+                {
+                    db.Videos.Remove(deleteVideo);
+                    db.SaveChanges();
+
+                    return Redirect("/admin");
+                }
+                //если не нашли новость
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            //если нет id
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        //GET-запрос на получение представления со всеми мероприятиями и поиском по мероприятиям
+        [HttpGet]
+        public ActionResult SearchVideos()
+        {
+            return View();
+        }
+
+        //GET-запрос на получение всех видео
+        [HttpGet]
+        public ActionResult GetSearchVideos(string search)
+        {
+            List<Models.Video> videos;
+            if (search == null)
+            {
+                videos = db.Videos.ToList();
+
+            }
+            else
+            {
+                videos = db.Videos.Where(n => n.Title.Contains(search)).ToList();
+            }
+            return PartialView("GetSearchVideos", videos);
+        }
+
+        //GET-запрос на получение представления со всеми мероприятиями и поиском по мероприятиям
+        [HttpGet]
+        public ActionResult SearchEmails()
+        {
+            return View();
+        }
+
+        //GET-запрос на получение всех видео
+        [HttpGet]
+        public ActionResult GetSearchEmails(string search)
+        {
+            List<Email> emails;
+            if (search == null)
+            {
+                emails = db.Emails.ToList();
+
+            }
+            else
+            {
+                emails = db.Emails.Where(n => n.Name.Contains(search) || n.Mail.Contains(search)).ToList();
+            }
+            return PartialView("GetSearchEmails", emails);
+        }
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

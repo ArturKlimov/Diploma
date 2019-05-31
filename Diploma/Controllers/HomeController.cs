@@ -22,10 +22,16 @@ namespace Diploma.Controllers
 
             var news = db.News.Include(n => n.Category).OrderByDescending(i => i.ID).Take(6).ToList();
 
+            var videos = db.Videos.OrderByDescending(i => i.ID).Take(6).ToList();
+
+            var events = db.Events.OrderByDescending(i => i.ID).Take(10).ToList();
+
             HomeViewModel viewModel = new HomeViewModel
             {
                 Notifications = notifications,
-                News = news
+                News = news,
+                Videos = videos,
+                Events = events
             };
 
             return View(viewModel);
@@ -69,12 +75,10 @@ namespace Diploma.Controllers
             return PartialView("AllNews", news.ToPagedList(pageNumber, pageSize));
         }
 
-        [HttpGet]
-        public ActionResult TestVideo()
+        public ActionResult GetAllNotifications()
         {
-            return View("TestVideo");
+            return PartialView();
         }
-
 
         protected override void Dispose(bool disposing)
         {

@@ -31,6 +31,10 @@ namespace Diploma.Models
 
         public DbSet<Notification> Notifications { get; set; }
 
+        public DbSet<Video> Videos { get; set; }
+
+        public DbSet<Event> Events { get; set; }
+
     }
 
     //Инициализация базы данных при изменении модели

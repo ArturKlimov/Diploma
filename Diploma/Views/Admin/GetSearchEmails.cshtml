@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Diploma.Models.Email>
+
+@{
+    Layout = "";
+}
+<div id="results">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Заголовок</th>
+                <th>Почтовый ящик</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var e in Model)
+                {
+                    <tr>
+                        <td>@e.Name</td>
+                        <td>@e.Mail</td>
+                        <td>
+                            @Html.ActionLink("Удалить", "DeleteEmail", "Admin", new { id = e.ID },
+                                new { onclick = "return confirm('Вы уверены, что хотите отписать этот ящик от рассылки?');" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+            $(document).on('keypress', (function (e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                    var search = $('#search').val();
+                    search = encodeURIComponent(search);
+                    $('#results').load("/Admin/GetSearchEmails?search=" + search);
+                }
+            }));
+</script>

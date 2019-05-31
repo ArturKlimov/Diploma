@@ -1,0 +1,74 @@
+﻿@model Diploma.Models.Event
+
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Редактирование мероприятия @Model.Title;</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!-- Template Styles -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
+
+    <!-- Milligram CSS minified -->
+    <link rel="stylesheet" href="~/Content/css/milligram.min.css">
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="~/Content/css/admin_style.css">
+
+</head>
+<body>
+    <div class="EditNew">
+        <div class="column ">
+            <div class="card">
+                <div class="card-title">
+                    <h3>Редактировать мероприятие @Model.Title</h3>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("EditEvent", "Admin", FormMethod.Post))
+                    {
+                        <fieldset>
+                            @Html.ValidationSummary(false)
+                            <label>Заголовок</label>
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { placeholder = "Введите заголовок" } })
+
+                            <label>Описание мероприятия</label>
+                            @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @placeholder = "Введите текст" })
+
+                            <label>Дата начала мероприятия</label>
+                            @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { type = "date" })
+                            
+                            <label>Время начала мероприятия</label>
+                            <input type="time" name="startTime" value="@ViewBag.StartTime">
+
+                            <label>Дата окончания мероприятия</label>
+                            @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { type = "date" })
+                            
+                            <label>Время окончания мероприятия</label>
+                            <input type="time" name="endTime" value="@ViewBag.EndTime">
+
+                            @Html.HiddenFor(model => model.ID)
+                            <br>
+                            <input class="button-primary" type="submit" value="Редактировать">
+                        </fieldset>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+
+</html>

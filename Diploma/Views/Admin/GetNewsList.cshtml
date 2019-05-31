@@ -4,8 +4,9 @@
 <div class="row grid-responsive">
     <div class="column ">
         <div class="card">
-            <div class="card-title">
-                <h3>Список новостей</h3>
+            <div class="card-title" style="position: relative; height: 63px;">
+                <h3 style="position: absolute;">Список новостей</h3>
+                <a href="/Admin/SearchNews" class="card-block" style="position: absolute; right: 20px;">Все новости</a>
             </div>
             <div class="card-block">
                 <table>
@@ -21,15 +22,18 @@
                     <tbody>
                         @foreach (var n in Model)
                         {
-                        <tr>
-                            <td>@n.Title</td>
-                            <td>@n.Date.ToShortDateString()</td>
-                            <td>@n.Category.Title</td>
-                            <td> <a href="/Admin/EditNew?id=@n.ID">Редактировать</a> </td>
-                            <td>@Html.ActionLink("Удалить", "DeleteNew", "Admin", new { id = n.ID },
-                                new { onclick = "return confirm('Вы уверены, что хотите удалить эту новость?');" })
-                            </td>
-                        </tr>
+                            if (n != null)
+                            {
+                            <tr>
+                                <td>@n.Title</td>
+                                <td>@n.Date.ToShortDateString()</td>
+                                <td>@n.Category.Title</td>
+                                <td> <a href="/Admin/EditNew?id=@n.ID">Редактировать</a> </td>
+                                <td>@Html.ActionLink("Удалить", "DeleteNew", "Admin", new { id = n.ID },
+                                     new { onclick = "return confirm('Вы уверены, что хотите удалить эту новость?');" })
+                                </td>
+                            </tr>
+                            }
                         }
                     </tbody>
                 </table>

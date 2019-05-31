@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Diploma.Models.Video>
+
+@{
+    Layout = "";
+}
+
+<h5 class="mt-2">Видео</h5><a class="anchor" name="video"></a>
+<div class="row grid-responsive">
+    <div class="column ">
+        <div class="card">
+            <div class="card-title" style="position: relative; height: 63px;">
+                <h3 style="position: absolute;">Список видео</h3>
+                <a href="/Admin/SearchVideos" class="card-block" style="position: absolute; right: 20px;">Все видео</a>
+            </div>
+            <div class="card-block">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Заголовок</th>
+                            <th>Дата</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var v in Model)
+                        {
+                            <tr>
+                                <td>@v.Title</td>
+                                <td>@v.Date.ToShortDateString()</td>
+                                <td>
+                                    @Html.ActionLink("Удалить", "DeleteVideo", "Admin", new { id = v.ID },
+                                        new { onclick = "return confirm('Вы уверены, что хотите удалить это видео?');" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

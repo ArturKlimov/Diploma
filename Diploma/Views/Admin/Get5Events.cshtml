@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Diploma.Models.Event>
+
+@{
+    Layout = "";
+}
+
+<h5 class="mt-2">Мероприятия</h5><a class="anchor" name="event"></a>
+<div class="row grid-responsive">
+    <div class="column ">
+        <div class="card">
+            <div class="card-title" style="position: relative; height: 63px;">
+                <h3 style="position: absolute;">Список мероприятий</h3>
+                <a href="/Admin/SearchEvents" class="card-block" style="position: absolute; right: 20px;">Все мероприятия</a>
+            </div>
+            <div class="card-block">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Заголовок</th>
+                            <th>Дата</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var e in Model)
+                        {
+                            <tr>
+                                <td>@e.Title</td>
+                                <td>@e.StartDate.ToString("dd.MM.yyyy")</td>
+                                <td><a href="/Admin/EditEvent?id=@e.ID">Редактировать</a></td>
+                                <td>
+                                    @Html.ActionLink("Удалить", "DeleteEvent", "Admin", new { id = e.ID },
+                                        new { onclick = "return confirm('Вы уверены, что хотите удалить это мероприятие?');" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

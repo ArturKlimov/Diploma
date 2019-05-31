@@ -76,160 +76,33 @@
             <!--               Блок объявлений             -->
             @Html.Action("GetNotificationsList")
 
-            <br />
-            <br />
-
             @Html.Action("AddNotification")
+
+            <!--               Мероприятия                  -->
+            @Html.Action("Get5Events")
+
+            @Html.Action("AddEvent")
+
+            <!--               Блок видео                  -->
+            @Html.Action("Get5Videos")
+
+            @Html.Action("AddVideo")
+
 
             <!--               Блок рассылки               -->
 
             @Html.Action("GetEmailsList")
 
-            <br />
-            <br />
-
             @Html.Action("AddEmail")
 
-            <br />
-            <br />
 
             <!--               Блок пользователей          -->
 
             @Html.Action("GetUsersList")
 
-            <br />
-            <br />
-
             @Html.Action("Register", "Account")
 
-            <!--Мероприятия-->
-            <h5 class="mt-2">Мероприятия</h5><a class="anchor" name="event"></a>
-            <div class="row grid-responsive">
-                <div class="column ">
-                    <div class="card">
-                        <div class="card-title">
-                            <h3>Список мероприятий</h3>
-                        </div>
-                        <div class="card-block">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Заголовок</th>
-                                        <th>Дата</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Мероприятие 1</td>
-                                        <td>09.05.19</td>
-                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
-                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Мероприятие 2</td>
-                                        <td>09.05.19</td>
-                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
-                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Мероприятие 3</td>
-                                        <td>09.05.19</td>
-                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
-                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Мероприятие 4</td>
-                                        <td>09.05.19</td>
-                                        <td><input class="button button-clear" type="submit" value="Редактировать"></td>
-                                        <td><input class="button button-clear" type="submit" value="Удалить"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row grid-responsive">
-                <div class="column ">
-                    <div class="card">
-                        <div class="card-title">
-                            <h3>Добавить мероприятие</h3>
-                        </div>
-                        <div class="card-block">
-                            <form>
-                                <fieldset>
-                                    <label for="nameField">Заголовок</label>
-                                    <input type="text" placeholder="Мероприятие" id="nameField">
-                                    <label for="commentField">Описание мероприятия</label>
-                                    <textarea placeholder="Введите текст" id="commentField"></textarea>
-                                    <label for="commentField">Дата начала мероприятия</label>
-                                    <input type="date" id="nameField">
-                                    <label for="commentField">Время начала мероприятия</label>
-                                    <input type="time" id="nameField">
-                                    <label for="commentField">Дата окончания мероприятия</label>
-                                    <input type="date" id="nameField">
-                                    <label for="commentField">Время окончания мероприятия</label>
-                                    <input type="time" id="nameField">
-                                    </br>
-                                    <input class="button-primary" type="submit" value="Опубликовать">
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row grid-responsive">
-                <div class="column ">
-                    <div class="card">
-                        <div class="card-title">
-                            <h3>Редактировать мероприятие</h3>
-                        </div>
-                        <div class="card-block">
-                            <form>
-                                <fieldset>
-                                    <label for="nameField">Заголовок</label>
-                                    <input type="text" placeholder="Мероприятие" id="nameField">
-                                    <label for="commentField">Описание мероприятия</label>
-                                    <textarea placeholder="Введите текст" id="commentField"></textarea>
-                                    <label for="commentField">Дата начала мероприятия</label>
-                                    <input type="date" id="nameField">
-                                    <label for="commentField">Время начала мероприятия</label>
-                                    <input type="time" id="nameField">
-                                    <label for="commentField">Дата окончания мероприятия</label>
-                                    <input type="date" id="nameField">
-                                    <label for="commentField">Время окончания мероприятия</label>
-                                    <input type="time" id="nameField">
-                                    </br>
-                                    <input class="button-primary" type="submit" value="Редактировать">
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Подтверждение удаления-->
-            <div class="delete">
-                <div class="column ">
-                    <div class="card">
-                        <div class="card-block">
-                            <form>
-                                <fieldset>
-                                    <div class="alert">
-                                        <em class="fa fa-warning"></em> Вы уверены,что хотите удалить?
-                                    </div>
-                                    <div class="float-center">
-                                        <input class="button-primary" type="submit" value="Да">
-                                        <input class="button-primary" type="submit" value="Нет">
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 </body>
 
     @Scripts.Render("~/bundles/jquery")

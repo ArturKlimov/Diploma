@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Diploma.Models.Event>
+
+@{
+    Layout = "";
+}
+<div id="results">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Заголовок</th>
+                <th>Дата</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var n in Model)
+                {
+                    <tr>
+                        <td>@n.Title</td>
+                        <td>@n.StartDate.ToShortDateString()</td>
+                        <td><a href="/Admin/EditEvent?id=@n.ID">Редактировать</a> </td>
+                        <td>
+                            @Html.ActionLink("Удалить", "DeleteEvent", "Admin", new { id = n.ID },
+                                new { onclick = "return confirm('Вы уверены, что хотите удалить это мероприятие?');" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+</div>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+            $(document).on('keypress', (function (e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                    var search = $('#search').val();
+                    search = encodeURIComponent(search);
+                    $('#results').load("/Admin/GetSearchEvents?search=" + search);
+                }
+            }));
+</script>

@@ -1,0 +1,13 @@
+﻿@model Diploma.Models.New
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+<p>@Model.Category.Title</p>
+<p>@Model.Date.ToString("M") @Model.Date.ToString("yyyy")</p>
+<img src="@Model.ImagePath"/>
+<p>@Model.Title</p>
+<p>@Model.Description</p>
+

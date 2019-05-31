@@ -297,6 +297,7 @@
     <Content Include="Views\Admin\SearchEmails.cshtml" />
     <Content Include="Views\Admin\GetSearchEmails.cshtml" />
     <Content Include="Views\Shared\Layout2.cshtml" />
+    <Content Include="Views\Home\GetOneNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\css\" />

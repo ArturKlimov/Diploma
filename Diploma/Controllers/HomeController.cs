@@ -75,9 +75,21 @@ namespace Diploma.Controllers
             return PartialView("AllNews", news.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult GetAllNotifications()
+        public ActionResult GetOneNew(int? id)
         {
-            return PartialView();
+
+            if (id != null)
+            {
+                var thisNew = db.News.Include(c => c.Category).FirstOrDefault(n => n.ID == id);
+                if (thisNew != null)
+                {
+                    var categories = db.Categories.ToList();
+                    ViewBag.Categories = categories;
+                    return View(thisNew);
+                }
+            }
+
+            return HttpNotFound();
         }
 
         protected override void Dispose(bool disposing)

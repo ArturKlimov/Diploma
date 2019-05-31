@@ -26,6 +26,12 @@ namespace Diploma
             );
 
             routes.MapRoute(
+                name: "get one new",
+                url: "new",
+                defaults: new { controller = "Home", action = "GetOneNew", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

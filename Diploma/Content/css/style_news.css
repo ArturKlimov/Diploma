@@ -1,4 +1,4 @@
-
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
 *{
 	margin: 0;
 	padding: 0;
@@ -309,7 +309,7 @@ main{
 .news_item{
   width: 400px;
   height: 404.21px;
-  margin: 0 10px;
+  margin: 0px 10px 10px 10px;
 }
 
 .newsimg{
@@ -887,7 +887,6 @@ main{
   margin:0 5px;
   font-size: 17px;
   line-height: 27px;
-  color: #222222;
 }
 .play1{
   padding-left: 160px;
@@ -972,6 +971,577 @@ main{
 }
 #vk_groups{
   padding-top:50px;
+}
+
+.ads_item1 {
+    width: 595px;
+    height: auto;
+    background: #FBFEFF;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.ads_topic1 {
+    flex: 0 0 auto;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 32px;
+    color: #222222;
+    margin-left: 40px;
+    margin-right: 25px;
+    margin-top: 31px;
+}
+
+.ads_content1 {
+    flex: 1 0 auto;
+    font-size: 16px;
+    line-height: 30px;
+    color: #6E6E6E;
+    margin-left: 40px;
+    margin-right:25px;
+    margin-top: 12px;
+}
+
+.ads_line {
+    flex: 0 0 auto;
+    margin-top: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.ads_bottom {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 17px;
+}
+
+.author {
+    font-size: 16px;
+    line-height: 100%;
+    color: #252525;
+    margin-top: 13px;
+}
+
+.circle {
+    position: relative;
+    height: 4px;
+    width: 4px;
+    background-color: #10C558;
+    border-radius: 50%;
+    margin-top: 19px;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+.ads_bottom p {
+    font-size: 16px;
+    line-height: 100%;
+    color: #6E6E6E;
+    margin-top: 13px;
+}
+
+.ads_btn1 {
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #FFFFFF;
+    padding: 8px 14px 7px 14px;
+    border: 1.5px solid #10C558;
+    background-color: #10C558;
+    margin-left: 136px;
+    margin-top: 6px;
+}
+
+    .ads_btn1:hover {
+        color: #10C558;
+        border: 1.5px solid #10C558;
+        background-color: #fff;
+    }
+
+.ads_main1 {
+    display: grid;
+    grid-template-columns: 1210px;
+    justify-content: center;
+}
+
+.ads_list1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.event_main {
+    display: grid;
+    grid-template-columns: 862px 318px;
+    justify-content: center;
+}
+
+.event_top {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.event_img {
+    width: 187px;
+    height: 264px;
+    background: grey;
+    border-radius: 15px;
+    margin-top: 31px;
+    margin-right: 26px;
+    margin-left: 40px;
+}
+
+.event_item {
+    width: 862px;
+    height: auto;
+    background: #FBFEFF;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.event_topic {
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 32px;
+    color: #222222;
+    margin-top: 31px;
+    margin-right: 40px;
+}
+
+.event_content {
+    flex: 1 0 auto;
+    font-size: 16px;
+    line-height: 30px;
+    color: #6E6E6E;
+    margin-top: 12px;
+    margin-right: 40px;
+    display: grid;
+    grid-template-columns: 569px;
+}
+
+.event_line {
+    flex: 0 0 auto;
+    margin-top: 21px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.event_bottom {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 17px;
+}
+
+.start {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    margin-top: 13px;
+}
+
+.horisontline {
+    background: #10C558;
+    border-radius: 4px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    width: 20px;
+    height: 2.5px;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.end {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    margin-top: 13px;
+}
+
+.event_bottom p {
+    font-size: 16px;
+    line-height: 100%;
+    color: #6E6E6E;
+    padding-left: 4px;
+    margin-top: 13px;
+}
+
+#vk_groups1 {
+    padding-left: 20px;
+}
+
+.videomainpage {
+    display: grid;
+    grid-template-columns: 862px 348px;
+    justify-content: center;
+    margin-left: 45px;
+}
+
+.videobtnpage {
+    padding-top: 17px;
+    padding-left: 6px;
+    padding-bottom: 20px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 132%;
+    letter-spacing: 0.01em;
+    color: #222222;
+}
+
+.videoimgpage {
+    width: 800px;
+    height: 535px;
+    background: grey;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    margin: 0 5px;
+    margin-bottom: 20px;
+}
+
+.videolistpage p {
+    margin: 0 5px;
+    font-size: 17px;
+    line-height: 27px;
+}
+
+.adsmainpage {
+    display: grid;
+    grid-template-columns: 862px 348px;
+    justify-content: center;
+    margin-left: 45px;
+    margin-bottom:20px;
+}
+
+.adsbtnpage {
+    padding-top: 17px;
+    padding-left: 6px;
+    padding-bottom: 20px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 132%;
+    letter-spacing: 0.01em;
+    color: #222222;
+}
+
+.adsimgpage {
+    width: 800px;
+    height: 535px;
+    background: grey;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    margin: 0 5px;
+    margin-bottom: 20px;
+}
+
+.adslistpage p {
+    margin: 0 5px;
+    font-size: 17px;
+    line-height: 27px;
+    padding-right: 10px;
+}
+
+.catdateads {
+    display: flex;
+}
+
+    .catdateads p {
+        color: rgba(34, 34, 34, 0.6);
+        letter-spacing: 0.02em;
+        font-size: 15px;
+        line-height: 18px;
+        margin-top: 12px;
+    }
+
+.download {
+    margin-bottom: 25px;
+    margin-left: 5px;
+}
+    .download ul li {
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+    .download ul li a {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 100%;
+        color: #31426A;
+    }
+
+
+.eventmainpage {
+    display: grid;
+    grid-template-columns: 862px 348px;
+    justify-content: center;
+    margin-left: 45px;
+}
+
+.eventbtnpage {
+    padding-top: 17px;
+    padding-left: 6px;
+    padding-bottom: 20px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 132%;
+    letter-spacing: 0.01em;
+    color: #222222;
+}
+
+.eventimgpage {
+    width: 800px;
+    height: 535px;
+    background: grey;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    margin: 0 5px;
+    margin-bottom: 20px;
+}
+
+.eventlistpage p {
+    margin: 0 5px;
+    font-size: 17px;
+    line-height: 27px;
+}
+
+.eventcatdate {
+    display: flex;
+    margin-left: 8px;
+}
+
+    .eventcatdate p {
+        color: rgba(34, 34, 34, 0.6);
+        letter-spacing: 0.02em;
+        font-size: 15px;
+        line-height: 18px;
+        margin-top: 13.5px;
+    }
+
+.tablemainpage {
+    display: grid;
+    grid-template-columns: 1210px;
+    justify-content: center;
+    margin-left: 45px;
+    margin-bottom: 30px;
+}
+
+.tablelistpage {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+}
+
+    .tablelistpage p {
+        margin: 0 5px;
+        font-size: 17px;
+        line-height: 27px;
+    }
+
+.post {
+    font-weight: bold;
+    color: #31426A;
+}
+
+.post1 {
+    font-weight: bold;
+    color: #31426A;
+    padding-top: 24px;
+}
+
+.glav {
+    font-size: 20px;
+}
+
+.zagolovok {
+    display: grid;
+    justify-content: center;
+    font-size: 40px;
+    color: #31426A;
+}
+
+.zagline {
+    width: 350px;
+    border-top: 3px solid #2DFF81;
+    margin-left: 100px;
+    margin-top: 20px;
+    margin-bottom: 45px;
+}
+
+/*******ПОДВАЛ********/
+footer {
+    flex: 0 0 auto;
+    width: 100%;
+    background: radial-gradient(1120.00px at 50% -31.84%, #1F1A53 0%, #120F37 100%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.top-footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 71px;
+}
+
+.footer1 {
+    margin-right: 36px;
+    margin-top: 59px;
+}
+
+.social {
+    display: flex;
+    flex-direction: row;
+    padding-top: 17px;
+}
+
+a.vk {
+    background: url(img/social_icons/Group.png); /* Путь к файлу с исходным  рисунком */
+    display: block; /* Ссылка как блочный элемент */
+    width: 32px; /* Ширина рисунка в пикселах */
+    height: 32px; /* Высота рисунка */
+    margin-right: 8px;
+}
+
+    a.vk:hover {
+        background-position: 0 -32px;
+    }
+
+a.instagram {
+    background: url(img/social_icons/Group_2.png); /* Путь к файлу с исходным  рисунком */
+    display: block; /* Ссылка как блочный элемент */
+    width: 32px; /* Ширина рисунка в пикселах */
+    height: 32px; /* Высота рисунка */
+    margin-right: 8px;
+}
+
+    a.instagram:hover {
+        background-position: 0 -32px;
+    }
+
+a.moroshka {
+    background: url(img/social_icons/Group_3.png); /* Путь к файлу с исходным  рисунком */
+    display: block; /* Ссылка как блочный элемент */
+    width: 32px; /* Ширина рисунка в пикселах */
+    height: 32px; /* Высота рисунка */
+}
+
+    a.moroshka:hover {
+        background-position: 0 -32px;
+    }
+
+.footer_logo {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 27px;
+    font-weight: normal;
+    line-height: 32px;
+    margin-bottom: 29px;
+}
+
+.textinfo {
+    color: #fff;
+    font-size: 16px;
+    line-height: 165%;
+    margin-bottom: 24px;
+    /*margin-right:15px;*/
+}
+
+.footer2 {
+    margin-right: 5px;
+    margin-top: 59px;
+}
+
+.poleznoe {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 21px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+    margin-bottom: 34px;
+    /*margin-right:114px;*/
+}
+
+.sspoleznoe ul li a {
+    font-size: 16px;
+    line-height: 30px;
+    color: #FFFFFF;
+}
+
+    .sspoleznoe ul li a:hover {
+        text-decoration: underline;
+        color: #2DFF81;
+    }
+
+.footer3 {
+    margin-right: 52px;
+    margin-top: 59px;
+}
+
+.contacts {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 21px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+    margin-bottom: 34px;
+    /*margin-right:52px;*/
+}
+
+.contactinfo {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 165%;
+}
+
+    .contactinfo p {
+        color: #fff;
+    }
+
+.colortext {
+    font-weight: 500;
+    color: #2DFF81;
+}
+
+.footer4 {
+    margin-top: 59px;
+}
+
+.bottom-footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+}
+
+.bottom-footer1 {
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    margin-right: 571px;
 }
 
 /*******ПОДВАЛ********/
@@ -1120,6 +1690,80 @@ a.moroshka:hover{
 	margin-right:571px;
 }
 
+.searchmainpage {
+    display: grid;
+    grid-template-columns: 862px 348px;
+    justify-content: center;
+    margin-left: 45px;
+}
+
+.search_news {
+    margin-bottom: 20px;
+}
+
+    .search_news h2 {
+        color: #31426A;
+        margin-bottom: 15px;
+    }
+
+    .search_news a {
+        color: #222;
+    }
+
+        .search_news a:hover {
+            color: #2DFF81;
+        }
+
+.search_ads {
+    margin-bottom: 20px;
+}
+
+    .search_ads h2 {
+        color: #31426A;
+        margin-bottom: 15px;
+    }
+
+    .search_ads a {
+        color: #222;
+    }
+
+        .search_ads a:hover {
+            color: #2DFF81;
+        }
+
+.search_event {
+    margin-bottom: 20px;
+}
+
+    .search_event h2 {
+        color: #31426A;
+        margin-bottom: 15px;
+    }
+
+    .search_event a {
+        color: #222;
+    }
+
+        .search_event a:hover {
+            color: #2DFF81;
+        }
+
+.search_video {
+    margin-bottom: 20px;
+}
+
+    .search_video h2 {
+        color: #31426A;
+        margin-bottom: 15px;
+    }
+
+    .search_video a {
+        color: #222;
+    }
+
+        .search_video a:hover {
+            color: #2DFF81;
+        }
 
 
 

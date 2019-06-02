@@ -5,9 +5,67 @@
     Layout = "~/Views/Shared/Layout2.cshtml";
 }
 
-<p>@Model.Category.Title</p>
-<p>@Model.Date.ToString("M"), @Model.Date.ToString("yyyy")</p>
-<img src="@Model.ImagePath"/>
-<p>@Model.Title</p>
-<p>@Model.Description</p>
+<div class="breadcr">
+    <ul class="breadcrumbs">
+        <li><a href="/">Главная</a></li>
+        <li><a href="/news">Новости</a></li>
+        <li><a href="/news/?category=@Model.CategoryID">@Model.Category.Title</a></li>
+        <li><a href="#">@ViewBag.Bread</a></li>
+    </ul>
+</div>
+<div class="newsmainpage">
+    <div class="newslistpage">
+        <div class="catdate">
+            @if (Model.Category.Title == "Достижения")
+            {
+                <a href="/news/?category=@Model.CategoryID" class="nameachi">Достижения</a>
+            }
+            @if (Model.Category.Title == "Культура")
+            {
+                <a href="/news/?category=@Model.CategoryID" class="namecult">Культура</a>
+            }
+            @if (Model.Category.Title == "Международная деятельность")
+            {
+                <a href="/news/?category=@Model.CategoryID" class="nameinter">Международная деятельность</a>
+            }
+            @if (Model.Category.Title == "Наука и инновации")
+            {
+                <a href="/news/?category=@Model.CategoryID" class="namesci">Наука и инновации</a>
+            }
+            @if (Model.Category.Title == "Образование")
+            {
+                <a href="/news/?category=@Model.CategoryID" class="nameform">Образование</a>
+            }
+            @if (Model.Category.Title == "Партнерство")
+            {
+                <a href="/news/?category=@Model.CategoryID" class="namepartner">Партнерство</a>
+            }
+            @if (Model.Category.Title == "Спорт")
+            {
+                <a href="/news/?category=@Model.CategoryID" class="namesport">Спорт</a>
+            }
+            @if (Model.Category.Title == "Университетская жизнь")
+            {
+                <a href="/news/?category=@Model.CategoryID" class="nameuniver">Университетская жизнь</a>
+            }
+            <p>@Model.Date.ToString("M"), @Model.Date.ToString("yyyy")</p>
+        </div>
+        <a href="#" class="newsbtnpage">@Model.Title</a>
+        <div class="newsimgpage" style="background-image: url(@Model.ImagePath);">
+        </div>
+        <p style="white-space:pre-line;">@Model.Description</p>
+        </br>
+        </br>
+    </div>
+
+        <script type="text/javascript" src="https://vk.com/js/api/openapi.js?160"></script>
+
+        <!-- VK Widget -->
+        <div id="vk_groups"></div>
+        <script type="text/javascript">
+      VK.Widgets.Group("vk_groups", {mode: 3, width: "318", color1: 'F3F6FD'}, 18079046);
+        </script>
+
+</div>
+
 

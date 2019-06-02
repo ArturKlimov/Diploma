@@ -6,15 +6,35 @@
     Layout = "~/Views/Shared/Layout2.cshtml";
 }
 
-@foreach (var v in Model)
-{
-    <p>@v.Title</p>
-    <p>@v.Description</p>
-    <p>@v.Date.ToString("M"), @v.Date.ToString("yyyy")</p>
-    <img style="width: 100px; height: 100px;"src="https://img.youtube.com/vi/@v.YoutubeID/maxresdefault.jpg" />
-}
+<div class="breadcr">
+    <ul class="breadcrumbs">
+        <li><a href="/">Главная</a></li>
+        <li><a href="#">Видео</a></li>
+    </ul>
+</div>
 
-@Html.PagedListPager(Model, page => Url.Action("GetAllVideos", new { page }),
-    new PagedListRenderOptions { LinkToPreviousPageFormat = "<", LinkToNextPageFormat = ">",
-        MaximumPageNumbersToDisplay = 3, DisplayEllipsesWhenNotShowingAllPageNumbers = false,
-        DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToFirstPage = PagedListDisplayMode.Never})
+<div class="videomain">
+    <div class="videolist">
+        @foreach (var v in Model)
+        {
+            <div class="video_item">
+                <div class="videocontent">
+                    <a href="/video?id=@v.ID">
+                        <div class="videoimg" style="background-image: url(https://img.youtube.com/vi/@v.YoutubeID/maxresdefault.jpg);">
+                            <div class="video_overlay">
+                                <img src="~/Content/Images/кнопка_плей.png" class="play1">
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <a href="/video?id=@v.ID" class="videobtn">@v.Title</a>
+                <p>@v.Date.ToString("M"), @v.Date.ToString("yyyy")</p>
+            </div>
+        }
+    </div>
+</div>
+
+        @Html.PagedListPager(Model, page => Url.Action("GetAllVideos", new { page }),
+            new PagedListRenderOptions { LinkToPreviousPageFormat = "<", LinkToNextPageFormat = ">",
+                MaximumPageNumbersToDisplay = 3, DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToFirstPage = PagedListDisplayMode.Never})

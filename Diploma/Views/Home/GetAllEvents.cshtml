@@ -5,16 +5,47 @@
     ViewBag.Title = "Мероприятия";
     Layout = "~/Views/Shared/Layout2.cshtml";
 }
+<div class="breadcr">
+    <ul class="breadcrumbs">
+        <li><a href="/">Главная</a></li>
+        <li><a href="#">Мероприятия</a></li>
+    </ul>
+</div>
 
-@foreach (var v in Model)
-{
-    <p>@v.Title</p>
-    <p>@v.Description</p>
-    <p>@v.StartDate.ToString("M"), @v.StartDate.ToString("yyyy")</p>
-    <p>@v.EndDate.ToString("M"), @v.EndDate.ToString("yyyy")</p>
-    <img style="width: 100px; height: 100px;" src="@v.ImagePath" />
-}
+<div class="event_main">
+    <div class="event_list">
+        <!--КАРТОЧКА-->
+        @foreach (var v in Model)
+        {
+            <div class="event_item">
+                <div class="event_top">
+                    <img src="@v.ImagePath" class="event_img" />
+                    <div class="event_top_con">
+                        <div class="event_topic">@v.Title</div>
+                        <div class="event_content">@v.Description</div>
+                    </div>
+                </div>
+                <div class="event_line"></div>
+                <div class="event_bottom">
+                    <div class="start">Начало:</div>
+                    <p>@v.StartDate.ToString("M"), @v.StartDate.ToString("yyyy")<p>
+                        <div class="horisontline"></div>
+                        <div class="end">Конец:</div>
+                    <p>@v.EndDate.ToString("M"), @v.EndDate.ToString("yyyy")</p>
+                    <a href="/event?id=@v.ID" class="ads_btn1">Читать полностью</a>
+                </div>
+            </div>
+        }
+    </div>
 
+    <script type="text/javascript" src="https://vk.com/js/api/openapi.js?160"></script>
+
+    <!-- VK Widget -->
+    <div id="vk_groups1"></div>
+    <script type="text/javascript">
+        VK.Widgets.Group("vk_groups1", { mode: 3, width: "300", color1: 'F3F6FD' }, 18079046);
+    </script>
+</div>
 @Html.PagedListPager(Model, page => Url.Action("GetAllEvents", new { page }),
     new PagedListRenderOptions { LinkToPreviousPageFormat = "<", LinkToNextPageFormat = ">",
         MaximumPageNumbersToDisplay = 3, DisplayEllipsesWhenNotShowingAllPageNumbers = false,

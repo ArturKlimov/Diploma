@@ -304,6 +304,8 @@
     <Content Include="Views\Home\GetOneVideo.cshtml" />
     <Content Include="Views\Home\GetOneNotification.cshtml" />
     <Content Include="Views\Home\GetOneEvent.cshtml" />
+    <Content Include="Views\Home\GetTable.cshtml" />
+    <Content Include="Views\Home\GetSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\css\" />

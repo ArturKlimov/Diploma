@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="~/Content/css/style_layout.css">
     <link rel="stylesheet" href="~/Content/css/style_news.css">
     <link rel="stylesheet" href="~/Content/PagedList.css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </head>
 <body>
     <!--ШАПКА-->
     <header>
-        <div class="header_logo">ФТИ</div>
+        <div class="header_logo1"><img src="~/Content/Images/logo1.png" style="width:63px;height:63px; margin-top:20px;margin-right:150px" /></div>
         <nav>
             <div class="header_menu" id="myHeader_menu">
                 <a href="/">Главная</a>
@@ -30,8 +31,8 @@
         <button class="buttonsearch"> <img src="~/Content/Images/search_layout.png"></button>
 
         <div class="modal-container">
-            <form class="form-wrapper">
-                <input type="text" id="search" placeholder="Поиск..." required>
+            <form class="form-wrapper" method="get" action="/search">
+                <input type="text" id="search" name="search" placeholder="Поиск..." required>
                 <input type="submit" value="Найти" id="submit">
             </form>
             <center><button class="close-btn">X</button></center>
@@ -45,7 +46,7 @@
     <footer>
         <div class="top-footer">
             <div class="footer1">
-                <div class="footer_logo">ФТИ</div>
+                <div class="footer_logo"><img src="~/Content/Images/logo2.png" style="width:83px;height:83px; margin-top:0px;" /></div>
                 <div class="textinfo">
                     <p>Информационно-медийный ресурс Физико-Технического института</p>
                     <p>Петрозаводского государственного университета. Сайт поддерживается и</p>

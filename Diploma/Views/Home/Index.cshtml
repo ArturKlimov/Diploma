@@ -65,7 +65,7 @@
     <!--ШАПКА-->
     <header>
         <div class="top_header">
-            <div class="header_logo">ФТИ</div>
+            <div class="header_logo"><img src="~/Content/Images/logo2.png" style="width:63px;height:63px;"/></div>
             <nav>
                 <div class="header_menu" id="myHeader_menu">
                     <a href="/">Главная</a>
@@ -79,9 +79,9 @@
             <button class="buttonsearch"> <img src="~/Content/Images/search.png"></button>
 
             <div class="modal-container">
-                <form class="form-wrapper">
-                    <input type="text" id="search" placeholder="Поиск..." required>
-                    <input type="submit" value="Найти" id="submit">
+                <form class="form-wrapper" method="get" action="/search">
+                    <input type="text" id="search" name="search" placeholder="Поиск..." required>
+                    <input type="submit" value="Найти" id="submit" >
                 </form>
                 <center><button class="close-btn">X</button></center>
 
@@ -95,10 +95,10 @@
                     @foreach (var n in Model.Notifications)
                     {
                         <ul>
-                            <li><a href="#">@n.Title  — @n.Date.ToString("M"), @n.Date.ToShortTimeString()</a></li>
+                            <li><a href="/notification?id=@n.ID">@n.Title  — @n.Date.ToString("M"), @n.Date.ToShortTimeString()</a></li>
                         </ul>
 
-                        <p>@n.Description</p>
+                        <p style="white-space:pre-wrap;">@n.Description</p>
 
                         <br>
                     }
@@ -114,7 +114,7 @@
                                 <div class="carousel__overlay1"></div>
                                 <div class="carousel__content">
                                     <div class="newscat"><p>@n.Category.Title</p></div>
-                                    <div class="newstopic"><a href="/new?id=@n.ID">@n.Title</a></div>
+                                    <div class="newstopic"><a href="/new?id=@n.ID" style="color: white;"><p style="overflow: hidden; width: 214px;">@n.Title</p></a></div>
                                     <div class="newsdate">@n.Date.ToString("M"), @n.Date.ToString("yyyy")</div>
                                 </div>
                             </div>
@@ -131,7 +131,7 @@
             <div class="top_video">
                 <p>Видео</p>
                 <ul>
-                    <li><a href="#">все видео</a></li>
+                    <li><a href="/videos">все видео</a></li>
                 </ul>
             </div>
             <div class="bottom_video">
@@ -142,13 +142,15 @@
                         {
                             <div class="video_item">
                                 <div class="videocontent">
+                                    <a href="/video?id=@v.ID">
                                     <div class="videoimg" style="background-image: url(https://img.youtube.com/vi/@v.YoutubeID/maxresdefault.jpg);">
                                         <div class="video_overlay">
                                             <img src="~/Content/Images/кнопка_плей.png" class="play">
                                         </div>
                                     </div>
+                                    </a>
                                 </div>
-                                <a href="#" class="btn">@v.Title</a>
+                                <a href="/video?id=@v.ID" class="btn">@v.Title</a>
                                 <p>@v.Date.ToString("M"), @v.Date.ToString("yyyy")</p>
                         </div>
                         } 
@@ -162,7 +164,7 @@
             <div class="top_event">
                 <p>Мероприятия</p>
                 <ul>
-                    <li><a href="#">все мероприятия</a></li>
+                    <li><a href="/events">все мероприятия</a></li>
                 </ul>
             </div>
             <div class="bottom_event">
@@ -171,17 +173,23 @@
                         <!--КАРТОЧКА-->
                         @foreach (var e in Model.Events)
                         {
+
                             <div class="fire">
-                                <div class="carousel_itemevent">
-                                    <div class="eventdate">
-                                        <h2 class="number">@e.StartDate.ToString("dd")</h2>
-                                        <div class="dayear">
-                                            <h2 class="day">@e.StartDate.ToString("dddd")</h2>
-                                            <h2 class="year">@e.StartDate.ToString("M").Substring(3), @e.StartDate.ToString("yyyy")</h2>
-                                        </div>
+                                <a href="/event?id=@e.ID">
+                                    <div class="carousel_itemevent">
+  
+                                            <div class="eventdate">
+
+                                                <h2 class="number">@e.StartDate.ToString("dd")</h2>
+                                                <div class="dayear">
+                                                    <h2 class="day">@e.StartDate.ToString("dddd")</h2>
+                                                    <h2 class="year">@e.StartDate.ToString("MMMM"), @e.StartDate.ToString("yyyy")</h2>
+                                                </div>
+                                            </div>
+
+                                        <div class="eventtopic"><p style="overflow: hidden; width: 238px;">@e.Title</p></div>
                                     </div>
-                                    <div class="eventtopic">@e.Title  </div>
-                                </div>
+                                </a>
                             </div>
                         }
                     </div>
@@ -198,38 +206,40 @@
                     <div class="carousel_info" data-flickity='{"groupCells": true, "pageDots": false}'>
                         <!--КАРТОЧКА-->
                         <div class="arrival">
-                            <div class="light">
-                                <a href="#" class="imgarrival"></a>
-                                <div class="infotopic">Поступление 2019</div>
-                                <a href="#" class="separator1"></a>
-                                <div class="infocontent">В настоящее время, пока поправки об ограничении числа вузов для подачи документов</div>
-                            </div>
+                            
+                                <div class="light">
+                                        <a href="https://petrsu.ru/page/aggr/abit" class="imgarrival"></a>
+                                        <div class="infotopic"><a href="https://petrsu.ru/page/aggr/abit">Абитуриенту</a></div>
+                                        <a href="#" class="separator1"></a>
+                                        <div class="infocontent"><a href="https://petrsu.ru/page/aggr/abit">Этот раздел поможет вам ориентироваться во всех вопросах приемной кампании.</a></div>
+                                 </div>
+
                         </div>
                         <!--КАРТОЧКА-->
                         <div class="table">
                             <div class="light">
-                                <a href="#" class="imgtable"></a>
-                                <div class="infotopic">Расписания и графики</div>
+                                <a href="https://petrsu.ru/schedule/index" class="imgtable"></a>
+                                <div class="infotopic"><a href="https://petrsu.ru/schedule/index">Расписание</a></div>
                                 <a href="#" class="separator2"></a>
-                                <div class="infocontent">График движения поездов является организующей и технологической основой работы</div>
+                                <div class="infocontent"><a href="https://petrsu.ru/schedule/index">Этот раздел поможет узнать вам актуальное расписание занятий</a></div>
                             </div>
                         </div>
                         <!--КАРТОЧКА-->
                         <div class="profcom">
                             <div class="light">
                                 <a href="#" class="imgprofcom"></a>
-                                <div class="infotopic">Профком</div>
+                                <div class="infotopic"><a href="http://xn----qtbefdicbgk9b.xn--p1ai/o-nas/">Профком</a></div>
                                 <a href="#" class="separator3"></a>
-                                <div class="infocontent">Организованная по определённым правилам деятельность людей</div>
+                                <div class="infocontent"><a href="http://xn----qtbefdicbgk9b.xn--p1ai/o-nas/">Первичная профсоюзная организация обучающихся Петрозаводского государственного университета</a></div>
                             </div>
                         </div>
                         <!--КАРТОЧКА-->
                         <div class="sci">
                             <div class="light">
-                                <a href="#" class="imgsci"></a>
-                                <div class="infotopic">Научная деятельность</div>
+                                <a href="/table" class="imgsci"></a>
+                                <div class="infotopic"><a href="/table">Режим работы дирекции</a></div>
                                 <a href="#" class="separator4"></a>
-                                <div class="infocontent">Интеллектуальная деятельность, направленная на получение </div>
+                                <div class="infocontent"><a href="/table">Здесь представлена информация о режиме работы дирекции Физико-Технического Института</a> </div>
                             </div>
                         </div>
                     </div>
@@ -241,7 +251,7 @@
     <footer>
         <div class="top-footer">
             <div class="footer1">
-                <div class="footer_logo">ФТИ</div>
+                <div class="footer_logo"><img src="~/Content/Images/logo2.png" style="width:83px;height:83px;" /></div>
                 <div class="textinfo">
                     <p>Информационно-медийный ресурс Физико-Технического института</p>
                     <p>Петрозаводского государственного университета. Сайт поддерживается и</p>
@@ -250,9 +260,9 @@
                     <p>© 2010 - 2019 Физико-технического институт (ФТИ)</p>
                 </div>
                 <div class="social">
-                    <a href="#" class="vk"></a>
-                    <a href="#" class="instagram"></a>
-                    <a href="#" class="moroshka"></a>
+                    <a href="https://vk.com/fti_directorate" class="vk"></a>
+                    <a href="https://instagram.com/fti_petrsu?igshid=1dwr69xi1gtf3" class="instagram"></a>
+                    <a href="https://vk.com/cloudberry10" class="moroshka"></a>
                 </div>
             </div>
             <div class="footer3">

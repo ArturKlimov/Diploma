@@ -107,7 +107,7 @@ namespace Diploma.Controllers
                 }
                 else
                 {
-                    aNew.ImagePath = "/Content/Images/default.jpg";
+                    aNew.ImagePath = "/Content/Images/no.png";
                 }
 
                 //Сохраняем новость в базе данных
@@ -132,7 +132,7 @@ namespace Diploma.Controllers
                 //если нашли новость
                 if (deleteNew != null)
                 {
-                    if (deleteNew.ImagePath != null && deleteNew.ImagePath != "/Content/Images/default.jpg")
+                    if (deleteNew.ImagePath != null && deleteNew.ImagePath != "/Content/Images/no.png")
                     {
                         string fullPath = Request.MapPath("~" + deleteNew.ImagePath);
 
@@ -675,7 +675,7 @@ namespace Diploma.Controllers
                 }
                 else
                 {
-                    aEvent.ImagePath = "/Content/Images/default.jpg";
+                    aEvent.ImagePath = "/Content/Images/no.png";
                 }
 
                 db.Events.Add(aEvent);
@@ -769,6 +769,16 @@ namespace Diploma.Controllers
                 //если нашли новость
                 if (deleteEvent != null)
                 {
+                    if (deleteEvent.ImagePath != null && deleteEvent.ImagePath != "/Content/Images/no.png")
+                    {
+                        string fullPath = Request.MapPath("~" + deleteEvent.ImagePath);
+
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            System.IO.File.Delete(fullPath);
+                        }
+                    }
+
                     db.Events.Remove(deleteEvent);
                     db.SaveChanges();
 

@@ -1,0 +1,89 @@
+﻿@model Diploma.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Поиск";
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+<div class="breadcr">
+    <ul class="breadcrumbs">
+        <li><a href="/">Главная</a></li>
+        <li><a href="#">Поиск</a></li>
+    </ul>
+</div>
+
+<div class="searchmainpage">
+
+    <div class="searchtitle">
+        <div class="search_news">
+            <h2>Новости</h2>
+            @if (Model.News.Count() != 0)
+            {
+                foreach (var n in Model.News)
+                {
+                    <a href="/new?id=@n.ID">@n.Title</a>
+                    <br />
+                }
+            }
+            else
+            {
+                <p>Не найдено</p>
+            }
+        </div>
+        <div class="search_ads">
+            <h2>Объявления</h2>
+            @if (Model.Notifications.Count() != 0)
+            {
+                foreach (var n in Model.Notifications)
+                {
+                    <a href="/notification?id=@n.ID">@n.Title</a>
+                    <br />
+                }
+            }
+            else
+            {
+                <p>Не найдено</p>
+            }
+        </div>
+        <div class="search_event">
+            <h2>Мероприятия</h2>
+
+            @if (Model.Events.Count() != 0)
+            {
+                foreach (var n in Model.Events)
+                {
+                    <a href="/event?id=@n.ID">@n.Title</a>
+                    <br />
+                }
+            }
+            else
+            {
+                <p>Не найдено</p>
+            }
+        </div>
+        <div class="search_video">
+            <h2>Видео</h2>
+            @if (Model.Videos.Count() != 0)
+            {
+                foreach (var n in Model.Videos)
+                {
+                    <a href="/video?id=@n.ID">@n.Title</a>
+                    <br />
+                }
+            }
+            else
+            {
+                <p>Не найдено</p>
+            }
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://vk.com/js/api/openapi.js?160"></script>
+    <!-- VK Widget -->
+    <div id="vk_groups3"></div>
+    <script type="text/javascript">
+      VK.Widgets.Group("vk_groups3", {mode: 3, width: "318", color1: 'F3F6FD'}, 18079046);
+    </script>
+</div>
+
+
+

@@ -8,8 +8,8 @@
 
 <div class="breadcr">
     <ul class="breadcrumbs">
-        <li><a href="">Главная</a></li>
-        <li><a href="">Новости</a></li>
+        <li><a href="/">Главная</a></li>
+        <li><a href="#">Новости</a></li>
     </ul>
 </div>
 <div class="newsmain">
@@ -21,12 +21,14 @@
             {
                 <div class="news_item">
                     <div class="newscontent">
-                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
-                            <div class="news_overlay"></div>
-                        </div>
+                        <a href="/new?id=@n.ID">
+                            <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                                <div class="news_overlay"></div>
+                            </div>
+                        </a>
                     </div>
                     <div class="category1">
-                        <a href="#" class="nameachi">Достижения</a>
+                        <a href="/news/?category=@n.CategoryID" class="nameachi">Достижения</a>
                     </div>
                     <a href="/new?id=@n.ID" class="newsbtn">@n.Title</a>
                     <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
@@ -36,12 +38,14 @@
             {
                 <div class="news_item">
                     <div class="newscontent">
-                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
-                            <div class="news_overlay"></div>
-                        </div>
+                        <a href="/new?id=@n.ID">
+                            <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                                <div class="news_overlay"></div>
+                            </div>
+                        </a>
                     </div>
                     <div class="category2">
-                        <a href="#" class="namecult">Культура</a>
+                        <a href="/news/?category=@n.CategoryID" class="namecult">Культура</a>
                     </div>
                     <a href="/new?id=@n.ID" class="newsbtn">@n.Title</a>
                     <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
@@ -52,12 +56,14 @@
             {
                 <div class="news_item">
                     <div class="newscontent">
-                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
-                            <div class="news_overlay"></div>
-                        </div>
+                        <a href="/new?id=@n.ID">
+                            <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                                <div class="news_overlay"></div>
+                            </div>
+                        </a>
                     </div>
                     <div class="category3">
-                        <a href="#" class="nameinter">Международная деятельность</a>
+                        <a href="/news/?category=@n.CategoryID" class="nameinter">Международная деятельность</a>
                     </div>
                     <a href="/new?id=@n.ID" class="newsbtn">@n.Title</a>
                     <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
@@ -68,12 +74,14 @@
             {
                 <div class="news_item">
                     <div class="newscontent">
-                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
-                            <div class="news_overlay"></div>
-                        </div>
+                        <a href="/new?id=@n.ID">
+                            <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                                <div class="news_overlay"></div>
+                            </div>
+                        </a>
                     </div>
                     <div class="category4">
-                        <a href="#" class="namesci">Наука и инновации</a>
+                        <a href="/news/?category=@n.CategoryID" class="namesci">Наука и инновации</a>
                     </div>
                     <a href="/new?id=@n.ID" class="newsbtn">@n.Title</a>
                     <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
@@ -83,12 +91,14 @@
             {
                 <div class="news_item">
                     <div class="newscontent">
-                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
-                            <div class="news_overlay"></div>
-                        </div>
+                        <a href="/new?id=@n.ID">
+                            <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                                <div class="news_overlay"></div>
+                            </div>
+                        </a>
                     </div>
                     <div class="category5">
-                        <a href="#" class="nameform">Образование</a>
+                        <a href="/news/?category=@n.CategoryID" class="nameform">Образование</a>
                     </div>
                     <a href="/new?id=@n.ID" class="newsbtn">@n.Title</a>
                     <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
@@ -98,12 +108,14 @@
             {
                 <div class="news_item">
                     <div class="newscontent">
-                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
-                            <div class="news_overlay"></div>
-                        </div>
+                        <a href="/new?id=@n.ID">
+                            <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                                <div class="news_overlay"></div>
+                            </div>
+                        </a>
                     </div>
                     <div class="category6">
-                        <a href="#" class="namepartner">Партнерство</a>
+                        <a href="/news/?category=@n.CategoryID" class="namepartner">Партнерство</a>
                     </div>
                     <a href="/new?id=@n.ID" class="newsbtn">@n.Title</a>
                     <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
@@ -113,12 +125,14 @@
             {
                 <div class="news_item">
                     <div class="newscontent">
-                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
-                            <div class="news_overlay"></div>
-                        </div>
+                        <a href="/new?id=@n.ID">
+                            <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                                <div class="news_overlay"></div>
+                            </div>
+                        </a>
                     </div>
                     <div class="category7">
-                        <a href="#" class="namesport">Спорт</a>
+                        <a href="/news/?category=@n.CategoryID" class="namesport">Спорт</a>
                     </div>
                     <a href="/new?id=@n.ID" class="newsbtn">@n.Title</a>
                     <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
@@ -128,12 +142,14 @@
             {
                 <div class="news_item">
                     <div class="newscontent">
-                        <div class="newsimg" style="background-image: url(@n.ImagePath);">
-                            <div class="news_overlay"></div>
-                        </div>
+                        <a href="/new?id=@n.ID">
+                            <div class="newsimg" style="background-image: url(@n.ImagePath);">
+                                <div class="news_overlay"></div>
+                            </div>
+                        </a>
                     </div>
                     <div class="category8">
-                        <a href="#" class="nameuniver">Университетская жизнь</a>
+                        <a href="/news/?category=@n.CategoryID" class="nameuniver">Университетская жизнь</a>
                     </div>
                     <a href="/new?id=@n.ID" class="newsbtn">@n.Title</a>
                     <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>

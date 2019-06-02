@@ -44,12 +44,12 @@ header {
     font-size: 21px;
     font-weight: 500;
     cursor: pointer;
-    margin-top: 38px;
+    margin-top: 20px;
     line-height: 25px;
     display: flex;
     align-items: center;
     text-align: center;
-    margin-right: 200px;
+    margin-right: 190px;
 }
 
 nav {
@@ -801,6 +801,9 @@ a.imgarrival {
     letter-spacing: 0.02em;
     color: #222222;
 }
+.infotopic a{
+    color: #222222;
+}
 
 a.separator1 {
     background: url(img/разделитель.png); /* Путь к файлу с исходным  рисунком */
@@ -827,10 +830,12 @@ a.separator1 {
     line-height: 28px;
     color: rgba(34, 34, 34, 0.65);
 }
-
-.table {
+    .infocontent a {
+        color: rgba(34, 34, 34, 0.65);
+    }
+    .table {
     width: 287px;
-    height: 360px;
+    height: 302px;
     background: #FFFFFF;
     box-shadow: 0px 4.5px 11.5px rgba(0, 0, 0, 0.12);
     border-radius: 15px;
@@ -881,7 +886,7 @@ a.separator2 {
 
 .profcom {
     width: 287px;
-    height: 302px;
+    height: 365px;
     background: #FFFFFF;
     box-shadow: 0px 4.5px 11.5px rgba(0, 0, 0, 0.12);
     border-radius: 15px;
@@ -932,7 +937,7 @@ a.separator3 {
 
 .sci {
     width: 287px;
-    height: 332px;
+    height: 340px;
     background: #FFFFFF;
     box-shadow: 0px 4.5px 11.5px rgba(0, 0, 0, 0.12);
     border-radius: 15px;

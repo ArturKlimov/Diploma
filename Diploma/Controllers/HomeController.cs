@@ -17,15 +17,56 @@ namespace Diploma.Controllers
     {
         ApplicationContext db = new ApplicationContext();
 
+        //Для контроля символов во View
+        static string CutTheString(int maxLength, string userString)
+        {
+            string cutString = userString;
+
+            if (cutString.Length > maxLength)
+            {
+                for (var i = maxLength - 1; i < userString.Length; i++)
+                {
+                    if (userString[i] == ' ')
+                    {
+                        cutString = cutString.Substring(0, i + 1);
+                        break;
+                    }
+                }
+            }
+            return cutString;
+        }
+
         public ActionResult Index()
         {
             var notifications = db.Notifications.OrderByDescending(i => i.ID).Take(3).ToList();
+
+            foreach (var n in notifications)
+            {
+                n.Title = CutTheString(30, n.Title);
+                n.Description = CutTheString(104, n.Description);
+            }
 
             var news = db.News.Include(n => n.Category).OrderByDescending(i => i.ID).Take(6).ToList();
 
             var videos = db.Videos.OrderByDescending(i => i.ID).Take(6).ToList();
 
+            foreach (var n in news)
+            {
+                n.Title = CutTheString(30, n.Title);
+            }
+
+            foreach (var n in videos)
+            {
+                n.Title = CutTheString(43, n.Title);
+            }
+
+
             var events = db.Events.OrderByDescending(i => i.ID).Take(10).ToList();
+
+            foreach (var n in events)
+            {
+                n.Title = CutTheString(66, n.Title);
+            }
 
             HomeViewModel viewModel = new HomeViewModel
             {
@@ -84,8 +125,8 @@ namespace Diploma.Controllers
                 var thisNew = db.News.Include(c => c.Category).FirstOrDefault(n => n.ID == id);
                 if (thisNew != null)
                 {
-                    var categories = db.Categories.ToList();
-                    ViewBag.Categories = categories;
+                    var bread = CutTheString(60, thisNew.Title);
+                    ViewBag.Bread = bread;
                     return View(thisNew);
                 }
             }
@@ -111,6 +152,12 @@ namespace Diploma.Controllers
             }
 
             var notifications = db.Notifications.OrderByDescending(i => i.ID);
+
+            foreach (var n in notifications)
+            {
+                n.Title = CutTheString(80, n.Title);
+                n.Description = CutTheString(370, n.Description);
+            }
 
             return PartialView("GetAllNotifications", notifications.ToPagedList(pageNumber, pageSize));
         }
@@ -156,6 +203,12 @@ namespace Diploma.Controllers
 
             var events = db.Events.OrderByDescending(i => i.ID);
 
+            foreach(var e in events)
+            {
+                e.Title = CutTheString(80, e.Title);
+                e.Description = CutTheString(370, e.Description);
+            }
+
             return PartialView("GetAllEvents", events.ToPagedList(pageNumber, pageSize));
         }
 
@@ -167,6 +220,8 @@ namespace Diploma.Controllers
 
                 if (thisVideo != null)
                 {
+                    var bread = CutTheString(60, thisVideo.Title);
+                    ViewBag.Bread = bread;
                     return View(thisVideo);
                 }
             }
@@ -189,7 +244,8 @@ namespace Diploma.Controllers
                     {
                         ViewBag.DocumentName2 = Path.GetFileName(thisNotification.DocumentPath2);
                     }
-
+                    var bread = CutTheString(60, thisNotification.Title);
+                    ViewBag.Bread = bread;
                     return View(thisNotification);
                 }
             }
@@ -201,13 +257,60 @@ namespace Diploma.Controllers
             if (id != null)
             {
                 var thisEvent = db.Events.FirstOrDefault(n => n.ID == id);
-
+                var bread = CutTheString(60, thisEvent.Title);
+                ViewBag.Bread = bread;
                 return View(thisEvent);
             }
             else
             {
                 return HttpNotFound();
             }
+        }
+
+        public ActionResult GetTable()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetSearch(string search)
+        {
+            if (search != "")
+            {
+                var news = db.News.Where(n => n.Title.Contains(search)).ToList();
+                foreach(var n in news)
+                {
+                    n.Title = CutTheString(30, n.Title);
+                }
+
+                var notifications = db.Notifications.Where(n => n.Title.Contains(search)).ToList();
+                foreach (var n in notifications)
+                {
+                    n.Title = CutTheString(30, n.Title);
+                }
+
+                var events = db.Events.Where(n => n.Title.Contains(search)).ToList();
+                foreach (var n in events)
+                {
+                    n.Title = CutTheString(30, n.Title);
+                }
+
+                var videos = db.Videos.Where(n => n.Title.Contains(search)).ToList();
+                foreach (var n in videos)
+                {
+                    n.Title = CutTheString(30, n.Title);
+                }
+
+                HomeViewModel model = new HomeViewModel
+                {
+                    News = news,
+                    Notifications = notifications,
+                    Events = events,
+                    Videos = videos
+                };
+                return View(model);
+            }
+            return View();
         }
 
         protected override void Dispose(bool disposing)

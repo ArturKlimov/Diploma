@@ -66,7 +66,16 @@ namespace Diploma
                 url: "event",
                 defaults: new { controller = "Home", action = "GetOneEvent" }
             );
-
+            routes.MapRoute(
+                name: "table",
+                url: "table",
+                defaults: new { controller = "Home", action = "GetTable" }
+            );
+            routes.MapRoute(
+                name: "search",
+                url: "search",
+                defaults: new { controller = "Home", action = "GetSearch" }
+            );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

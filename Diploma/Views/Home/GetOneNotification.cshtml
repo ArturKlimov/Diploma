@@ -1,13 +1,14 @@
-﻿@model Diploma.Models.Event
+﻿@model Diploma.Models.Notification
 
-@{
-    ViewBag.Title = Model.Title;
-    Layout = "~/Views/Shared/Layout2.cshtml";
-}
-
-<p>@Model.StartDate.ToString("M"), @Model.StartDate.ToString("yyyy")<</p>
-<p>@Model.EndDate.ToString("M"), @Model.EndDate.ToString("yyyy")<</p>
+<p>@Model.Author</p>
+<p>@Model.Date.ToString("M"), @Model.Date.ToString("yyyy")</p>
 <p>@Model.Title</p>
-<img src="@Model.ImagePath" />
 <p>@Model.Description</p>
-
+@if (Model.DocumentPath1 != "")
+{
+    <a href="@Model.DocumentPath1" download>@ViewBag.DocumentName1</a>
+}
+@if (Model.DocumentPath2 != "")
+{
+    <a href="@Model.DocumentPath2" download>@ViewBag.DocumentName2</a>
+}

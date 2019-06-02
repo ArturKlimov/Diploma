@@ -1,0 +1,12 @@
+﻿@model Diploma.Models.Video
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+<p>@Model.Date.ToString("M") @Model.Date.ToString("yyyy")</p>
+<p>@Model.Title</p>
+<iframe type="text/html" width="640" height="385" src="http://www.youtube.com/embed/@Model.YoutubeID" frameborder="0"></iframe>
+<p>@Model.Description</p>
+

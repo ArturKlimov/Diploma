@@ -46,14 +46,10 @@
                             <label>Дата начала мероприятия</label>
                             @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { type = "date" })
                             
-                            <label>Время начала мероприятия</label>
-                            <input type="time" name="startTime" value="@ViewBag.StartTime">
 
                             <label>Дата окончания мероприятия</label>
                             @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { type = "date" })
                             
-                            <label>Время окончания мероприятия</label>
-                            <input type="time" name="endTime" value="@ViewBag.EndTime">
 
                             @Html.HiddenFor(model => model.ID)
                             <br>

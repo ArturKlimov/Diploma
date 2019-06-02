@@ -1,0 +1,22 @@
+﻿@model PagedList.IPagedList<Diploma.Models.Event>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Мероприятия";
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+@foreach (var v in Model)
+{
+    <p>@v.Title</p>
+    <p>@v.Description</p>
+    <p>@v.StartDate.ToString("M"), @v.StartDate.ToString("yyyy")</p>
+    <p>@v.EndDate.ToString("M"), @v.EndDate.ToString("yyyy")</p>
+    <img style="width: 100px; height: 100px;" src="@v.ImagePath" />
+}
+
+@Html.PagedListPager(Model, page => Url.Action("GetAllEvents", new { page }),
+    new PagedListRenderOptions { LinkToPreviousPageFormat = "<", LinkToNextPageFormat = ">",
+        MaximumPageNumbersToDisplay = 3, DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+        DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToFirstPage = PagedListDisplayMode.Never})
+

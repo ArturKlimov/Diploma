@@ -298,9 +298,16 @@
     <Content Include="Views\Admin\GetSearchEmails.cshtml" />
     <Content Include="Views\Shared\Layout2.cshtml" />
     <Content Include="Views\Home\GetOneNew.cshtml" />
+    <Content Include="Views\Home\GetAllNotifications.cshtml" />
+    <Content Include="Views\Home\GetAllVideos.cshtml" />
+    <Content Include="Views\Home\GetAllEvents.cshtml" />
+    <Content Include="Views\Home\GetOneVideo.cshtml" />
+    <Content Include="Views\Home\GetOneNotification.cshtml" />
+    <Content Include="Views\Home\GetOneEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\css\" />
+    <Folder Include="Content\Documents\" />
     <Folder Include="Content\Images\" />
     <Folder Include="fonts\" />
     <Folder Include="Views\Email\" />

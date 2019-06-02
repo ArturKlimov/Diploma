@@ -32,6 +32,36 @@ namespace Diploma
             );
 
             routes.MapRoute(
+                name: "notifications",
+                url: "notifications",
+                defaults: new { controller = "Home", action = "GetAllNotifications" }
+            );
+
+            routes.MapRoute(
+                name: "videos",
+                url: "videos",
+                defaults: new { controller = "Home", action = "GetAllVideos" }
+            );
+
+            routes.MapRoute(
+                name: "events",
+                url: "events",
+                defaults: new { controller = "Home", action = "GetAllEvents" }
+            );
+
+            routes.MapRoute(
+                name: "video",
+                url: "video",
+                defaults: new { controller = "Home", action = "GetOneVideo" }
+            );
+
+            routes.MapRoute(
+                name: "notification",
+                url: "notification",
+                defaults: new { controller = "Home", action = "GetOneNotification" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

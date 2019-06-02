@@ -25,6 +25,25 @@ namespace Diploma.Controllers
         //Объявляем контекст данных
         ApplicationContext db = new ApplicationContext();
 
+        //Для контроля символов во View
+        static string CutTheString(int maxLength, string userString)
+        {
+            string cutString = userString;
+
+            if (cutString.Length > maxLength)
+            {
+                for (var i = maxLength - 1; i < userString.Length; i++)
+                {
+                    if (userString[i] == ' ')
+                    {
+                        cutString = cutString.Substring(0, i + 1);
+                        break;
+                    }
+                }
+            }
+            return cutString;
+        }
+
         //GET-запрос админ панель
         [HttpGet]
         public ActionResult Index(int? UserId)
@@ -40,6 +59,11 @@ namespace Diploma.Controllers
         public ActionResult GetNewsList()
         {
             var news = db.News.Include(n => n.Category).OrderByDescending(i => i.ID).Take(5).ToList();
+
+            foreach(var n in news)
+            {
+                n.Title = CutTheString(40, n.Title);
+            }
 
             return PartialView(news);
         }
@@ -269,6 +293,43 @@ namespace Diploma.Controllers
                 //Заполняем поле даты  
                 notification.Date = DateTime.Now;
 
+                var userName = User.Identity.GetUserName();
+
+                var user = db.Users.FirstOrDefault(n => n.UserName == userName);
+
+                if (user != null)
+                {
+                    notification.Author = user.Name;
+                }
+                else
+                {
+                    notification.Author = "Балашов Д.И.";
+                }
+
+                if (document1 != null)
+                {
+                    var fileName = Path.GetFileName(document1.FileName);
+
+                    document1.SaveAs(Server.MapPath(@"~/Content/Documents/" + fileName));
+                    notification.DocumentPath1 = "/Content/Documents/" + fileName;
+                }
+                else
+                {
+                    notification.DocumentPath1 = "";
+                }
+
+                if (document2 != null)
+                {
+                    var fileName = Path.GetFileName(document2.FileName);
+
+                    document2.SaveAs(Server.MapPath(@"~/Content/Documents/" + fileName));
+                    notification.DocumentPath2 = "/Content/Documents/" + fileName;
+                }
+                else
+                {
+                    notification.DocumentPath2 = "";
+                }
+
                 //Сохраняем объявление в базе данных
                 db.Notifications.Add(notification);
                 db.SaveChanges();
@@ -327,8 +388,17 @@ namespace Diploma.Controllers
                                 message.Attachments.Add(new Attachment(document2.InputStream, Path.GetFileName(document2.FileName)));
                             }
 
-                            await smtp.SendMailAsync(message);
+                            try
+                            {
+                                await smtp.SendMailAsync(message);
+                            }
+                            catch
+                            {
+                                Redirect("/admin");
+                            }
                         }
+
+
                     }
                 }
 
@@ -341,6 +411,11 @@ namespace Diploma.Controllers
         public ActionResult GetNotificationsList()
         {
             var notifications = db.Notifications.OrderByDescending(i => i.ID).Take(5).ToList();
+
+            foreach (var n in notifications)
+            {
+                n.Title = CutTheString(40, n.Title);
+            }
 
             return PartialView(notifications);
         }
@@ -398,6 +473,26 @@ namespace Diploma.Controllers
                 //если нашли новость
                 if (deleteNotification != null)
                 {
+                    if (deleteNotification.DocumentPath1 != "")
+                    {
+                        string fullPath = Request.MapPath("~" + deleteNotification.DocumentPath1);
+
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            System.IO.File.Delete(fullPath);
+                        }
+                    }
+
+                    if (deleteNotification.DocumentPath2 != "")
+                    {
+                        string fullPath = Request.MapPath("~" + deleteNotification.DocumentPath2);
+
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            System.IO.File.Delete(fullPath);
+                        }
+                    }
+
                     db.Notifications.Remove(deleteNotification);
                     db.SaveChanges();
 
@@ -430,6 +525,12 @@ namespace Diploma.Controllers
             {
                 notifications = db.Notifications.Where(n => n.Title.Contains(search)).ToList();
             }
+
+            foreach (var n in notifications)
+            {
+                n.Title = CutTheString(40, n.Title);
+            }
+
             return PartialView("GetAllNotifications", notifications);
         }
 
@@ -460,6 +561,11 @@ namespace Diploma.Controllers
             else
             {
                 news = db.News.Include(n => n.Category).Where(n => n.Title.Contains(search)).ToList();
+            }
+
+            foreach (var n in news)
+            {
+                n.Title = CutTheString(40, n.Title);
             }
             return PartialView("GetSearchNews", news);
         }
@@ -537,7 +643,7 @@ namespace Diploma.Controllers
 
         //POST-запрос на добавление мероприятия
         [HttpPost]
-        public ActionResult AddEvent(Event aEvent, string startTime, string endTime)
+        public ActionResult AddEvent(Event aEvent)
         {
             if (ModelState.IsValid)
             {
@@ -551,27 +657,25 @@ namespace Diploma.Controllers
                     aEvent.EndDate = DateTime.Now.Date;
                 }
 
-                //Если поле со времнем было заполнено
-                if (startTime != "")
+                var image = WebImage.GetImageFromRequest();
+
+                if (image != null)
                 {
-                    //То из строки времени вырезаем первые два символа, конвертируем их в число и записываем как часы к дате
-                    aEvent.StartDate = aEvent.StartDate.AddHours(Convert.ToDouble(startTime.Substring(0, 2)));
-                    aEvent.StartDate = aEvent.StartDate.AddMinutes(Convert.ToDouble(startTime.Substring(3, 2)));
+                    string extension = image.ImageFormat;
+                    string fileName = DateTime.Now.ToString("ddMMyyyyhhmmss");
+                    string filePath = "/Content/Images/" + fileName + "." + extension;
+
+                    image.FileName = fileName;
+                    image.Resize(1280, 720);
+
+                    image.Save(Server.MapPath(@"~" + filePath));
+
+                    //Заполняем поле путь к изображению
+                    aEvent.ImagePath = filePath;
                 }
                 else
                 {
-                    aEvent.StartDate = aEvent.StartDate.AddHours(12);
-                }
-                
-                //
-                if (endTime != "")
-                {
-                    aEvent.EndDate = aEvent.EndDate.AddHours(Convert.ToDouble(endTime.Substring(0, 2)));
-                    aEvent.EndDate = aEvent.EndDate.AddMinutes(Convert.ToDouble(endTime.Substring(3, 2)));
-                }
-                else
-                {
-                    aEvent.EndDate = aEvent.EndDate.AddHours(12);
+                    aEvent.ImagePath = "/Content/Images/default.jpg";
                 }
 
                 db.Events.Add(aEvent);
@@ -586,6 +690,11 @@ namespace Diploma.Controllers
         public ActionResult Get5Events()
         {
             var events = db.Events.OrderByDescending(i => i.ID).Take(5).ToList();
+
+            foreach (var n in events)
+            {
+                n.Title = CutTheString(40, n.Title);
+            }
 
             return PartialView(events);
         }
@@ -603,9 +712,6 @@ namespace Diploma.Controllers
                 //Если новость найдена
                 if (editEvent != null)
                 {
-                    ViewBag.StartTime = editEvent.StartDate.ToString("t");
-                    ViewBag.EndTime = editEvent.EndDate.ToString("t");
-
                     return View(editEvent);
                 }
                 //Если новость не найдена
@@ -636,32 +742,16 @@ namespace Diploma.Controllers
                     editEvent.EndDate = DateTime.Now.Date;
                 }
 
-                //Если поле со времнем было заполнено
-                if (startTime != "")
-                {
-                    //То из строки времени вырезаем первые два символа, конвертируем их в число и записываем как часы к дате
-                    editEvent.StartDate = editEvent.StartDate.AddHours(Convert.ToDouble(startTime.Substring(0, 2)));
-                    editEvent.StartDate = editEvent.StartDate.AddMinutes(Convert.ToDouble(startTime.Substring(3, 2)));
-                }
-                else
-                {
-                    editEvent.StartDate = editEvent.StartDate.AddHours(12);
-                }
-
-                //
-                if (endTime != "")
-                {
-                    editEvent.EndDate = editEvent.EndDate.AddHours(Convert.ToDouble(endTime.Substring(0, 2)));
-                    editEvent.EndDate = editEvent.EndDate.AddMinutes(Convert.ToDouble(endTime.Substring(3, 2)));
-                }
-                else
-                {
-                    editEvent.EndDate = editEvent.EndDate.AddHours(12);
-                }
-
                 //Редактирование мероприятия
-                db.Entry(editEvent).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.Entry(editEvent).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    return Redirect("/admin");
+                }
             }
             return Redirect("/admin");
         }
@@ -718,6 +808,11 @@ namespace Diploma.Controllers
             {
                 events = db.Events.Where(n => n.Title.Contains(search)).ToList();
             }
+
+            foreach (var n in events)
+            {
+                n.Title = CutTheString(40, n.Title);
+            }
             return PartialView("GetSearchEvents", events);
         }
 
@@ -726,6 +821,11 @@ namespace Diploma.Controllers
         public ActionResult Get5Videos()
         {
             var videos = db.Videos.OrderByDescending(i => i.ID).Take(5).ToList();
+
+            foreach (var n in videos)
+            {
+                n.Title = CutTheString(40, n.Title);
+            }
 
             return PartialView(videos);
         }
@@ -782,6 +882,11 @@ namespace Diploma.Controllers
             {
                 videos = db.Videos.Where(n => n.Title.Contains(search)).ToList();
             }
+
+            foreach (var n in videos)
+            {
+                n.Title = CutTheString(40, n.Title);
+            }
             return PartialView("GetSearchVideos", videos);
         }
 
@@ -808,6 +913,8 @@ namespace Diploma.Controllers
             }
             return PartialView("GetSearchEmails", emails);
         }
+
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

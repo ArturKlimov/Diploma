@@ -1,0 +1,21 @@
+﻿@model PagedList.IPagedList<Diploma.Models.Notification>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Объявления";
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+@foreach (var n in Model)
+{
+    <p>@n.Title</p>
+    <p>@n.Description</p>
+    <p>@n.Date.ToString("M"), @n.Date.ToString("yyyy")</p>
+    <p>@n.Author</p>
+}
+
+@Html.PagedListPager(Model, page => Url.Action("GetAllNotifications", new { page }),
+    new PagedListRenderOptions { LinkToPreviousPageFormat = "<", LinkToNextPageFormat = ">",
+        MaximumPageNumbersToDisplay = 3, DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+        DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToFirstPage = PagedListDisplayMode.Never})
+

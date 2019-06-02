@@ -1,0 +1,20 @@
+﻿@model PagedList.IPagedList<Diploma.Models.Video>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Видео";
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+@foreach (var v in Model)
+{
+    <p>@v.Title</p>
+    <p>@v.Description</p>
+    <p>@v.Date.ToString("M"), @v.Date.ToString("yyyy")</p>
+    <img style="width: 100px; height: 100px;"src="https://img.youtube.com/vi/@v.YoutubeID/maxresdefault.jpg" />
+}
+
+@Html.PagedListPager(Model, page => Url.Action("GetAllVideos", new { page }),
+    new PagedListRenderOptions { LinkToPreviousPageFormat = "<", LinkToNextPageFormat = ">",
+        MaximumPageNumbersToDisplay = 3, DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+        DisplayLinkToLastPage = PagedListDisplayMode.Never, DisplayLinkToFirstPage = PagedListDisplayMode.Never})

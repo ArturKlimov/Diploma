@@ -19,14 +19,12 @@
 
                     <label>Дата начала мероприятия</label>
                     @Html.TextBoxFor(model => model.StartDate, "{0:dd.MM.yyyy }", new { type = "date" })
-                    <label>Время начала мероприятия</label>
-                    <input type="time" name="startTime">
 
                     <label>Дата окончания мероприятия</label>
                     @Html.TextBoxFor(model => model.EndDate, "{0:dd.MM.yyyy }", new { type = "date" })
-                    <label>Время окончания мероприятия</label>
-                    <input type="time" name="endTime">
 
+                    <label>Добавить афишу</label>
+                    <input type="file" name="imageFile" multiple accept="image/*,image/jpeg">
                     <br>
                     <input class="button-primary" type="submit" value="Опубликовать">
                 </fieldset>

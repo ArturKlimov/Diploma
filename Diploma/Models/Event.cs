@@ -27,5 +27,8 @@ namespace Diploma.Models
         [DataType(DataType.DateTime, ErrorMessage = "Неправильная дата")]
         public DateTime EndDate { get; set; }
 
+        //Путь к изображению
+        public string ImagePath { get; set; }
+
     }
 }

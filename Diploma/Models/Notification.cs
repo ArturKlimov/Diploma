@@ -21,5 +21,14 @@ namespace Diploma.Models
 
         //Дата публикации
         public DateTime Date { get; set; }
+
+        //Автор
+        public string Author { get; set; }
+
+        //Путь к первому документу
+        public string DocumentPath1 { get; set; }
+
+        //Путь ко второму документу
+        public string DocumentPath2 { get; set; }
     }
 }

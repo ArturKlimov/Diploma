@@ -46,6 +46,8 @@
                         @Html.ValidationMessageFor(model => model.Description, "")
 
                         @Html.HiddenFor(model => model.Date)
+                        @Html.HiddenFor(model => model.DocumentPath1)
+                        @Html.HiddenFor(model => model.DocumentPath2)
                         @Html.HiddenFor(model => model.ID)
                         <input class="button-primary" type="submit" value="Редактировать">
                     </fieldset>
